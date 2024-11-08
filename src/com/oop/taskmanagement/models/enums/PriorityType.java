@@ -1,4 +1,4 @@
-package com.oop.taskmanagement.models.enums.BugEnums;
+package com.oop.taskmanagement.models.enums;
 
 public enum PriorityType {
     HIGH,
