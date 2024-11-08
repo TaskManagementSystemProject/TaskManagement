@@ -1,4 +1,6 @@
 package com.oop.taskmanagement.models;
 
-public class ToBeImplemented {
+public class TeamImpl {
+    //TODO
+
 }
