@@ -1,15 +1,15 @@
-package com.oop.taskmanagement.commands.showing;
+package com.oop.taskmanagement.commands.listing;
 
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class ShowMembersCommand implements Command {
+public class ListStoriesCommand implements Command {
 
     private final TaskManagementRepository taskManagementRepository;
 
-    public ShowMembersCommand(TaskManagementRepository taskManagementRepository) {
+    public ListStoriesCommand(TaskManagementRepository taskManagementRepository) {
         this.taskManagementRepository = taskManagementRepository;
     }
 

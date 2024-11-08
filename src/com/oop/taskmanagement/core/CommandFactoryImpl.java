@@ -7,42 +7,49 @@ import com.oop.taskmanagement.commands.changing.*;
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.commands.creation.*;
 import com.oop.taskmanagement.commands.enums.CommandType;
+import com.oop.taskmanagement.commands.listing.*;
 import com.oop.taskmanagement.commands.showing.*;
 import com.oop.taskmanagement.core.contracts.CommandFactory;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 
 public class CommandFactoryImpl implements CommandFactory {
+
     @Override
     public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
 
         // TODO
         return switch (commandType) {
-            case CREATEMEMBER -> new CreateMemberCommand();
-            case SHOWMEMBERS -> new ShowMembersCommand();
-            case SHOWMEMBERACTIVITY -> new ShowMemberActivityCommand();
-            case CREATETEAM -> new CreateTeamCommand();
-            case SHOWTEAMS -> new ShowTeamsCommand();
-            case SHOWTEAMACTIVITY -> new ShowTeamActivityCommand();
-            case ADDPERSONTOTEAM -> new AddPersonToTeamCommand();
-            case SHOWTEAMMEMBERS -> new ShowTeamMembersCommand();
-            case CREATEBOARDINTEAM -> new CreateBoardInTeamCommand();
-            case SHOWTEAMBOARDS -> new ShowTeamBoardsCommand();
-            case SHOWBOARDACTIVITY -> new ShowBoardActivityCommand();
-            case CREATEBUGINBOARD -> new CreateBugInBoardCommand();
-            case CREATESTORYINBOARD -> new CreateStoryInBoardCommand();
-            case CREATEFEEDBACKINBOARD -> new CreateFeedbackInBoardCommand();
-            case CHANGEBUGPRIORITY -> new ChangeBugPriorityCommand();
-            case CHANGEBUGSEVERITY -> new ChangeBugSeverityCommand();
-            case CHANGEBUGSTATUS -> new ChangeBugStatusCommand();
-            case CHANGESTORYPRIORITY -> new ChangeStoryPriorityCommand();
-            case CHANGESTORYSIZE -> new ChangeStorySizeCommand();
-            case CHANGESTORYSTATUS -> new ChangeStoryStatusCommand();
-            case CHANGEFEEDBACKRATING -> new ChangeFeedbackRatingCommand();
-            case CHANGEFEEDBACKSTATUS -> new ChangeFeedbackStatusCommand();
-            case ASSIGNTOMEMBER -> new AssignToMemberCommand();
-            case UNASSINGFROMMEMBER -> new UnassignFromMemberCommand();
+            case CREATEMEMBER -> new CreateMemberCommand(taskManagementRepository);
+            case SHOWMEMBERS -> new ShowMembersCommand(taskManagementRepository);
+            case SHOWMEMBERACTIVITY -> new ShowMemberActivityCommand(taskManagementRepository);
+            case CREATETEAM -> new CreateTeamCommand(taskManagementRepository);
+            case SHOWTEAMS -> new ShowTeamsCommand(taskManagementRepository);
+            case SHOWTEAMACTIVITY -> new ShowTeamActivityCommand(taskManagementRepository);
+            case ADDPERSONTOTEAM -> new AddPersonToTeamCommand(taskManagementRepository);
+            case SHOWTEAMMEMBERS -> new ShowTeamMembersCommand(taskManagementRepository);
+            case CREATEBOARDINTEAM -> new CreateBoardInTeamCommand(taskManagementRepository);
+            case SHOWTEAMBOARDS -> new ShowTeamBoardsCommand(taskManagementRepository);
+            case SHOWBOARDACTIVITY -> new ShowBoardActivityCommand(taskManagementRepository);
+            case CREATEBUGINBOARD -> new CreateBugInBoardCommand(taskManagementRepository);
+            case CREATESTORYINBOARD -> new CreateStoryInBoardCommand(taskManagementRepository);
+            case CREATEFEEDBACKINBOARD -> new CreateFeedbackInBoardCommand(taskManagementRepository);
+            case CHANGEBUGPRIORITY -> new ChangeBugPriorityCommand(taskManagementRepository);
+            case CHANGEBUGSEVERITY -> new ChangeBugSeverityCommand(taskManagementRepository);
+            case CHANGEBUGSTATUS -> new ChangeBugStatusCommand(taskManagementRepository);
+            case CHANGESTORYPRIORITY -> new ChangeStoryPriorityCommand(taskManagementRepository);
+            case CHANGESTORYSIZE -> new ChangeStorySizeCommand(taskManagementRepository);
+            case CHANGESTORYSTATUS -> new ChangeStoryStatusCommand(taskManagementRepository);
+            case CHANGEFEEDBACKRATING -> new ChangeFeedbackRatingCommand(taskManagementRepository);
+            case CHANGEFEEDBACKSTATUS -> new ChangeFeedbackStatusCommand(taskManagementRepository);
+            case ASSIGNTOMEMBER -> new AssignToMemberCommand(taskManagementRepository);
+            case UNASSINGFROMMEMBER -> new UnassignFromMemberCommand(taskManagementRepository);
+            case LISTTASKS -> new ListTasksCommand(taskManagementRepository);
+            case LISTASSIGNEDTASKS -> new ListAssignedTasksCommand(taskManagementRepository);
+            case LISTBUGS -> new ListBugsCommand(taskManagementRepository);
+            case LISTFEEDBACKS -> new ListFeedbacksCommand(taskManagementRepository);
+            case LISTSTORIES -> new ListStoriesCommand(taskManagementRepository);
         };
     }
 }
