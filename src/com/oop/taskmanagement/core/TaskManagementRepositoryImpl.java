@@ -216,6 +216,9 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 toReturn = getTaskById(board.getTasks(), id);
             }
         }
+        if(toReturn == null){
+            throw new InvalidUserInputException(String.format("Task with ID %d was not found.", id));
+        }
         return toReturn;
     }
 
