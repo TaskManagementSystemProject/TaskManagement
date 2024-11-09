@@ -1,6 +1,6 @@
 package com.oop.taskmanagement.models;
 
-import com.oop.taskmanagement.models.contracts.TeamAsset;
+import com.oop.taskmanagement.models.contracts.team.TeamAsset;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 
 import java.util.ArrayList;
@@ -43,6 +43,9 @@ abstract public class TeamAssetImpl implements TeamAsset {
     public void addTask(TaskBase task) {
         tasks.add(task);
     }
+
+    @Override
+    public void removeTask(TaskBase task) {tasks.remove(task);}
 
     @Override
     public void logActivity(String activityLog) {

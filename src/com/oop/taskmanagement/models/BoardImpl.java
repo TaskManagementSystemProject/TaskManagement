@@ -1,9 +1,10 @@
 package com.oop.taskmanagement.models;
 
+import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.utils.ValidationHelpers;
 
 
-public class BoardImpl extends TeamAssetImpl{
+public class BoardImpl extends TeamAssetImpl implements Board {
 
     private static final int NAME_MIN_LENGTH = 5;
     private static final int NAME_MAX_LENGTH = 10;
@@ -17,5 +18,4 @@ public class BoardImpl extends TeamAssetImpl{
     protected void validateName(String name) {
         ValidationHelpers.validateIntRange(name.length(), NAME_MIN_LENGTH, NAME_MAX_LENGTH, NAME_LENGTH_ERROR);
     }
-
 }
