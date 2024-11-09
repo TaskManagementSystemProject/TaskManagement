@@ -13,8 +13,8 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
     private int rating;
 
-    protected FeedbackImpl(int id, String title, String description, int rating, List<Comment> comments) {
-        super(id, title, description, comments);
+    protected FeedbackImpl(int id, String title, String description, int rating) {
+        super(id, title, description);
         this.rating = rating;
         this.status = StatusType.NEW;
         addEvent("New feedback created successfully");
