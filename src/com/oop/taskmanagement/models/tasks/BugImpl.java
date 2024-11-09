@@ -1,9 +1,7 @@
 package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
-import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
-import com.oop.taskmanagement.models.contracts.tasks.Comment;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.StatusType;
@@ -15,20 +13,18 @@ public class BugImpl extends TaskBaseImpl implements Bug {
     private final List<String> stepsToReproduce;
     private PriorityType priority;
     private SeverityType severity;
-    private Member assignee;
 
 
     protected BugImpl(int id, String title, String description,
                       List<String> stepsToReproduce, PriorityType priority,
-                      SeverityType severity, List<Comment> comments, Member assignee) {
-        super(id, title, description, comments);
+                      SeverityType severity) {
+        super(id, title, description);
 
         this.stepsToReproduce = stepsToReproduce;
         this.priority = priority;
 
         changeSeverity(severity);
         this.status = StatusType.ACTIVE;
-        this.assignee = assignee;
         addEvent("New Bug created successfully");
 
     }
@@ -37,7 +33,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
     public void changeStatus(StatusType status) {
         if (status.equals(StatusType.ACTIVE) || status.equals(StatusType.DONE)) {
             addEvent(String.format(ADD_STATUS_CHANGED_TO_EVENTLOG, this.status, status));
-            super.status = status;
+            this.status = status;
         } else {
             throw new InvalidUserInputException("Invalid Status provided.");
         }
@@ -48,10 +44,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
         this.severity = severity;
     }
 
-    public void changeAssignee(Member assignee) {
-        addEvent(String.format(ADD_ASSIGNEE_CHANGED_TO_EVENTLOG, this.assignee, assignee));
-        this.assignee = assignee;
-    }
+
 
     public void changePriority(PriorityType priority) {
         addEvent(String.format(ADD_PRIORITY_CHANGED_TO_EVENTLOG, this.priority, priority));
@@ -75,9 +68,6 @@ public class BugImpl extends TaskBaseImpl implements Bug {
         return severity;
     }
 
-    public Member getAssignee() {
-        return assignee;
-    }
 
 
 

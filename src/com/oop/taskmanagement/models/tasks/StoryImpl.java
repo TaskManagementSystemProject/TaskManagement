@@ -2,28 +2,25 @@ package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.team.Member;
-import com.oop.taskmanagement.models.contracts.tasks.Comment;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.models.enums.StatusType;
 
-import java.util.List;
+
 
 public class StoryImpl extends TaskBaseImpl implements Story {
 
 
     private PriorityType priority;
     private SizeType size;
-    private Member assignee;
 
     protected StoryImpl(int id, String title, String description,
-                        PriorityType priority, SizeType size, Member assignee, List<Comment> comments) {
-        super(id, title, description, comments);
+                        PriorityType priority, SizeType size) {
+        super(id, title, description);
         this.priority = priority;
         this.size = size;
         this.status = StatusType.NOT_DONE;
-        this.assignee = assignee;
         addEvent("New Story created successfully");
 
 
@@ -50,10 +47,6 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         this.size = size;
     }
 
-    public void changeAssignee(Member assignee) {
-        addEvent(String.format(ADD_ASSIGNEE_CHANGED_TO_EVENTLOG, this.assignee, assignee));
-        this.assignee = assignee;
-    }
 
                                                                     //  GETTERS
     public PriorityType getPriority() {
@@ -64,7 +57,5 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         return size;
     }
 
-    public Member getAssignee() {
-        return assignee;
-    }
+
 }
