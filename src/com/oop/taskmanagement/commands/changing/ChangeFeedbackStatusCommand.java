@@ -30,7 +30,7 @@ public class ChangeFeedbackStatusCommand implements Command {
         int feedbackId = ParsingHelpers.tryParseInt(parameters.get(0), TASK_ID_PARSING_ERROR);
         StatusType newStatus = ParsingHelpers.tryParseEnum(parameters.get(1), StatusType.class);
 
-        Feedback feedbackToChangeStatus = (Feedback) taskManagementRepository.findTaskByIdLooping(feedbackId);
+        Feedback feedbackToChangeStatus = taskManagementRepository.findFeedbackById(feedbackId);
         feedbackToChangeStatus.changeStatus(newStatus);
 
         return String.format(FEEDBACK_CHANGED_SUCCESSFULLY);
