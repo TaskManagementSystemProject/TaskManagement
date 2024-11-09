@@ -14,7 +14,7 @@ public class ChangeBugPriorityCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String BUG_ID_PARSING_ERROR = "Bug ID must be a number!";
-    private static final String BUG_PRIORITY_CHANGE_SUCCESS_MESSAGE = "Bug with ID %d status changed to %s successfully.";
+    private static final String BUG_PRIORITY_CHANGE_SUCCESS_MESSAGE = "Bug with ID %d priority changed to %s successfully.";
 
     private final TaskManagementRepository taskManagementRepository;
 
