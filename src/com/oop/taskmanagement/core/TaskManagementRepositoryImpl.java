@@ -1,6 +1,9 @@
 package com.oop.taskmanagement.core;
 
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
+import com.oop.taskmanagement.models.BoardImpl;
+import com.oop.taskmanagement.models.MemberImpl;
 import com.oop.taskmanagement.models.TeamImpl;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
@@ -11,9 +14,11 @@ import com.oop.taskmanagement.models.contracts.team.Team;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.SizeType;
+import com.oop.taskmanagement.models.tasks.BugImpl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
@@ -30,23 +35,54 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Team createTeam(String name) {
-        return null;
+        if(teams.stream()
+                .noneMatch(team -> team.getName().equalsIgnoreCase(name))){
+            Team newTeam = new TeamImpl(name);
+            teams.add(newTeam);
+        }
+
+        throw new InvalidUserInputException(String.format("Team %s already exists.", name));
+
     }
 
     @Override
     public Board createBoardInTeam(String name, Team team) {
-        return null;
+        if(teams.stream()
+                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
+            throw new InvalidUserInputException(String.format("Team %s does not exist.", team.getName()));
+        }
+        Board newBoard = new BoardImpl(name);
+        team.addBoard(newBoard);
+        return newBoard;
     }
 
     @Override
     public Member createMember(String name) {
-        return null;
+        if(members.stream()
+                .noneMatch(member -> member.getName().equalsIgnoreCase(name))){
+            Member newMember = new MemberImpl(name);
+            members.add(newMember);
+        }
+
+        throw new InvalidUserInputException(String.format("Member %s already exists.", name));
     }
 
     @Override
     public Bug createBugInBoard(int id, String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board) {
-        return null;
+        if(teams.stream()
+                        .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
+            throw new InvalidUserInputException(String.format("Creating a bug failed! Team %s does not exist.", team.getName()));
+        }
+        if(team.getBoards().stream()
+                .noneMatch(currentBoard -> currentBoard.getName().equalsIgnoreCase(board.getName()))){
+            throw new InvalidUserInputException(String.format("Creating a bug failed! Board %s does not exist.", board.getName()));
+        }
+        Bug newBug = new BugImpl(nextId,title,stepsToReproduce,priority,severity);
+        nextId++;
+        board.addTask(newBug);
+        return newBug;
     }
+
     // gosho
     @Override
     public Feedback createFeedbackInBoard(int id, String title, String description, int rating, Team team, Board board) {
