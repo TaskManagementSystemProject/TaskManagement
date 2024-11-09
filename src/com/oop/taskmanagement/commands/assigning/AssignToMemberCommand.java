@@ -2,11 +2,8 @@ package com.oop.taskmanagement.commands.assigning;
 
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
-import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.contracts.team.Member;
-import com.oop.taskmanagement.models.contracts.team.Team;
-import com.oop.taskmanagement.models.contracts.team.TeamAsset;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
 
@@ -32,16 +29,18 @@ public class AssignToMemberCommand implements Command {
         String memberName = parameters.get(1);
         // find the Task which has to be assigned from all the boards + members
         // find the current member of the task
-        TaskBase taskToAssign = taskManagementRepository.findTaskByIdLooping(taskId);
+        TaskBase taskToAssign = taskManagementRepository.findTaskById(taskId);
         Member memberToRemoveFrom = taskManagementRepository.findMemberOfTaskLooping(taskToAssign);
         Member memberForAssignment = taskManagementRepository.findMemberByName(memberName);
         // remove task from current board/ member
         if (memberToRemoveFrom != null) {
             memberToRemoveFrom.removeTask(taskToAssign);
+            memberToRemoveFrom.logActivity(String.format("Unassigned task with ID %d", taskId));
         }
 
         // add task to new member
         memberForAssignment.addTask(taskToAssign);
+        memberForAssignment.logActivity(String.format("Assigned task with ID %d", taskId));
         return String.format(TASK_ASSIGNED_SUCCESSFULLY, taskId, memberName);
     }
 }

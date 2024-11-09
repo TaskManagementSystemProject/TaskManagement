@@ -272,26 +272,34 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Bug findBugById(int id) {
-        Bug result = findTaskById(bugs, id);
+        Bug result = findTaskByIdHelper(bugs, id);
         ifNullThrow(result, String.format("Bug with ID %d not found.", id));
         return result;
     }
 
     @Override
     public Story findStoryById(int id) {
-        Story result = findTaskById(stories, id);
+        Story result = findTaskByIdHelper(stories, id);
         ifNullThrow(result, String.format("Story with ID %d not found.", id));
         return result;
     }
 
     @Override
     public Feedback findFeedbackById(int id) {
-        Feedback result = findTaskById(feedbacks, id);
+        Feedback result = findTaskByIdHelper(feedbacks, id);
         ifNullThrow(result, String.format("Feedback with ID %d not found.", id));
         return result;
     }
 
-    private <T extends TaskBase> T findTaskById(List<T> elements, int id){
+    @Override
+    public TaskBase findTaskById(int id) {
+        return Stream.concat(bugs.stream(), Stream.concat(stories.stream(), feedbacks.stream())) // creating a stream of TaskBase
+                .filter(task -> task.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new InvalidUserInputException(String.format("Task with ID %d not found.", id)));
+    }
+
+    private <T extends TaskBase> T findTaskByIdHelper(List<T> elements, int id){
         return elements.stream()
                 .filter(task -> task.getId() == id)
                 .findFirst()

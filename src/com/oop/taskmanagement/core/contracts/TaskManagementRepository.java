@@ -46,5 +46,6 @@ public interface TaskManagementRepository {
     Bug findBugById(int id);
     Story findStoryById(int id);
     Feedback findFeedbackById(int id);
+    TaskBase findTaskById(int id);
 
 }

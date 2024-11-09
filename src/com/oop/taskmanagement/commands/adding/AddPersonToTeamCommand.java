@@ -28,7 +28,9 @@ public class AddPersonToTeamCommand implements Command {
         Member memberToAdd = taskManagementRepository.findMemberByName(memberName);
         Team teamForAdding = taskManagementRepository.findTeamByName(teamName);
         teamForAdding.addMember(memberToAdd);
+        String outputLog = String.format(MEMBER_ADDED_SUCCESSFULLY, memberName, teamName);
+        memberToAdd.logActivity(outputLog);
 
-        return String.format(MEMBER_ADDED_SUCCESSFULLY, memberName, teamName);
+        return outputLog;
     }
 }
