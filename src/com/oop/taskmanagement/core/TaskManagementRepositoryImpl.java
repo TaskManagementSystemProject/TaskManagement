@@ -83,12 +83,13 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return newBug;
     }
 
-    // gosho
     @Override
     public Feedback createFeedbackInBoard(int id, String title, String description, int rating, Team team, Board board) {
         return null;
     }
 
+
+    // gosho
     @Override
     public Story createStoryInBoard(int id, String title, String description, PriorityType priority, SizeType size, Team team, Board board) {
         return null;
