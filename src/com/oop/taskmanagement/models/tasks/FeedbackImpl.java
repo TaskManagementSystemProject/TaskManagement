@@ -2,11 +2,8 @@ package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 
-import com.oop.taskmanagement.models.contracts.tasks.Comment;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.enums.StatusType;
-
-import java.util.List;
 
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 

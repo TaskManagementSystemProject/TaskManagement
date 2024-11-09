@@ -1,7 +1,6 @@
 package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
-import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SizeType;
