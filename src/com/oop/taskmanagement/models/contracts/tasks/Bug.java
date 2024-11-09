@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface Bug extends TaskBase {
 
+    void changeAssignee(Member assignee);
+
+    void changePriority(PriorityType priority);
 
     List<String> getStepsToReproduce();
 

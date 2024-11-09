@@ -8,6 +8,8 @@ public interface TaskBase {
 
     abstract void changeStatus(StatusType status);
 
+    void addComment(Comment comment);
+
     int getId();
 
     String getTitle();
