@@ -57,6 +57,7 @@ public abstract class TaskBaseImpl implements TaskBase {
         this.description = description;
     }
 
+    @Override
     public int getId() {
         return id;
     }
