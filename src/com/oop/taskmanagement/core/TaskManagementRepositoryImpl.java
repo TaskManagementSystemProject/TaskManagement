@@ -5,6 +5,7 @@ import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.BoardImpl;
 import com.oop.taskmanagement.models.MemberImpl;
 import com.oop.taskmanagement.models.TeamImpl;
+import com.oop.taskmanagement.models.contracts.functionality.Nameable;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
@@ -114,11 +115,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 .noneMatch(currentBoard -> currentBoard.getName().equalsIgnoreCase(board.getName()))) {
             throw new InvalidUserInputException(String.format("Creating a Story failed! Board %s does not exist.", board.getName()));
         }
+
         Story newStory = new StoryImpl(nextId, title, description, priority, size);
         nextId++;
         board.addTask(newStory);
         return newStory;
     }
+
+    /*
+    private <T extends Nameable>  void checkExistence(List<T> elements, String name, String message){
+        if (elements.stream()
+                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(name))) {
+            throw new InvalidUserInputException(message);
+        }
+    }
+     */
 
     @Override
     public List<Member> getMembers() {
