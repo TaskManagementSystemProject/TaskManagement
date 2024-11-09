@@ -9,9 +9,11 @@ import com.oop.taskmanagement.models.contracts.functionality.Nameable;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
+import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.team.Team;
+import com.oop.taskmanagement.models.contracts.team.TeamAsset;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.SizeType;
@@ -22,6 +24,7 @@ import com.oop.taskmanagement.models.tasks.StoryImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
@@ -160,5 +163,37 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
             }
         }
         throw new InvalidUserInputException(String.format("There is no team with name %s", name));
+    }
+
+
+    @Override
+    public TaskBase findTaskById(int id) {
+        return teams.stream()
+                .flatMap(team -> Stream.concat(
+                        team.getMembers().stream()
+                                .flatMap(member -> member.getTasks().stream()),
+                        team.getBoards().stream()
+                                .flatMap(board -> board.getTasks().stream())
+                ))
+                .filter(task -> task.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new InvalidUserInputException(String.format("Task with %d id does not exist.", id)));
+
+        // create a stream of tasks, by flattening each team to a concatenation of its members stream of tasks and boards stream of tasks.
+        // then filter to see only the tasks whose id match
+        // knowing they are unique for sure there will be only one match, or 0 if it doesn't exist;
+    }
+
+    @Override
+    public TeamAsset findOwnerOfTask(TaskBase task) {
+        return teams.stream()
+                .flatMap(team -> Stream.concat(
+                        team.getMembers().stream(),
+                        team.getBoards().stream()
+                )).filter(teamAsset -> teamAsset.getTasks().contains(task))
+                .findFirst()
+                .orElseThrow(() -> new InvalidUserInputException("Not found"));
+
+        // to be tested.
     }
 }

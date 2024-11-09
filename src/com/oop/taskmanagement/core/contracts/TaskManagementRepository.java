@@ -3,9 +3,11 @@ package com.oop.taskmanagement.core.contracts;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
+import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.team.Team;
+import com.oop.taskmanagement.models.contracts.team.TeamAsset;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.SizeType;
@@ -29,5 +31,7 @@ public interface TaskManagementRepository {
     // find
     Member findMemberByName(String name);
     Team findTeamByName(String name);
+    TaskBase findTaskById(int id);
+    TeamAsset findOwnerOfTask(TaskBase task);
 
 }
