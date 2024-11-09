@@ -22,14 +22,13 @@ public abstract class TaskBaseImpl implements TaskBase {
     private String title;
     private String description;
     protected StatusType status;
-    private List<Comment> comments;
-    private List<String> eventLog;
+    private final List<Comment> comments;
+    private final List<String> eventLog;
 
     protected TaskBaseImpl(int id, String title, String description) {
         this.id = id;
         setTitle(title);
         setDescription(description);
-        this.comments = comments;
         comments = new ArrayList<>();
         eventLog = new ArrayList<>();
     }

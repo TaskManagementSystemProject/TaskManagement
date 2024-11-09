@@ -1,7 +1,6 @@
 package com.oop.taskmanagement.models.contracts.tasks;
 
 import com.oop.taskmanagement.models.enums.StatusType;
-import com.oop.taskmanagement.models.enums.TaskType;
 
 import java.util.List;
 
@@ -14,8 +13,6 @@ public interface TaskBase {
     int getId();
 
     String getTitle();
-
-    TaskType getTaskType();
 
     String getDescription();
 

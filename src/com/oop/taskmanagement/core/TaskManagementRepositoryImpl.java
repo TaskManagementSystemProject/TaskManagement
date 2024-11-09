@@ -5,7 +5,6 @@ import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.BoardImpl;
 import com.oop.taskmanagement.models.MemberImpl;
 import com.oop.taskmanagement.models.TeamImpl;
-import com.oop.taskmanagement.models.contracts.functionality.Nameable;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
@@ -23,7 +22,6 @@ import com.oop.taskmanagement.models.tasks.StoryImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
