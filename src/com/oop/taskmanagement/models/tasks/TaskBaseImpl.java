@@ -1,34 +1,46 @@
 package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.models.contracts.tasks.Comment;
-import com.oop.taskmanagement.models.contracts.tasks.EventLog;
+
+import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
+import com.oop.taskmanagement.models.enums.StatusType;
+import com.oop.taskmanagement.utils.TaskValidation;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TaskBaseImpl {
+public abstract class TaskBaseImpl implements TaskBase {
 
     private int id;
     private String title;
     private String description;
+    protected StatusType status;
     private List<Comment> comments;
-    private EventLog eventlog;
+    private ArrayList<String> eventLog;
 
-    protected TaskBaseImpl(int id, String title, String description, List<Comment> comments) {
+    protected TaskBaseImpl(int id, String title, String description, StatusType status, List<Comment> comments) {
         this.id = id;
         setTitle(title);
         setDescription(description);
+        this.comments = comments;
+        eventLog = new ArrayList<>();
+        validateStatus(status);
 
     }
 
-    public void setTitle(String title) {
+    public abstract void validateStatus(StatusType status);
 
-        //validate
+
+
+
+    private void setTitle(String title) {
+        TaskValidation.validateTitle(title);
         this.title = title;
     }
 
-    public void setDescription(String description) {
-        //validate
+    private void setDescription(String description) {
+        TaskValidation.validateDescription(description);
         this.description = description;
     }
 
