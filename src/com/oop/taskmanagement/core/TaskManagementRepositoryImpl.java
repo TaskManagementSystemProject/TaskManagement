@@ -31,11 +31,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     private final List<Team> teams;
     private final List<Member> members;
+    private final List<Bug> bugs;
+    private final List<Feedback> feedbacks;
+    private final List<Story> stories;
     private int nextId;
 
     public TaskManagementRepositoryImpl(){
         teams = new ArrayList<>();
         members = new ArrayList<>();
+        bugs = new ArrayList<>();
+        feedbacks = new ArrayList<>();
+        stories = new ArrayList<>();
         nextId = 1;
     }
 
@@ -86,6 +92,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         Bug newBug = new BugImpl(nextId, title, description, stepsToReproduce, priority, severity);
         nextId++;
         board.addTask(newBug);
+        bugs.add(newBug);
         return newBug;
     }
 
@@ -102,6 +109,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         Feedback newFeedback = new FeedbackImpl(nextId, title, description, rating);
         nextId++;
         board.addTask(newFeedback);
+        feedbacks.add(newFeedback);
         return newFeedback;
     }
 
@@ -122,6 +130,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         Story newStory = new StoryImpl(nextId, title, description, priority, size);
         nextId++;
         board.addTask(newStory);
+        stories.add(newStory);
         return newStory;
     }
 
@@ -142,6 +151,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public List<Team> getTeams() {
         return new ArrayList<>(teams);
+    }
+
+    @Override
+    public List<Bug> getBugs(){
+        return new ArrayList<>(bugs);
+    }
+
+    @Override
+    public List<Story> getStories(){
+        return new ArrayList<>(stories);
+    }
+
+    @Override
+    public List<Feedback> getFeedbacks(){
+        return new ArrayList<>(feedbacks);
     }
 
     @Override
@@ -246,5 +270,39 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
             }
         }
         return null;
+    }
+
+    @Override
+    public Bug findBugById(int id) {
+        Bug result = findTaskById(bugs, id);
+        ifNullThrow(result, String.format("Bug with ID %d not found.", id));
+        return result;
+    }
+
+    @Override
+    public Story findStoryById(int id) {
+        Story result = findTaskById(stories, id);
+        ifNullThrow(result, String.format("Story with ID %d not found.", id));
+        return result;
+    }
+
+    @Override
+    public Feedback findFeedbackById(int id) {
+        Feedback result = findTaskById(feedbacks, id);
+        ifNullThrow(result, String.format("Feedback with ID %d not found.", id));
+        return result;
+    }
+
+    private <T extends TaskBase> T findTaskById(List<T> elements, int id){
+        return elements.stream()
+                .filter(task -> task.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private <T>  void ifNullThrow(T element, String message){
+        if(element == null){
+            throw new InvalidUserInputException(message);
+        }
     }
 }

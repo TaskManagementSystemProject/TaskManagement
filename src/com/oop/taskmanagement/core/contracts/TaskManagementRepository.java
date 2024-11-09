@@ -25,8 +25,12 @@ public interface TaskManagementRepository {
     Story createStoryInBoard(int id, String title, String description, PriorityType priority, SizeType size, Team team, Board board);
 
     // get
-    List<Member> getMembers();
     List<Team> getTeams();
+    List<Member> getMembers();
+    List<Bug> getBugs();
+    List<Story> getStories();
+    List<Feedback> getFeedbacks();
+
 
     // find
     Member findMemberByName(String name);
@@ -36,5 +40,11 @@ public interface TaskManagementRepository {
     TaskBase findTaskByIdLooping(int id);
     Member findMemberOfTaskLooping(TaskBase task);
     Team findTeamOfMemberLooping(String memberName);
+
+
+    // new find logic
+    Bug findBugById(int id);
+    Story findStoryById(int id);
+    Feedback findFeedbackById(int id);
 
 }
