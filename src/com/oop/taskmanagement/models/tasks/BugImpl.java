@@ -15,7 +15,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
     private SeverityType severity;
 
 
-    protected BugImpl(int id, String title, String description,
+    public BugImpl(int id, String title, String description,
                       List<String> stepsToReproduce, PriorityType priority,
                       SeverityType severity) {
         super(id, title, description);
