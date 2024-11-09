@@ -14,7 +14,6 @@ public abstract class TaskBaseImpl implements TaskBase {
     protected static final String ADD_STATUS_CHANGED_TO_EVENTLOG = "Status changed from %s to %s.";
     protected static final String ADD_PRIORITY_CHANGED_TO_EVENTLOG = "Priority changed from %s to %s.";
     protected static final String ADD_SIZE_CHANGED_TO_EVENTLOG = "Size changed from %s to %s.";
-    protected static final String ADD_ASSIGNEE_CHANGED_TO_EVENTLOG = "Assignee changed from %s to %s.";
     protected static final String ADD_SEVERITY_CHANGED_TO_EVENTLOG = "Severity changed from %s to %s.";
     protected static final String ADD_RATING_CHANGED_TO_EVENTLOG = "Rating changed from %d to %d.";
     private static final String NEW_COMMENT_ADDED = "Comment added successfully";
@@ -76,12 +75,12 @@ public abstract class TaskBaseImpl implements TaskBase {
     }
 
     public List<Comment> getComments() {
-        return comments;                        //TODO
+        return new ArrayList<>(comments);
     }
 
 
     public List<String> getEventLog() {
-        return eventLog;                        //TODO
+        return new ArrayList<>(eventLog);
     }
 
 
