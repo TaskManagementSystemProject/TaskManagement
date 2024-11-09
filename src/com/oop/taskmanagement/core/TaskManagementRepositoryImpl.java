@@ -167,7 +167,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 
     @Override
-    public TaskBase findTaskById(int id) {
+    public TaskBase findTaskByIdWithStream(int id) {
         return teams.stream()
                 .flatMap(team -> Stream.concat(
                         team.getMembers().stream()
@@ -185,7 +185,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public TeamAsset findOwnerOfTask(TaskBase task) {
+    public TeamAsset findOwnerOfTaskWithStream(TaskBase task) {
         return teams.stream()
                 .flatMap(team -> Stream.concat(
                         team.getMembers().stream(),
@@ -195,5 +195,53 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 .orElseThrow(() -> new InvalidUserInputException("Not found"));
 
         // to be tested.
+    }
+
+    private TaskBase getTaskById(List<TaskBase> tasks, int id){
+        for(TaskBase task : tasks){
+            if(task.getId() == id){
+                return task;
+            }
+        }
+        return null;
+    }
+    @Override
+    public TaskBase findTaskByIdLooping(int id) {
+        TaskBase toReturn = null;
+        for(Team team: teams){
+            for(Member member : team.getMembers()){
+                toReturn = getTaskById(member.getTasks(),id);
+            }
+            for(Board board : team.getBoards()){
+                toReturn = getTaskById(board.getTasks(), id);
+            }
+        }
+        return toReturn;
+    }
+
+    @Override
+    public Member findMemberOfTaskLooping(TaskBase task) {
+        for (Team team : teams) {
+            for (Member member : team.getMembers()) {
+                for (TaskBase currentTask : member.getTasks()) {
+                    if (currentTask.getId() == task.getId()) {
+                        return member;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Team findTeamOfMemberLooping(String memberName) {
+        for(Team team: teams){
+            for(Member member : team.getMembers()){
+                if(member.getName().equalsIgnoreCase(memberName)){
+                    return team;
+                }
+            }
+        }
+        return null;
     }
 }

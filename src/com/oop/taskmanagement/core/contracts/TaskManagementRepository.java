@@ -31,7 +31,10 @@ public interface TaskManagementRepository {
     // find
     Member findMemberByName(String name);
     Team findTeamByName(String name);
-    TaskBase findTaskById(int id);
-    TeamAsset findOwnerOfTask(TaskBase task);
+    TaskBase findTaskByIdWithStream(int id);
+    TeamAsset findOwnerOfTaskWithStream(TaskBase task);
+    TaskBase findTaskByIdLooping(int id);
+    Member findMemberOfTaskLooping(TaskBase task);
+    Team findTeamOfMemberLooping(String memberName);
 
 }
