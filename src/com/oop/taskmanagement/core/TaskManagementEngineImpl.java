@@ -6,7 +6,6 @@ import com.oop.taskmanagement.core.contracts.TaskManagementEngine;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,8 +14,6 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
     private static final char MAIN_SPLIT_SYMBOL = ' ';
     private static final char SENTENCE_SEPARATOR = '^';
-    private static final String TEXT_OPEN_SYMBOL = "<<";
-    private static final String TEXT_CLOSE_SYMBOL = ">>";
     private static final String REPORT_SEPARATOR = "####################";
 
     private final CommandFactory commandFactory;
@@ -86,12 +83,6 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
         return parameters;
     }
 
-
-    private void print(String result) {
-        System.out.println(result);
-        System.out.println(REPORT_SEPARATOR);
-    }
-
     /**
      * Receives a full line and extracts the parameters that are needed for the command to execute.
      * For example, if the input line is "FilterBy Assignee ^John Jones^",
@@ -143,5 +134,10 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
             result.add(currentWord.toString());
         }
         return result;
+    }
+
+    private void print(String result) {
+        System.out.println(result);
+        System.out.println(REPORT_SEPARATOR);
     }
 }
