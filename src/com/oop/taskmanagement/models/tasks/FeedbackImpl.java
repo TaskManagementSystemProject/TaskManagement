@@ -1,6 +1,7 @@
 package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
+
 import com.oop.taskmanagement.models.contracts.tasks.Comment;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.enums.StatusType;
@@ -30,7 +31,8 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
         }
     }
 
-    public void setRating(int rating) {
+    public void changeRating(int rating) {
+            addEvent(String.format(ADD_RATING_CHANGED_TO_EVENTLOG, this.rating, rating));
         this.rating = rating;
     }
 

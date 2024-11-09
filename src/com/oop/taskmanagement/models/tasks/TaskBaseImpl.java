@@ -12,6 +12,12 @@ import java.util.List;
 
 public abstract class TaskBaseImpl implements TaskBase {
     protected static final String ADD_STATUS_CHANGED_TO_EVENTLOG = "Status changed from %s to %s.";
+    protected static final String ADD_PRIORITY_CHANGED_TO_EVENTLOG = "Priority changed from %s to %s.";
+    protected static final String ADD_SIZE_CHANGED_TO_EVENTLOG = "Size changed from %s to %s.";
+    protected static final String ADD_ASSIGNEE_CHANGED_TO_EVENTLOG = "Assignee changed from %s to %s.";
+    protected static final String ADD_SEVERITY_CHANGED_TO_EVENTLOG = "Severity changed from %s to %s.";
+    protected static final String ADD_RATING_CHANGED_TO_EVENTLOG = "Rating changed from %d to %d.";
+    private static final String NEW_COMMENT_ADDED = "Comment added successfully";
 
     private final int id;
     private String title;
@@ -30,15 +36,22 @@ public abstract class TaskBaseImpl implements TaskBase {
 
     public abstract void changeStatus(StatusType status);
 
-    protected void addEvent(String event){
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+        addEvent(NEW_COMMENT_ADDED);
+    }
+
+    protected void addEvent(String event) {
         this.eventLog.add(event);
     }
 
+    // no eventLog needed   --  can be changed to final later
     private void setTitle(String title) {
         TaskValidation.validateTitle(title);
         this.title = title;
     }
 
+    // no eventLog needed   --  can be changed to final later
     private void setDescription(String description) {
         TaskValidation.validateDescription(description);
         this.description = description;
@@ -65,11 +78,9 @@ public abstract class TaskBaseImpl implements TaskBase {
     }
 
 
-
     public List<String> getEventLog() {
         return eventLog;                        //TODO
     }
-
 
 
 }

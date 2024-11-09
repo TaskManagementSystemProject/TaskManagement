@@ -29,7 +29,6 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 
     }
 
-
                                                                      //  SETTERS
     @Override
     public void changeStatus(StatusType status) {
@@ -41,15 +40,18 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         }
     }
 
-    public void setPriority(PriorityType priority) {
+    public void changePriority(PriorityType priority) {
+        addEvent(String.format(ADD_PRIORITY_CHANGED_TO_EVENTLOG, this.priority, priority));
         this.priority = priority;
     }
 
-    public void setSize(SizeType size) {
+    public void changeSize(SizeType size) {
+        addEvent(String.format(ADD_SIZE_CHANGED_TO_EVENTLOG, this.size, size));
         this.size = size;
     }
 
-    public void setAssignee(Member assignee) {
+    public void changeAssignee(Member assignee) {
+        addEvent(String.format(ADD_ASSIGNEE_CHANGED_TO_EVENTLOG, this.assignee, assignee));
         this.assignee = assignee;
     }
 

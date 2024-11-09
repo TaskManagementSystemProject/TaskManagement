@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
 
-    private List<String> stepsToReproduce;
+    private final List<String> stepsToReproduce;
     private PriorityType priority;
     private SeverityType severity;
     private Member assignee;
@@ -44,25 +44,23 @@ public class BugImpl extends TaskBaseImpl implements Bug {
     }
 
     public void changeSeverity(SeverityType severity) {
+        addEvent(String.format(ADD_SEVERITY_CHANGED_TO_EVENTLOG, this.severity, severity));
         this.severity = severity;
     }
 
-    public void setAssignee(Member assignee) {
+    public void changeAssignee(Member assignee) {
+        addEvent(String.format(ADD_ASSIGNEE_CHANGED_TO_EVENTLOG, this.assignee, assignee));
         this.assignee = assignee;
     }
 
-
-    public void setStepsToReproduce(List<String> stepsToReproduce) {
-        this.stepsToReproduce = stepsToReproduce;
-    }
-
-    public void setPriority(PriorityType priority) {
+    public void changePriority(PriorityType priority) {
+        addEvent(String.format(ADD_PRIORITY_CHANGED_TO_EVENTLOG, this.priority, priority));
         this.priority = priority;
     }
 
-    public void setSeverity(SeverityType severity) {
-        this.severity = severity;
-    }
+
+
+
 
     public List<String> getStepsToReproduce() {
         return stepsToReproduce;                 // TODO
