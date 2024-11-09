@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface Bug extends TaskBase {
 
-    void changeAssignee(Member assignee);
+    void changeSeverity(SeverityType severity);
 
     void changePriority(PriorityType priority);
 
@@ -19,6 +19,6 @@ public interface Bug extends TaskBase {
 
     SeverityType getSeverity();
 
-    Member getAssignee();
+
 
 }
