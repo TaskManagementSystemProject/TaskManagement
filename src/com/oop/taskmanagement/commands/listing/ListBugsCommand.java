@@ -16,6 +16,7 @@ import java.util.List;
 
 public class ListBugsCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 2;
+    private static final String SORT_FIELD_ERROR = "Bug cannot be sorted by field %s";
 
     private final TaskManagementRepository taskManagementRepository;
 
@@ -50,7 +51,7 @@ public class ListBugsCommand implements Command {
             case PRIORITY -> Comparator.comparing(Bug::getPriority);
             case SEVERITY -> Comparator.comparing(Bug::getSeverity);
             default ->
-                    throw new InvalidUserInputException(String.format("Bug cannot be sorted by field %s ", sortType));
+                    throw new InvalidUserInputException(String.format(SORT_FIELD_ERROR, sortType));
         };
     }
 }
