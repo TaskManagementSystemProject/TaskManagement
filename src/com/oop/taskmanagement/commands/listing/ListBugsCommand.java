@@ -13,7 +13,6 @@ import com.oop.taskmanagement.utils.ValidationHelpers;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ListBugsCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 2;
@@ -27,17 +26,20 @@ public class ListBugsCommand implements Command {
     @Override
     public String execute(List<String> parameters) {
 
+        if (parameters.isEmpty()) {
+            return FilteringAndSortingHelperMethods.getTasksGeneric(taskManagementRepository.getBugs(), false);
+        }
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
 
         return switch (listingType) {
             case FILTER -> {
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository,parameters,filterType);
+                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getBugs(), parameters, filterType, false);
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
                 SortType sortType = ParsingHelpers.tryParseEnum(parameters.get(1), SortType.class);
-                yield sortTasks(getComparator(sortType));
+                yield FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getBugs(), getComparator(sortType), false);
             }
         };
     }
@@ -50,13 +52,5 @@ public class ListBugsCommand implements Command {
             default ->
                     throw new InvalidUserInputException(String.format("Bug cannot be sorted by field %s ", sortType));
         };
-    }
-
-    private String sortTasks(Comparator<Bug> bugComparator) {
-        return taskManagementRepository.getBugs()
-                .stream()
-                .sorted(bugComparator)
-                .map(Object::toString)
-                .collect(Collectors.joining(", "));
     }
 }
