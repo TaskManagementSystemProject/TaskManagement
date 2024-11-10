@@ -13,8 +13,8 @@ import com.oop.taskmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class CreateStoryInBoardCommand implements Command {
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
 
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
     private static final String CREATE_STORY_SUCCESS_MESSAGE = "Story with ID %d created successfully in board %s in team %s";
     private final TaskManagementRepository taskManagementRepository;
 
