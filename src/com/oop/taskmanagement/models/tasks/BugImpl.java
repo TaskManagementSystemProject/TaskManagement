@@ -6,6 +6,7 @@ import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.StatusType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
@@ -16,8 +17,8 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
 
     public BugImpl(int id, String title, String description,
-                      List<String> stepsToReproduce, PriorityType priority,
-                      SeverityType severity) {
+                   List<String> stepsToReproduce, PriorityType priority,
+                   SeverityType severity) {
         super(id, title, description);
 
         this.stepsToReproduce = stepsToReproduce;
@@ -37,37 +38,36 @@ public class BugImpl extends TaskBaseImpl implements Bug {
         }
     }
 
+    @Override
     public void changeSeverity(SeverityType severity) {
         addEvent(String.format(ADD_SEVERITY_CHANGED_TO_EVENTLOG, this.severity, severity));
         this.severity = severity;
     }
 
-
-
+    @Override
     public void changePriority(PriorityType priority) {
         addEvent(String.format(ADD_PRIORITY_CHANGED_TO_EVENTLOG, this.priority, priority));
         this.priority = priority;
     }
 
 
-
-
-
+    @Override
     public List<String> getStepsToReproduce() {
-        return stepsToReproduce;                 // TODO
+        return new ArrayList<>(stepsToReproduce);    // TODO
     }
 
+    @Override
     public PriorityType getPriority() {
         return priority;
     }
 
-
+    @Override
     public SeverityType getSeverity() {
         return severity;
     }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "Not implemented yet";
+    }
 }

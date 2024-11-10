@@ -44,7 +44,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Team createTeam(String name) {
+    public void createTeam(String name) {
         if(teams.stream()
                 .noneMatch(team -> team.getName().equalsIgnoreCase(name))){
             Team newTeam = new TeamImpl(name);
@@ -64,6 +64,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         Board newBoard = new BoardImpl(name);
         team.addBoard(newBoard);
         return newBoard;
+    }
+
+    @Override
+    public Member createMemberInTeam(String name, Team team) {
+        if(teams.stream()
+                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
+            throw new InvalidUserInputException(String.format("Team %s does not exist.", team.getName()));
+        }
+        Member newMember = new MemberImpl(name);
+        team.addMember(newMember);
+        return newMember;
     }
 
     @Override

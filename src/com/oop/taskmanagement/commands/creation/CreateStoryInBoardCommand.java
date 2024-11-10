@@ -2,11 +2,20 @@ package com.oop.taskmanagement.commands.creation;
 
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
+import com.oop.taskmanagement.models.contracts.tasks.Story;
+import com.oop.taskmanagement.models.contracts.team.Board;
+import com.oop.taskmanagement.models.contracts.team.Team;
+import com.oop.taskmanagement.models.enums.PriorityType;
+import com.oop.taskmanagement.models.enums.SizeType;
+import com.oop.taskmanagement.utils.ParsingHelpers;
+import com.oop.taskmanagement.utils.ValidationHelpers;
 
 import java.util.List;
 
 public class CreateStoryInBoardCommand implements Command {
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
 
+    private static final String CREATE_STORY_SUCCESS_MESSAGE = "Story with ID %d created successfully in board %s in team %s";
     private final TaskManagementRepository taskManagementRepository;
 
     public CreateStoryInBoardCommand(TaskManagementRepository taskManagementRepository) {
@@ -15,7 +24,20 @@ public class CreateStoryInBoardCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        // TODO
-        return "";
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+
+        String title = parameters.get(0);
+        String description = parameters.get(1);
+        PriorityType priorityType = ParsingHelpers.tryParseEnum(parameters.get(2), PriorityType.class);
+        SizeType sizeType = ParsingHelpers.tryParseEnum(parameters.get(3), SizeType.class);
+        String teamName = parameters.get(4);
+        String boardName = parameters.get(5);
+
+        Team team = taskManagementRepository.findTeamByName(teamName);
+        Board board = taskManagementRepository.findBoardByTeamName(teamName, boardName);
+        Story newStory = taskManagementRepository.createStoryInBoard(title, description, priorityType, sizeType, team, board);
+
+        board.logActivity(String.format("Story with ID %d was added", newStory.getId()));
+        return String.format(CREATE_STORY_SUCCESS_MESSAGE, newStory.getId(), boardName, teamName);
     }
 }
