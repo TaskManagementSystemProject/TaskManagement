@@ -2,12 +2,9 @@ package com.oop.taskmanagement.commands.creation;
 
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
-import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Team;
-import com.oop.taskmanagement.models.enums.PriorityType;
-import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
 

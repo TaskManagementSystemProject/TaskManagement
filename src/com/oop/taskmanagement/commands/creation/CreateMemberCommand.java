@@ -2,7 +2,6 @@ package com.oop.taskmanagement.commands.creation;
 
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
-import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.team.Team;
 import com.oop.taskmanagement.utils.ValidationHelpers;

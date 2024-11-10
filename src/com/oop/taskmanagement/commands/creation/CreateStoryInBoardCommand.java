@@ -2,17 +2,14 @@ package com.oop.taskmanagement.commands.creation;
 
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
-import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Team;
 import com.oop.taskmanagement.models.enums.PriorityType;
-import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateStoryInBoardCommand implements Command {
