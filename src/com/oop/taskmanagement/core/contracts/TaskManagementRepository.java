@@ -19,6 +19,7 @@ public interface TaskManagementRepository {
     // create
     Team createTeam(String name);
     Board createBoardInTeam(String name, Team team);
+    Member createMemberInTeam(String name, Team team);
     Member createMember(String name);
     Bug createBugInBoard(String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board);
     Feedback createFeedbackInBoard( String title, String description, int rating, Team team, Board board);

@@ -67,6 +67,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
+    public Member createMemberInTeam(String name, Team team) {
+        if(teams.stream()
+                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
+            throw new InvalidUserInputException(String.format("Team %s does not exist.", team.getName()));
+        }
+        Member newMember = new MemberImpl(name);
+        team.addMember(newMember);
+        return newMember;
+    }
+
+    @Override
     public Member createMember(String name) {
         if (members.stream()
                 .noneMatch(member -> member.getName().equalsIgnoreCase(name))) {
