@@ -20,9 +20,9 @@ public interface TaskManagementRepository {
     Team createTeam(String name);
     Board createBoardInTeam(String name, Team team);
     Member createMember(String name);
-    Bug createBugInBoard(int id, String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board);
-    Feedback createFeedbackInBoard(int id, String title, String description, int rating, Team team, Board board);
-    Story createStoryInBoard(int id, String title, String description, PriorityType priority, SizeType size, Team team, Board board);
+    Bug createBugInBoard(String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board);
+    Feedback createFeedbackInBoard( String title, String description, int rating, Team team, Board board);
+    Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Team team, Board board);
 
     // get
     List<Team> getTeams();
@@ -35,6 +35,7 @@ public interface TaskManagementRepository {
     // find
     Member findMemberByName(String name);
     Team findTeamByName(String name);
+    Board findBoardByTeamName(String boardName, String teamName);
     TaskBase findTaskByIdWithStream(int id);
     TeamAsset findOwnerOfTaskWithStream(TaskBase task);
     TaskBase findTaskByIdLooping(int id);
@@ -47,5 +48,4 @@ public interface TaskManagementRepository {
     Story findStoryById(int id);
     Feedback findFeedbackById(int id);
     TaskBase findTaskById(int id);
-
 }
