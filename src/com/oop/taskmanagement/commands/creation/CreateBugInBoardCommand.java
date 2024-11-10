@@ -18,6 +18,7 @@ public class CreateBugInBoardCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 7;
 
     private static final String CREATE_BUG_SUCCESS_MESSAGE = "Bug with ID %d created successfully in board %s in team %s";
+    private static final String LOG_ACTIVITY_IN_BOARD_MESSAGE = "Bug with ID %d was added";
     private final TaskManagementRepository taskManagementRepository;
 
     public CreateBugInBoardCommand(TaskManagementRepository taskManagementRepository) {
@@ -39,7 +40,7 @@ public class CreateBugInBoardCommand implements Command {
         Board board = taskManagementRepository.findBoardByTeamName(teamName, boardName);
         Bug newBug = taskManagementRepository.createBugInBoard(title, description, stepsToReproduce, priorityType, severityType, team, board);
 
-        board.logActivity(String.format("Bug with ID %d was added", newBug.getId()));
+        board.logActivity(String.format(LOG_ACTIVITY_IN_BOARD_MESSAGE, newBug.getId()));
         return String.format(CREATE_BUG_SUCCESS_MESSAGE, newBug.getId(), boardName, teamName);
     }
 

@@ -12,7 +12,8 @@ public class CreateBoardInTeamCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
-    private static final String CREATE_BOARD__SUCCESS_MESSAGE = "Board %s created successfully in team %s";
+    private static final String CREATE_BOARD_SUCCESS_MESSAGE = "Board %s created successfully in team %s";
+    private static final String LOG_ACTIVITY_IN_BOARD_MESSAGE = "Board %s added to team %s";
 
     private final TaskManagementRepository taskManagementRepository;
 
@@ -28,8 +29,8 @@ public class CreateBoardInTeamCommand implements Command {
         String teamName = parameters.get(1);
         Team teamToAddBoardIn = taskManagementRepository.findTeamByName(teamName);
         Board newBoard = taskManagementRepository.createBoardInTeam(boardName, teamToAddBoardIn);
-        newBoard.logActivity(String.format("Board %s added to team %s", boardName, teamName));
+        newBoard.logActivity(String.format(LOG_ACTIVITY_IN_BOARD_MESSAGE, boardName, teamName));
 
-        return String.format(CREATE_BOARD__SUCCESS_MESSAGE, boardName, teamName);
+        return String.format(CREATE_BOARD_SUCCESS_MESSAGE, boardName, teamName);
     }
 }
