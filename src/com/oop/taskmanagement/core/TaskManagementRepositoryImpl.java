@@ -2,9 +2,9 @@ package com.oop.taskmanagement.core;
 
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
-import com.oop.taskmanagement.models.BoardImpl;
-import com.oop.taskmanagement.models.MemberImpl;
-import com.oop.taskmanagement.models.TeamImpl;
+import com.oop.taskmanagement.models.team.BoardImpl;
+import com.oop.taskmanagement.models.team.MemberImpl;
+import com.oop.taskmanagement.models.team.TeamImpl;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.Story;

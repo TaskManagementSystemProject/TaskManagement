@@ -1,4 +1,4 @@
-package com.oop.taskmanagement.models;
+package com.oop.taskmanagement.models.team;
 
 import com.oop.taskmanagement.models.contracts.team.TeamAsset;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
