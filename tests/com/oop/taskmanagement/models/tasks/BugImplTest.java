@@ -106,6 +106,7 @@ public class BugImplTest {
         Bug bug = initializeValidBug();
 
         // Act
+        bug.changeStatus(StatusType.ACTIVE);
         bug.changeStatus(StatusType.DONE);
 
         // Assert

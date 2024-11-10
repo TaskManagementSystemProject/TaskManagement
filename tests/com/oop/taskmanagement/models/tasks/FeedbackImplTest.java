@@ -1,12 +1,9 @@
 package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
-import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Comment;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
-import com.oop.taskmanagement.models.enums.PriorityType;
-import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.StatusType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -100,6 +97,9 @@ public class FeedbackImplTest {
         Feedback feedback = initializeValidFeedback();
 
         // Act
+        feedback.changeStatus(StatusType.NEW);
+        feedback.changeStatus(StatusType.UNSCHEDULED);
+        feedback.changeStatus(StatusType.SCHEDULED);
         feedback.changeStatus(StatusType.DONE);
 
         // Assert
