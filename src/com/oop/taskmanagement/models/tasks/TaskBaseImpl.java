@@ -24,6 +24,7 @@ public abstract class TaskBaseImpl implements TaskBase {
     protected StatusType status;
     private final List<Comment> comments;
     private final List<String> eventLog;
+    private String assigneeName;
 
     protected TaskBaseImpl(int id, String title, String description) {
         this.id = id;
@@ -31,6 +32,14 @@ public abstract class TaskBaseImpl implements TaskBase {
         setDescription(description);
         comments = new ArrayList<>();
         eventLog = new ArrayList<>();
+    }
+
+    public String getAssigneeName() {
+        return assigneeName;
+    }
+
+    public void setAssigneeName(String assigneeName) {
+        this.assigneeName = assigneeName;
     }
 
     @Override

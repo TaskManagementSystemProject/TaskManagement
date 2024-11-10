@@ -22,4 +22,8 @@ public interface TaskBase {
 
     List<String> getEventLog();
 
+    String getAssigneeName();
+
+    void setAssigneeName(String assignee);
+
 }
