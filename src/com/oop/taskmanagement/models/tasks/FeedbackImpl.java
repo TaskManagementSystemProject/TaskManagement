@@ -27,13 +27,20 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
         }
     }
 
+    @Override
     public void changeRating(int rating) {
-            addEvent(String.format(ADD_RATING_CHANGED_TO_EVENTLOG, this.rating, rating));
+        addEvent(String.format(ADD_RATING_CHANGED_TO_EVENTLOG, this.rating, rating));
         this.rating = rating;
     }
 
+    @Override
     public int getRating() {
         return rating;
+    }
+
+    @Override
+    public String toString() {
+        return "Not implemented yet";
     }
 
 }

@@ -33,12 +33,8 @@ public abstract class TaskBaseImpl implements TaskBase {
         eventLog = new ArrayList<>();
     }
 
+    @Override
     public abstract void changeStatus(StatusType status);
-
-    public void addComment(Comment comment) {
-        this.comments.add(comment);
-        addEvent(NEW_COMMENT_ADDED);
-    }
 
     protected void addEvent(String event) {
         this.eventLog.add(event);
@@ -57,30 +53,44 @@ public abstract class TaskBaseImpl implements TaskBase {
     }
 
     @Override
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+        addEvent(NEW_COMMENT_ADDED);
+    }
+
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public String getTitle() {
         return title;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public StatusType getStatus() {
         return status;
     }
 
+    @Override
     public List<Comment> getComments() {
         return new ArrayList<>(comments);
     }
 
-
+    @Override
     public List<String> getEventLog() {
         return new ArrayList<>(eventLog);
     }
 
+    @Override
+    public String toString() {
+        return "Not implemented yet";
+    }
 
 }

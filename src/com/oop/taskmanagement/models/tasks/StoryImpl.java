@@ -32,25 +32,33 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         }
     }
 
+    @Override
     public void changePriority(PriorityType priority) {
         addEvent(String.format(ADD_PRIORITY_CHANGED_TO_EVENTLOG, this.priority, priority));
         this.priority = priority;
     }
 
+    @Override
     public void changeSize(SizeType size) {
         addEvent(String.format(ADD_SIZE_CHANGED_TO_EVENTLOG, this.size, size));
         this.size = size;
     }
 
 
-    //  GETTERS
+    @Override                                               //  GETTERS
     public PriorityType getPriority() {
         return priority;
     }
 
+    @Override
     public SizeType getSize() {
         return size;
     }
 
+
+    @Override
+    public String toString() {
+        return "Not implemented yet";
+    }
 
 }
