@@ -11,11 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TeamImplTest {
-    private static final String VALID_NAME = "Geordan";
+    private static final String VALID_NAME = "Gedan";
     private static final String INVALID_SHORT_NAME = "Geor";
     private static final String INVALID_LONG_NAME = "GeorgiYordanOtbo";
-    private static final int MIN_LENGTH_NAME = 5;
-    private static final int MAX_LENGTH_NAME = 15;
 
     @Test
     public void TeamImpl_Should_ImplementTeamInterface(){

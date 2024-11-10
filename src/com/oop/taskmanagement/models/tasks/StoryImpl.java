@@ -9,7 +9,7 @@ import com.oop.taskmanagement.models.enums.StatusType;
 
 public class StoryImpl extends TaskBaseImpl implements Story {
 
-
+    private static final String TO_STRING_FORMAT ="%sPriority: %s%nSize: %s%nAssigned to: %s"; // new
     private PriorityType priority;
     private SizeType size;
 
@@ -56,6 +56,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
     }
 
 
+    /*
     @Override
     public String toString() {
         StringBuilder stringFromTaskBase = new StringBuilder(super.toString());
@@ -66,6 +67,13 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         stringFromTaskBase.append(String.format("Assigned to: %s", getAssigneeName())).append(System.lineSeparator());
 
         return stringFromTaskBase.toString();
+    }
+    old version
+     */
+
+    @Override // new implementation
+    public String toString(){
+        return String.format(TO_STRING_FORMAT, super.toString(), getPriority(), getSize(), getAssigneeName());
     }
 
 }

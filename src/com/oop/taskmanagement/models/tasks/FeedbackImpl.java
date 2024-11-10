@@ -7,7 +7,7 @@ import com.oop.taskmanagement.models.enums.StatusType;
 
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
-
+    private static final String TO_STRING_FORMAT ="%sRating: %d"; // new
     private int rating;
 
     public FeedbackImpl(int id, String title, String description, int rating) {
@@ -38,6 +38,7 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
         return rating;
     }
 
+    /*
     @Override
     public String toString() {
         StringBuilder stringFromTaskBase = new StringBuilder(super.toString());
@@ -46,6 +47,12 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
         stringFromTaskBase.append(String.format(stringFromTaskBase.toString(), sb));
 
         return stringFromTaskBase.toString();
+    }
+    old version
+    */
+    @Override // new implementation
+    public String toString() {
+        return String.format(TO_STRING_FORMAT, super.toString(), getRating());
     }
 
 }
