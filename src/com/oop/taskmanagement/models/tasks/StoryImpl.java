@@ -7,7 +7,6 @@ import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.models.enums.StatusType;
 
 
-
 public class StoryImpl extends TaskBaseImpl implements Story {
 
 
@@ -15,17 +14,14 @@ public class StoryImpl extends TaskBaseImpl implements Story {
     private SizeType size;
 
     public StoryImpl(int id, String title, String description,
-                        PriorityType priority, SizeType size) {
+                     PriorityType priority, SizeType size) {
         super(id, title, description);
         this.priority = priority;
         this.size = size;
         this.status = StatusType.NOT_DONE;
-        addEvent("New Story created successfully");
-
-
     }
 
-                                                                     //  SETTERS
+    //  SETTERS
     @Override
     public void changeStatus(StatusType status) {
         if (status.equals(StatusType.NOT_DONE) || status.equals(StatusType.IN_PROGRESS) || status.equals(StatusType.DONE)) {
@@ -47,7 +43,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
     }
 
 
-                                                                    //  GETTERS
+    //  GETTERS
     public PriorityType getPriority() {
         return priority;
     }

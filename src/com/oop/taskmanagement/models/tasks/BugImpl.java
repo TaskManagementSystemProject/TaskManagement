@@ -25,8 +25,6 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
         changeSeverity(severity);
         this.status = StatusType.ACTIVE;
-        addEvent("New Bug created successfully");
-
     }
 
     @Override
