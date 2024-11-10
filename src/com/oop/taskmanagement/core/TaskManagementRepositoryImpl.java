@@ -78,7 +78,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Member createMember(String name) {
+    public void createMember(String name) {
         if (members.stream()
                 .noneMatch(member -> member.getName().equalsIgnoreCase(name))) {
             Member newMember = new MemberImpl(name);
