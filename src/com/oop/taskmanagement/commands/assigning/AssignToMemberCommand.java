@@ -37,6 +37,8 @@ public class AssignToMemberCommand implements Command {
             memberToRemoveFrom.removeTask(taskToAssign);
             memberToRemoveFrom.logActivity(String.format("Unassigned task with ID %d", taskId));
         }
+        // TODO check if the member is from the team in which the task was created
+
 
         // add task to new member
         memberForAssignment.addTask(taskToAssign);
