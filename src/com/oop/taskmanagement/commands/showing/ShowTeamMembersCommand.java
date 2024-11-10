@@ -22,7 +22,7 @@ public class ShowTeamMembersCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        String teamName = parameters.getFirst();
+        String teamName = parameters.get(0);
         Team team = taskManagementRepository.findTeamByName(teamName);
 
         return team.getMembers()
