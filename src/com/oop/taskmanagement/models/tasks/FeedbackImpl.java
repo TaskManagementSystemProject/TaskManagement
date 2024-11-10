@@ -14,7 +14,6 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
         super(id, title, description);
         this.rating = rating;
         this.status = StatusType.NEW;
-        addEvent("New feedback created successfully");
     }
 
     @Override
