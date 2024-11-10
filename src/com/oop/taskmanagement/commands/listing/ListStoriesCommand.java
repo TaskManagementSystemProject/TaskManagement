@@ -36,12 +36,14 @@ public class ListStoriesCommand implements Command {
         return switch (listingType) {
             case FILTER -> {
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository, parameters, filterType);
+                yield FilteringAndSortingHelperMethods.filterTasks(
+                        taskManagementRepository.getStories(), parameters, filterType,false);
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
                 SortType sortType = ParsingHelpers.tryParseEnum(parameters.get(1), SortType.class);
-                yield sortTasks(getComparator(sortType));
+                yield FilteringAndSortingHelperMethods.sortTasksGeneric(
+                        taskManagementRepository.getStories(),getComparator(sortType),false);
             }
         };
     }
@@ -54,13 +56,5 @@ public class ListStoriesCommand implements Command {
             default ->
                     throw new InvalidUserInputException(String.format("Feedback cannot be sorted by field %s ", sortType));
         };
-    }
-
-    private String sortTasks(Comparator<Story> storyComparator) {
-        return taskManagementRepository.getStories()
-                .stream()
-                .sorted(storyComparator)
-                .map(Object::toString)
-                .collect(Collectors.joining(", "));
     }
 }

@@ -13,7 +13,6 @@ import com.oop.taskmanagement.utils.ValidationHelpers;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ListFeedbacksCommand implements Command {
 
@@ -27,22 +26,24 @@ public class ListFeedbacksCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        if (parameters.isEmpty()){
-            return taskManagementRepository.getFeedbacks().toString();
+        if (parameters.isEmpty()) {
+            return FilteringAndSortingHelperMethods.getTasksGeneric(
+                    taskManagementRepository.getFeedbacks(), false);
         }
-
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
 
         return switch (listingType) {
             case FILTER -> {
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository,parameters,filterType);
+                yield FilteringAndSortingHelperMethods.filterTasks(
+                        taskManagementRepository.getFeedbacks(), parameters, filterType, false);
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
                 SortType sortType = ParsingHelpers.tryParseEnum(parameters.get(1), SortType.class);
-                yield sortTasks(getComparator(sortType));
+                yield FilteringAndSortingHelperMethods.sortTasksGeneric(
+                        taskManagementRepository.getFeedbacks(), getComparator(sortType), false);
             }
         };
     }
@@ -54,13 +55,5 @@ public class ListFeedbacksCommand implements Command {
             default ->
                     throw new InvalidUserInputException(String.format("Feedback cannot be sorted by field %s ", sortType));
         };
-    }
-
-    private String sortTasks(Comparator<Feedback> feedbackComparator) {
-        return taskManagementRepository.getFeedbacks()
-                .stream()
-                .sorted(feedbackComparator)
-                .map(Object::toString)
-                .collect(Collectors.joining(", "));
     }
 }
