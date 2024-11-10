@@ -49,6 +49,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 .noneMatch(team -> team.getName().equalsIgnoreCase(name))){
             Team newTeam = new TeamImpl(name);
             teams.add(newTeam);
+            return;
         }
 
         throw new InvalidUserInputException(String.format("Team %s already exists.", name));
@@ -83,6 +84,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 .noneMatch(member -> member.getName().equalsIgnoreCase(name))) {
             Member newMember = new MemberImpl(name);
             members.add(newMember);
+            return;
         }
 
         throw new InvalidUserInputException(String.format("Member %s already exists.", name));
