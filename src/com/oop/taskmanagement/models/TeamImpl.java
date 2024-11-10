@@ -86,4 +86,8 @@ public class TeamImpl implements Team {
         members.remove(member);
     }
 
+    @Override
+    public String toString(){
+        return String.format("Name: %s, type: team", getName());
+    }
 }

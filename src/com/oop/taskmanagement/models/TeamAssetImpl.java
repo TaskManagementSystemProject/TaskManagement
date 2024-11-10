@@ -8,6 +8,7 @@ import java.util.List;
 
 abstract public class TeamAssetImpl implements TeamAsset {
 
+    private static final String TO_STRING_FORMAT = "Name: %s";
     private String name;
     private final List<TaskBase> tasks;
     private final List<String> activityHistory;
@@ -50,5 +51,9 @@ abstract public class TeamAssetImpl implements TeamAsset {
     @Override
     public void logActivity(String activityLog) {
         activityHistory.add(activityLog);
+    }
+    @Override
+    public String toString(){
+        return String.format(TO_STRING_FORMAT,getName());
     }
 }
