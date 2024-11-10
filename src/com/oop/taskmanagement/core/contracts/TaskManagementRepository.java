@@ -31,6 +31,7 @@ public interface TaskManagementRepository {
     List<Bug> getBugs();
     List<Story> getStories();
     List<Feedback> getFeedbacks();
+    List<TaskBase> getAllTasks();
 
 
     // find

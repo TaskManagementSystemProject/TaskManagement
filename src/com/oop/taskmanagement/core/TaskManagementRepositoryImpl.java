@@ -177,6 +177,13 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return new ArrayList<>(feedbacks);
     }
 
+    public List<TaskBase> getAllTasks() {
+        List<TaskBase> result = new ArrayList<>(bugs);
+        result.addAll(stories);
+        result.addAll(feedbacks);
+        return result;
+    }
+
     @Override
     public Member findMemberByName(String name) {
         for (Member member : members) {
