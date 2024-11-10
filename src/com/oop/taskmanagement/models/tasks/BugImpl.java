@@ -66,8 +66,16 @@ public class BugImpl extends TaskBaseImpl implements Bug {
         return severity;
     }
 
+
     @Override
     public String toString() {
-        return "Not implemented yet";
+        StringBuilder stringFromTaskBase = new StringBuilder(super.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Priority: %s", priority)).append(System.lineSeparator());
+        sb.append(String.format("Severity: %s", severity)).append(System.lineSeparator());
+        stringFromTaskBase.append(String.format(stringFromTaskBase.toString(), sb));
+        stringFromTaskBase.append(String.format("Assigned to: %s", getAssigneeName())).append(System.lineSeparator());
+
+        return stringFromTaskBase.toString();
     }
 }
