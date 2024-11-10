@@ -2,8 +2,11 @@ package com.oop.taskmanagement.commands.assigning;
 
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
+import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Member;
+import com.oop.taskmanagement.models.contracts.team.Team;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
 
@@ -37,12 +40,15 @@ public class AssignToMemberCommand implements Command {
             memberToRemoveFrom.removeTask(taskToAssign);
             memberToRemoveFrom.logActivity(String.format("Unassigned task with ID %d", taskId));
         }
-        // TODO check if the member is from the team in which the task was created
+        Team teamOfMemberForAssignment = taskManagementRepository.findTeamOfMemberLooping(memberName);
+        ValidationHelpers.validateMemberInProperTeamForAssignment(taskManagementRepository, taskToAssign, teamOfMemberForAssignment);
 
 
         // add task to new member
         memberForAssignment.addTask(taskToAssign);
+        taskToAssign.setAssigneeName(memberName);
         memberForAssignment.logActivity(String.format("Assigned task with ID %d", taskId));
         return String.format(TASK_ASSIGNED_SUCCESSFULLY, taskId, memberName);
     }
+
 }

@@ -1,5 +1,11 @@
 package com.oop.taskmanagement.utils;
 
+import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
+import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
+import com.oop.taskmanagement.models.contracts.team.Board;
+import com.oop.taskmanagement.models.contracts.team.Team;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,6 +39,23 @@ public class ValidationHelpers {
         Matcher matcher = patternToMatch.matcher(value);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(message);
+        }
+    }
+
+    public static void validateMemberInProperTeamForAssignment(TaskManagementRepository taskManagementRepository, TaskBase taskBase, Team teamOfMember) {
+        for (Team currentTeam : taskManagementRepository.getTeams()) {
+            for (Board board : currentTeam.getBoards()) {
+                for (TaskBase task : board.getTasks()) {
+                    if (task.getId() == taskBase.getId()) {
+                        if (!currentTeam.getName().equalsIgnoreCase(teamOfMember.getName())) {
+                            throw new InvalidUserInputException(String.format("Cannot assign task with ID %d from team %s to team %s",
+                                    taskBase.getId(),
+                                    currentTeam.getName(),
+                                    teamOfMember.getName()));
+                        }
+                    }
+                }
+            }
         }
     }
 }
