@@ -44,4 +44,13 @@ public class CommentImpl implements Comment {
     public String toString(){
         return String.format(TO_STRING_FORMAT,getAuthor(),getMessage());
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Comment comment = (Comment) obj;
+        return comment.getAuthor().equals(this.author) && comment.getMessage().equals(this.message);
+    }
 }
