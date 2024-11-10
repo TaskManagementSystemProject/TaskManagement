@@ -78,7 +78,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Bug createBugInBoard(int id, String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board) {
+    public Bug createBugInBoard(String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board) {
         if(teams.stream()
                         .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
             throw new InvalidUserInputException(String.format("Creating a bug failed! Team %s does not exist.", team.getName()));
@@ -95,7 +95,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Feedback createFeedbackInBoard(int id, String title, String description, int rating, Team team, Board board) {
+    public Feedback createFeedbackInBoard(String title, String description, int rating, Team team, Board board) {
         if (teams.stream()
                 .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))) {
             throw new InvalidUserInputException(String.format("Creating feedback failed! Team %s does not exist.", team.getName()));
@@ -114,7 +114,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     // gosho
     @Override
-    public Story createStoryInBoard(int id, String title, String description, PriorityType priority, SizeType size, Team team, Board board) {
+    public Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Team team, Board board) {
 
         if (teams.stream()
                 .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))) {
@@ -185,6 +185,17 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
             }
         }
         throw new InvalidUserInputException(String.format("There is no team with name %s", name));
+    }
+
+    @Override
+    public Board findBoardByTeamName(String boardName, String teamName) {
+        Team toSearchIn = findTeamByName(teamName);
+        for(Board board : toSearchIn.getBoards()){
+            if(board.getName().equalsIgnoreCase(boardName)){
+                return board;
+            }
+        }
+        throw new InvalidUserInputException(String.format("There is no board %s in team %s", boardName, teamName));
     }
 
 
