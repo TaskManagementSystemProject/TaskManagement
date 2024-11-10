@@ -4,6 +4,7 @@ import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShowMembersCommand implements Command {
 
@@ -15,7 +16,10 @@ public class ShowMembersCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        // TODO
-        return "";
+
+        return taskManagementRepository.getMembers()
+                .stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 }
