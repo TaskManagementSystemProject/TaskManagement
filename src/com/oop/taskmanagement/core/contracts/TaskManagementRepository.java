@@ -17,7 +17,7 @@ import java.util.List;
 public interface TaskManagementRepository {
 
     // create
-    Team createTeam(String name);
+    void createTeam(String name);
     Board createBoardInTeam(String name, Team team);
     Member createMemberInTeam(String name, Team team);
     Member createMember(String name);

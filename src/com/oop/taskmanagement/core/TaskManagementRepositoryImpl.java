@@ -44,7 +44,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Team createTeam(String name) {
+    public void createTeam(String name) {
         if(teams.stream()
                 .noneMatch(team -> team.getName().equalsIgnoreCase(name))){
             Team newTeam = new TeamImpl(name);
