@@ -73,7 +73,7 @@ public class TeamImpl implements Team {
 
     @Override
     public void removeBoard(Board board) {
-        boards.add(board);
+        boards.remove(board);
     }
 
     @Override
@@ -88,6 +88,6 @@ public class TeamImpl implements Team {
 
     @Override
     public String toString(){
-        return String.format("Name: %s, type: team", getName());
+        return String.format("Name: %s, type: team.", getName());
     }
 }
