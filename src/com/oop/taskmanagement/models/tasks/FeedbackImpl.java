@@ -40,7 +40,12 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
     @Override
     public String toString() {
-        return "Not implemented yet";
+        StringBuilder stringFromTaskBase = new StringBuilder(super.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Rating: %d", rating)).append(System.lineSeparator());
+        stringFromTaskBase.append(String.format(stringFromTaskBase.toString(), sb));
+
+        return stringFromTaskBase.toString();
     }
 
 }
