@@ -11,6 +11,7 @@ import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.models.tasks.BugImpl;
+import com.oop.taskmanagement.models.tasks.CommentImpl;
 import com.oop.taskmanagement.models.tasks.FeedbackImpl;
 import com.oop.taskmanagement.models.tasks.StoryImpl;
 import com.oop.taskmanagement.models.team.BoardImpl;
@@ -25,12 +26,16 @@ public class ValidInitialization {
         return new TeamImpl(VALID_TEAM_NAME);
     }
 
+    public static MemberImpl initializeValidMember() {
+        return new MemberImpl(VALID_MEMBER_NAME_ONE);
+    }
+
     public static BoardImpl initializeValidBoard() {
         return new BoardImpl(VALID_BOARD_NAME);
     }
 
-    public static MemberImpl initializeValidMember() {
-        return new MemberImpl(VALID_MEMBER_NAME_ONE);
+    public static CommentImpl initializeValidComment() {
+        return new CommentImpl(VALID_COMMENT_AUTHOR, VALID_COMMENT_MESSAGE);
     }
 
     public static BugImpl initializeValidBug() {

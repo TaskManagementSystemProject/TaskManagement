@@ -7,6 +7,8 @@ import java.util.List;
 public class Constants {
 
     public static final String VALID_TEAM_NAME = "Otbor";
+    public static final String VALID_COMMENT_AUTHOR = "JohnSmith";
+    public static final String VALID_COMMENT_MESSAGE = "Messages can be from 5 to 500 characters";
     public static final String VALID_TEAM_NAME_TWO = "Otbor1";
     public static final String VALID_BOARD_NAME = "White";
     public static final String VALID_MEMBER_NAME_ONE = "Gosho";
