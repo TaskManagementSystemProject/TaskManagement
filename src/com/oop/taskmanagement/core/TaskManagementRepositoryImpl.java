@@ -177,8 +177,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     public List<TaskBase> getAllTasks() {
         List<TaskBase> result = new ArrayList<>(bugs);
-        result.addAll(stories);
         result.addAll(feedbacks);
+        result.addAll(stories);
         return result;
     }
 

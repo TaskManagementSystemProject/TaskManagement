@@ -1,5 +1,9 @@
 package com.oop.taskmanagement.utils;
 
+import com.oop.taskmanagement.models.enums.PriorityType;
+import com.oop.taskmanagement.models.enums.SeverityType;
+import com.oop.taskmanagement.models.enums.StatusType;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +19,7 @@ public class Constants {
     public static final int VALID_RATING = 5;
     public static final String EXPECTED_FEEDBACK_TO_STRING_FORMAT = "Task with id: %d%nTitle: %s%nStatus: %s%nRating: %d%nAssigned to: %s";
     public static final String EXPECTED_STORY_TO_STRING_FORMAT = "Task with id: %d%nTitle: %s%nStatus: %s%nPriority: %s%nSize: %s%nAssigned to: %s";
+    public static final String EXPECTED_BUG_TO_STRING_FORMAT ="Task with id: %d%nTitle: %s%nStatus: %s%nPriority: %s%nSeverity: %s%nAssigned to: %s";
     // Team
     public static final String VALID_TEAM_NAME = "Otbor";
     public static final String VALID_TEAM_NAME_TWO = "Otbor1";
@@ -47,4 +52,28 @@ public class Constants {
     public static final String CREATE_BOARD_SUCCESS_MESSAGE = "Story with ID %d was added.";
     public static final String VALID_PRIORITY_TYPE_STORY = "Low";
     public static final String VALID_SIZE_TYPE_STORY = "Small";
+
+    // To_STRING
+    public static final String FEEDBACK_TO_STRING_DUMMY_REPO = String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
+            1,
+            VALID_TITLE,
+            StatusType.NEW,
+            VALID_RATING,
+            VALID_MEMBER_NAME_ONE);
+
+    public static final String BUG_TO_STRING_DUMMY_REPO = String.format(EXPECTED_BUG_TO_STRING_FORMAT,
+            2,
+            VALID_TITLE,
+            StatusType.ACTIVE,
+            PriorityType.LOW,
+            SeverityType.MINOR,
+            null);
+
+    public static final String STORY_TO_STRING_DUMMY_REPO = String.format(EXPECTED_STORY_TO_STRING_FORMAT,
+            3,
+            VALID_TITLE,
+            StatusType.NOT_DONE,
+            VALID_PRIORITY_TYPE_STORY,
+            VALID_SIZE_TYPE_STORY,
+            VALID_MEMBER_NAME_TWO);
 }
