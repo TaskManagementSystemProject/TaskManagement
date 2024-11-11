@@ -34,14 +34,14 @@ public class AssignToMemberCommand implements Command {
         // find the Task which has to be assigned from all the boards + members
         // find the current member of the task
         TaskBase taskToAssign = taskManagementRepository.findTaskById(taskId);
-        Member memberToRemoveFrom = taskManagementRepository.findMemberOfTaskLooping(taskToAssign);
+        Member memberToRemoveFrom = taskManagementRepository.findMemberByTask(taskToAssign);
         Member memberForAssignment = taskManagementRepository.findMemberByName(memberName);
         // remove task from current board/ member
         if (memberToRemoveFrom != null) {
             memberToRemoveFrom.removeTask(taskToAssign);
             memberToRemoveFrom.logActivity(String.format(ACTIVITY_LOG_UNASSIGN_MESSAGE, taskId));
         }
-        Team teamOfMemberForAssignment = taskManagementRepository.findTeamOfMemberLooping(memberName);
+        Team teamOfMemberForAssignment = taskManagementRepository.findTeamByMemberName(memberName);
         ValidationHelpers.validateMemberInProperTeamForAssignment(taskManagementRepository, taskToAssign, teamOfMemberForAssignment);
 
 

@@ -32,7 +32,7 @@ public class UnassignFromMemberCommand implements Command {
         String memberName = parameters.get(1);
 
         // find the Task which has to be unassigned.  checks all boards + members in all teams
-        TaskBase taskToUnassign = taskManagementRepository.findTaskByIdLooping(taskId);
+        TaskBase taskToUnassign = taskManagementRepository.findTaskById(taskId);
         Member memberToRemoveTaskFrom = taskManagementRepository.findMemberByName(memberName);
 
        /*   if the given name exists and the id is valid but the task

@@ -46,14 +46,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public void createTeam(String name) {
         if(teams.stream()
-                .noneMatch(team -> team.getName().equalsIgnoreCase(name))){
-            Team newTeam = new TeamImpl(name);
-            teams.add(newTeam);
-            return;
+                .anyMatch(team -> team.getName().equalsIgnoreCase(name))){
+            throw new InvalidUserInputException(String.format("Team %s already exists.", name));
         }
-
-        throw new InvalidUserInputException(String.format("Team %s already exists.", name));
-
+        Team newTeam = new TeamImpl(name);
+        teams.add(newTeam);
     }
 
     @Override
@@ -67,6 +64,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return newBoard;
     }
 
+    /*
     @Override
     public Member createMemberInTeam(String name, Team team) {
         if(teams.stream()
@@ -77,17 +75,15 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         team.addMember(newMember);
         return newMember;
     }
-
+     */
     @Override
     public void createMember(String name) {
         if (members.stream()
-                .noneMatch(member -> member.getName().equalsIgnoreCase(name))) {
-            Member newMember = new MemberImpl(name);
-            members.add(newMember);
-            return;
+                .anyMatch(member -> member.getName().equalsIgnoreCase(name))) {
+            throw new InvalidUserInputException(String.format("Member %s already exists.", name));
         }
-
-        throw new InvalidUserInputException(String.format("Member %s already exists.", name));
+        Member newMember = new MemberImpl(name);
+        members.add(newMember);
     }
 
     @Override
@@ -218,16 +214,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         throw new InvalidUserInputException(String.format("There is no board %s in team %s", boardName, teamName));
     }
 
-
+    /*
     @Override
     public TaskBase findTaskByIdWithStream(int id) {
-        return teams.stream()
-                .flatMap(team -> Stream.concat(
-                        team.getMembers().stream()
-                                .flatMap(member -> member.getTasks().stream()),
-                        team.getBoards().stream()
-                                .flatMap(board -> board.getTasks().stream())
-                ))
+        return Stream.concat(bugs.stream(),
+                        Stream.concat(feedbacks.stream(), stories.stream()))
                 .filter(task -> task.getId() == id)
                 .findFirst()
                 .orElseThrow(() -> new InvalidUserInputException(String.format("Task with %d id does not exist.", id)));
@@ -250,14 +241,15 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         // to be tested.
     }
 
-    private TaskBase getTaskById(List<TaskBase> tasks, int id){
-        for(TaskBase task : tasks){
-            if(task.getId() == id){
+    private TaskBase getTaskById(List<TaskBase> tasks, int id) {
+        for (TaskBase task : tasks) {
+            if (task.getId() == id) {
                 return task;
             }
         }
         return null;
     }
+
     @Override
     public TaskBase findTaskByIdLooping(int id) {
         TaskBase toReturn = null;
@@ -274,9 +266,13 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         }
         return toReturn;
     }
+    */
 
     @Override
-    public Member findMemberOfTaskLooping(TaskBase task) {
+    public Member findMemberByTask(TaskBase task) {
+        String memberName = task.getAssigneeName();
+        return memberName == null ? null : findMemberByName(memberName);
+        /*
         for (Team team : teams) {
             for (Member member : team.getMembers()) {
                 for (TaskBase currentTask : member.getTasks()) {
@@ -287,10 +283,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
             }
         }
         return null;
+         */
     }
 
     @Override
-    public Team findTeamOfMemberLooping(String memberName) {
+    public Team findTeamByMemberName(String memberName) {
         for(Team team: teams){
             for(Member member : team.getMembers()){
                 if(member.getName().equalsIgnoreCase(memberName)){
