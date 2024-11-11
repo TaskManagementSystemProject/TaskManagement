@@ -38,4 +38,5 @@ public class Constants {
     public final static String TASK_UNASSIGNED_SUCCESSFULLY = "Task with ID %d unassigned from member %s successfully.";
     public final static String FEEDBACK_STATUS_CHANGED_SUCCESSFULLY = "Feedback with ID %d status changed to %s successfully.";
     public final static String STORY_ATTRIBUTE_CHANGED_SUCCESSFULLY = "Story with ID %d %s changed to %s successfully.";
+    public static final String CREATE_MEMBER_SUCCESS_MESSAGE = "Member %s created successfully.";
 }
