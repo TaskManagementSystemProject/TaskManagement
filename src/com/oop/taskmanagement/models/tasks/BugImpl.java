@@ -33,6 +33,9 @@ public class BugImpl extends TaskBaseImpl implements Bug {
     @Override
     public void changeStatus(StatusType status) {
         if (status.equals(StatusType.ACTIVE) || status.equals(StatusType.DONE)) {
+            if (status.equals(this.status)) {
+                throw new InvalidUserInputException(String.format("Status is already at %s", status));
+            }
             addEvent(String.format(ADD_STATUS_CHANGED_TO_EVENTLOG, this.status, status));
             this.status = status;
         } else {
@@ -42,12 +45,18 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
     @Override
     public void changeSeverity(SeverityType severity) {
+        if (severity.equals(this.severity)) {
+            throw new InvalidUserInputException(String.format("Severity is already at %s", severity));
+        }
         addEvent(String.format(ADD_SEVERITY_CHANGED_TO_EVENTLOG, this.severity, severity));
         this.severity = severity;
     }
 
     @Override
     public void changePriority(PriorityType priority) {
+        if (priority.equals(this.priority)) {
+            throw new InvalidUserInputException(String.format("Priority is already at %s", priority));
+        }
         addEvent(String.format(ADD_PRIORITY_CHANGED_TO_EVENTLOG, this.priority, priority));
         this.priority = priority;
     }
@@ -69,20 +78,6 @@ public class BugImpl extends TaskBaseImpl implements Bug {
     }
 
 
-    /*
-    @Override
-    public String toString() {
-        StringBuilder stringFromTaskBase = new StringBuilder(super.toString());
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Priority: %s", priority)).append(System.lineSeparator());
-        sb.append(String.format("Severity: %s", severity)).append(System.lineSeparator());
-        stringFromTaskBase.append(String.format(stringFromTaskBase.toString(), sb));
-        stringFromTaskBase.append(String.format("Assigned to: %s", getAssigneeName())).append(System.lineSeparator());
-
-        return stringFromTaskBase.toString();
-    }
-    older version
-     */
     @Override // new implementation
     public String toString() {
         return String.format(TO_STRING_FORMAT, super.toString(), getPriority(), getSeverity(), getAssigneeName());

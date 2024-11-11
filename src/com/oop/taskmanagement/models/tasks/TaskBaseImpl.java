@@ -99,19 +99,6 @@ public abstract class TaskBaseImpl implements TaskBase {
     }
 
 
-    /*
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Task with id: %d", id)).append(System.lineSeparator());
-        sb.append(String.format("Title: %s", title)).append(System.lineSeparator());
-        sb.append("%s").append(System.lineSeparator());     // to use String format in subclasses
-        sb.append(String.format("Status: %s", status)).append(System.lineSeparator());
-        return sb.toString();
-    }
-    previous implementation
-     */
-
     @Override // new implementation
     public String toString(){
         return String.format(TO_STRING_FORMAT, getId(),getTitle(),getStatus());
