@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Constants {
+
     public static final String VALID_TEAM_NAME = "Otbor";
     public static final String VALID_TEAM_NAME_TWO = "Otbor1";
     public static final String VALID_BOARD_NAME = "White";
@@ -17,4 +18,8 @@ public class Constants {
     public static int currentId = 1;
     public static final String INVALID_TEAM_SHORT_NAME = "Geor";
     public static final String INVALID_TEAM_LONG_NAME = "GeorgiYordanOtbo";
+    public static final String INVALID_BOARD_SHORT_NAME = "Bob";
+    public static final String INVALID_BOARD_LONG_NAME = "DaveTheMagicalCheeseWizard";
+    public static final String INVALID_MEMBER_SHORT_NAME = "Bob";
+    public static final String INVALID_MEMBER_LONG_NAME = "DaveTheMagicalCheeseWizard";
 }
