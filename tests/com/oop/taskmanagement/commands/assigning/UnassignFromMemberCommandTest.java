@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UnassignFromMemberTest {
+public class UnassignFromMemberCommandTest {
 
     private static final int ARGUMENT_COUNT = 2;
     private TaskManagementRepository repository;
