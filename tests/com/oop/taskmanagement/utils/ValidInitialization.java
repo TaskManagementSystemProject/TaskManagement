@@ -13,24 +13,35 @@ import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.models.tasks.BugImpl;
 import com.oop.taskmanagement.models.tasks.FeedbackImpl;
 import com.oop.taskmanagement.models.tasks.StoryImpl;
+import com.oop.taskmanagement.models.team.BoardImpl;
+import com.oop.taskmanagement.models.team.MemberImpl;
 import com.oop.taskmanagement.models.team.TeamImpl;
 
 import static com.oop.taskmanagement.utils.Constants.*;
 
 public class ValidInitialization {
 
-    public static TeamImpl initializeValidTeam(){
+    public static TeamImpl initializeValidTeam() {
         return new TeamImpl(VALID_TEAM_NAME);
     }
 
-    public static BugImpl initializeValidBug(){
-        return new BugImpl(currentId, VALID_TITLE, VALID_DESCRIPTION, VALID_LIST_TO_REPRODUCE,PriorityType.LOW, SeverityType.MINOR);
+    public static BoardImpl initializeValidBoard() {
+        return new BoardImpl(VALID_BOARD_NAME);
     }
 
-    public static FeedbackImpl initializeValidFeedback(){
+    public static MemberImpl initializeValidMember() {
+        return new MemberImpl(VALID_MEMBER_NAME_ONE);
+    }
+
+    public static BugImpl initializeValidBug() {
+        return new BugImpl(currentId, VALID_TITLE, VALID_DESCRIPTION, VALID_LIST_TO_REPRODUCE, PriorityType.LOW, SeverityType.MINOR);
+    }
+
+    public static FeedbackImpl initializeValidFeedback() {
         return new FeedbackImpl(currentId, VALID_TITLE, VALID_DESCRIPTION, VALID_RATING);
     }
-    public static StoryImpl initializeValidStory(){
+
+    public static StoryImpl initializeValidStory() {
         return new StoryImpl(currentId, VALID_TITLE, VALID_DESCRIPTION, PriorityType.LOW, SizeType.SMALL);
     }
 
