@@ -1,9 +1,9 @@
 package com.oop.taskmanagement.models.enums;
 
 public enum SizeType {
-    LARGE,
+    SMALL,
     MEDIUM,
-    SMALL;
+    LARGE;
 
     @Override
     public String toString() {

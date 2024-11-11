@@ -1,9 +1,9 @@
 package com.oop.taskmanagement.models.enums;
 
 public enum PriorityType {
-    HIGH,
+    LOW,
     MEDIUM,
-    LOW;
+    HIGH;
 
     @Override
     public String toString() {

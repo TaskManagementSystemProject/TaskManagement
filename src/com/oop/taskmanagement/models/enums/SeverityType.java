@@ -2,9 +2,9 @@ package com.oop.taskmanagement.models.enums;
 
 public enum SeverityType {
 
-    CRITICAL,
+    MINOR,
     MAJOR,
-    MINOR;
+    CRITICAL;
 
     @Override
     public String toString() {

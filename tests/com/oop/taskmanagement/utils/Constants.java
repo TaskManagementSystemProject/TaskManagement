@@ -14,6 +14,7 @@ public class Constants {
     public static final List<String> VALID_LIST_TO_REPRODUCE = new ArrayList<>(Arrays.asList("Step1","Step2"));
     public static final int VALID_RATING = 5;
     public static final String EXPECTED_FEEDBACK_TO_STRING_FORMAT = "Task with id: %d%nTitle: %s%nStatus: %s%nRating: %d%nAssigned to: %s";
+    public static final String EXPECTED_STORY_TO_STRING_FORMAT = "Task with id: %d%nTitle: %s%nStatus: %s%nPriority: %s%nSize: %s%nAssigned to: %s";
     // Team
     public static final String VALID_TEAM_NAME = "Otbor";
     public static final String VALID_TEAM_NAME_TWO = "Otbor1";

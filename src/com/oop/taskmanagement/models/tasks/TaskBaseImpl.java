@@ -26,7 +26,6 @@ public abstract class TaskBaseImpl implements TaskBase {
     private final List<Comment> comments;
     private final List<String> eventLog;
     private String assigneeName;
-
     protected TaskBaseImpl(int id, String title, String description) {
         this.id = id;
         setTitle(title);
