@@ -1,14 +1,14 @@
 package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
-import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Comment;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.enums.PriorityType;
-import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.models.enums.StatusType;
+import com.oop.taskmanagement.utils.Constants;
+import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,15 +16,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.oop.taskmanagement.utils.Constants.VALID_DESCRIPTION;
+
 public class StoryImplTest {
-    private static final String VALID_TITLE = "10symb tit";
-    private static final String VALID_DESCRIPTION = "10symb des";
-    private int currentId = 1;
 
     @Test
     public void StoryImpl_Should_ImplementStoryInterface(){
         // Arrange, Act
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
 
         // Assert
         Assertions.assertTrue(story instanceof Story);
@@ -33,7 +32,7 @@ public class StoryImplTest {
     @Test
     public void StoryImpl_Should_ImplementTaskBaseInterface(){
         // Arrange, Act
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
 
         // Assert
         Assertions.assertTrue(story instanceof TaskBase);
@@ -43,7 +42,7 @@ public class StoryImplTest {
     public void constructor_Should_ThrowException_When_InvalidNameProvided(){
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new StoryImpl(currentId,
+                new StoryImpl(Constants.currentId,
                         "Invalid",
                         VALID_DESCRIPTION,
                         PriorityType.LOW,
@@ -54,8 +53,8 @@ public class StoryImplTest {
     public void constructor_Should_ThrowException_When_InvalidDescriptionProvided(){
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new StoryImpl(currentId,
-                        VALID_TITLE,
+                new StoryImpl(Constants.currentId,
+                        Constants.VALID_TITLE,
                         "Invalid",
                         PriorityType.LOW,
                         SizeType.SMALL));
@@ -64,12 +63,12 @@ public class StoryImplTest {
     @Test
     public void constructor_Should_createNewStory_When_ArgumentsAreValid() {
         // Arrange, Act
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
 
         // Assert
         Assertions.assertAll(
-                () -> Assertions.assertEquals(currentId, story.getId()),
-                () -> Assertions.assertEquals(VALID_TITLE, story.getTitle()),
+                () -> Assertions.assertEquals(Constants.currentId, story.getId()),
+                () -> Assertions.assertEquals(Constants.VALID_TITLE, story.getTitle()),
                 () -> Assertions.assertEquals(VALID_DESCRIPTION, story.getDescription()),
                 () -> Assertions.assertEquals(PriorityType.LOW, story.getPriority()),
                 () -> Assertions.assertEquals(SizeType.SMALL, story.getSize()),
@@ -80,7 +79,7 @@ public class StoryImplTest {
     @Test
     public void setAssignee_Should_AssignName(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         String expectedOutput = "Gosho";
         // Act
         story.setAssigneeName("Gosho");
@@ -91,7 +90,7 @@ public class StoryImplTest {
     @Test
     public void changeStatus_Should_ThrowException_When_InvalidStatusProvided(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
 
         // Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> story.changeStatus(StatusType.NEW));
@@ -100,7 +99,7 @@ public class StoryImplTest {
     @Test
     public void changeStatus_Should_ChangeStatus_When_ValidStatusProvided(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
 
         // Act
         story.changeStatus(StatusType.NOT_DONE);
@@ -114,7 +113,7 @@ public class StoryImplTest {
     @Test
     public void changeStatus_Should_LogChange_When_ValidStatusProvided(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         String expectedOutput = String.format("Status changed from %s to %s.", StatusType.NOT_DONE, StatusType.DONE);
         // Act
         story.changeStatus(StatusType.DONE);
@@ -126,7 +125,7 @@ public class StoryImplTest {
     @Test
     public void changeSize_Should_ChangeSize(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
 
         // Act
         story.changeSize(SizeType.LARGE);
@@ -138,7 +137,7 @@ public class StoryImplTest {
     @Test
     public void changeSize_Should_LogChange_When_ValidSizeProvided(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         String expectedOutput = String.format("Size changed from %s to %s.", SizeType.SMALL, SizeType.LARGE);
         // Act
         story.changeSize(SizeType.LARGE);
@@ -150,7 +149,7 @@ public class StoryImplTest {
     @Test
     public void changePriority_Should_ChangePriority(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
 
         // Act
         story.changePriority(PriorityType.HIGH);
@@ -162,7 +161,7 @@ public class StoryImplTest {
     @Test
     public void changePriority_Should_LogChange_When_ValidPriorityProvided(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         String expectedOutput = String.format("Priority changed from %s to %s.", PriorityType.LOW, PriorityType.HIGH);
         // Act
         story.changePriority(PriorityType.HIGH);
@@ -174,11 +173,11 @@ public class StoryImplTest {
     @Test
     public void toString_Should_ConvertToStringWithProperFormat(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         String expectedResult = String.format("Task with id: %d%nTitle: %s%nStatus: %s%n" +
                         "Priority: %s%nSize: %s%nAssigned to: %s",
-                currentId,
-                VALID_TITLE,
+                Constants.currentId,
+                Constants.VALID_TITLE,
                 StatusType.NOT_DONE,
                 PriorityType.LOW,
                 SizeType.SMALL,
@@ -194,7 +193,7 @@ public class StoryImplTest {
     @Test
     public void addComment_Should_AddCommentInList(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         Comment comment = new CommentImpl("Pesho","Long message");
 
         // Act
@@ -207,7 +206,7 @@ public class StoryImplTest {
     @Test
     public void addComment_Should_LogAdding(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         Comment comment = new CommentImpl("Pesho","Long message");
         String expectedLog = "Comment added successfully";
         // Act
@@ -219,7 +218,7 @@ public class StoryImplTest {
     @Test
     public void getEventLog_Should_ReturnListOfLogs(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         story.addComment(new CommentImpl("Gosho","Some message"));
         story.changePriority(PriorityType.HIGH);
         List<String> expectedOutput = new ArrayList<>(
@@ -235,7 +234,7 @@ public class StoryImplTest {
     @Test
     public void getComments_Should_ReturnListOfComments(){
         // Arrange
-        StoryImpl story = initializeValidStory();
+        StoryImpl story = ValidInitialization.initializeValidStory();
         Comment firstComment = new CommentImpl("Gosho","Some message");
         Comment secondComment = new CommentImpl("Pesho", "Other message");
         story.addComment(firstComment);
@@ -249,7 +248,5 @@ public class StoryImplTest {
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
-    private StoryImpl initializeValidStory(){
-        return new StoryImpl(currentId, VALID_TITLE, VALID_DESCRIPTION, PriorityType.LOW, SizeType.SMALL);
-    }
+
 }

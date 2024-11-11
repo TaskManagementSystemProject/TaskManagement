@@ -3,6 +3,8 @@ package com.oop.taskmanagement.models.team;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.team.Team;
+import com.oop.taskmanagement.utils.Constants;
+import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,14 +13,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TeamImplTest {
-    private static final String VALID_NAME = "Gedan";
-    private static final String INVALID_SHORT_NAME = "Geor";
-    private static final String INVALID_LONG_NAME = "GeorgiYordanOtbo";
 
     @Test
     public void TeamImpl_Should_ImplementTeamInterface(){
         // Arrange, Act
-        TeamImpl team = initializeValidTeam();
+        TeamImpl team = ValidInitialization.initializeValidTeam();
         // Assert
         Assertions.assertTrue(team instanceof Team);
     }
@@ -27,7 +26,7 @@ public class TeamImplTest {
     public void constructor_Should_ThrowException_When_NameOutOfLowerBounds() {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new TeamImpl(INVALID_SHORT_NAME)
+                new TeamImpl(Constants.INVALID_TEAM_SHORT_NAME)
         );
     }
 
@@ -35,14 +34,14 @@ public class TeamImplTest {
     public void constructor_Should_ThrowException_When_NameOutOfUpperBounds() {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new TeamImpl(INVALID_LONG_NAME)
+                new TeamImpl(Constants.INVALID_TEAM_LONG_NAME)
         );
     }
 
     @Test
     public void constructor_Should_InitializeMemberList_When_ValidTeamName(){
         // Arrange
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
 
         // Act, Assert
         Assertions.assertNotNull(team.getMembers());
@@ -51,7 +50,7 @@ public class TeamImplTest {
     @Test
     public void constructor_Should_InitializeBoardList_When_ValidTeamName(){
         // Arrange
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
 
         // Act, Assert
         Assertions.assertNotNull(team.getBoards());
@@ -60,8 +59,8 @@ public class TeamImplTest {
     @Test
     public void toString_Should_ConvertToStringWithProperFormat(){
         // Arrange
-        Team team = initializeValidTeam();
-        String expectedResult = String.format("Name: %s, type: team.", VALID_NAME);
+        Team team = ValidInitialization.initializeValidTeam();
+        String expectedResult = String.format("Name: %s, type: team.", Constants.VALID_TEAM_NAME);
 
         // Act
         String actualOutput = team.toString();
@@ -74,7 +73,7 @@ public class TeamImplTest {
     public void addMember_Should_AddMemberToMemberList(){
         // Arrange
         Member member = new MemberImpl("Gosho");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
 
         // Act
         team.addMember(member);
@@ -87,7 +86,7 @@ public class TeamImplTest {
     public void addBoard_Should_AddBoardToBoardList(){
         // Arrange
         Board board = new BoardImpl("White");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
 
         // Act
         team.addBoard(board);
@@ -100,7 +99,7 @@ public class TeamImplTest {
     public void removeMember_Should_RemoveMemberFromMemberList_WhenMemberExists(){
         // Arrange
         Member member = new MemberImpl("Gosho");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
         team.addMember(member);
 
         // Act
@@ -115,7 +114,7 @@ public class TeamImplTest {
         // Arrange
         Member member = new MemberImpl("Gosho");
         Member notMember = new MemberImpl("Pesho");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
         team.addMember(member);
 
         // Act
@@ -129,7 +128,7 @@ public class TeamImplTest {
     public void removeBoard_Should_RemoveBoardFromBoardList_WhenBoardExists(){
         // Arrange
         Board board = new BoardImpl("White");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
         team.addBoard(board);
 
         // Act
@@ -144,7 +143,7 @@ public class TeamImplTest {
         // Arrange
         Board board = new BoardImpl("White");
         Board notBoard = new BoardImpl("Black");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
         team.addBoard(board);
 
         // Act
@@ -160,7 +159,7 @@ public class TeamImplTest {
         Board board = new BoardImpl("White");
         Member member = new MemberImpl("Gosho");
         Member secondMember = new MemberImpl("Pesho");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
         team.addBoard(board);
         team.addMember(member);
         team.addMember(secondMember);
@@ -184,7 +183,7 @@ public class TeamImplTest {
         Board board = new BoardImpl("White");
         Member member = new MemberImpl("Gosho");
         Member secondMember = new MemberImpl("Pesho");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
         team.addBoard(board);
         team.addMember(member);
         team.addMember(secondMember);
@@ -210,7 +209,7 @@ public class TeamImplTest {
         Member member = new MemberImpl("Gosho");
         Member secondMember = new MemberImpl("Pesho");
         Member thirdMember = new MemberImpl("Newbie");
-        Team team = initializeValidTeam();
+        Team team = ValidInitialization.initializeValidTeam();
         team.addBoard(board);
         team.addBoard(secondBoard);
         team.addMember(thirdMember);
@@ -229,12 +228,6 @@ public class TeamImplTest {
 
         // Assert
         Assertions.assertEquals(expectedList, resultList);
-    }
-
-
-
-    private TeamImpl initializeValidTeam(){
-        return new TeamImpl(VALID_NAME);
     }
 
 }

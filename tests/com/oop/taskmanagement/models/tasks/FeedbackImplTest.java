@@ -5,6 +5,8 @@ import com.oop.taskmanagement.models.contracts.tasks.Comment;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.enums.StatusType;
+import com.oop.taskmanagement.utils.Constants;
+import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,68 +15,63 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FeedbackImplTest {
-    private static final String VALID_TITLE = "10symb tit";
-    private static final String VALID_DESCRIPTION = "10symb des";
-    private static final int VALID_RATING = 5;
-    private int currentId = 1;
-
     @Test
-    public void FeedbackImpl_Should_ImplementFeedbackInterface(){
+    public void FeedbackImpl_Should_ImplementFeedbackInterface() {
         // Arrange, Act
-        FeedbackImpl feedback = initializeValidFeedback();
+        FeedbackImpl feedback = ValidInitialization.initializeValidFeedback();
 
         // Assert
         Assertions.assertTrue(feedback instanceof Feedback);
     }
 
     @Test
-    public void FeedbackImpl_Should_ImplementTaskBaseInterface(){
+    public void FeedbackImpl_Should_ImplementTaskBaseInterface() {
         // Arrange, Act
-        TaskBase feedback = initializeValidFeedback();
+        TaskBase feedback = ValidInitialization.initializeValidFeedback();
 
         // Assert
         Assertions.assertTrue(feedback instanceof TaskBase);
     }
 
     @Test
-    public void constructor_Should_ThrowException_When_InvalidNameProvided(){
+    public void constructor_Should_ThrowException_When_InvalidNameProvided() {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new FeedbackImpl(currentId,
+                new FeedbackImpl(Constants.currentId,
                         "Invalid",
-                        VALID_DESCRIPTION,
-                        VALID_RATING));
+                        Constants.VALID_DESCRIPTION,
+                        Constants.VALID_RATING));
     }
 
     @Test
-    public void constructor_Should_ThrowException_When_InvalidDescriptionProvided(){
+    public void constructor_Should_ThrowException_When_InvalidDescriptionProvided() {
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new FeedbackImpl(currentId,
-                        VALID_TITLE,
+                new FeedbackImpl(Constants.currentId,
+                        Constants.VALID_TITLE,
                         "Invalid",
-                        VALID_RATING));
+                        Constants.VALID_RATING));
     }
 
     @Test
     public void constructor_Should_createNewFeedback_When_ArgumentsAreValid() {
         // Arrange, Act
-        Feedback feedback = initializeValidFeedback();
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
 
         // Assert
         Assertions.assertAll(
-                () -> Assertions.assertEquals(currentId, feedback.getId()),
-                () -> Assertions.assertEquals(VALID_TITLE, feedback.getTitle()),
-                () -> Assertions.assertEquals(VALID_DESCRIPTION, feedback.getDescription()),
-                () -> Assertions.assertEquals(VALID_RATING, feedback.getRating()),
+                () -> Assertions.assertEquals(Constants.currentId, feedback.getId()),
+                () -> Assertions.assertEquals(Constants.VALID_TITLE, feedback.getTitle()),
+                () -> Assertions.assertEquals(Constants.VALID_DESCRIPTION, feedback.getDescription()),
+                () -> Assertions.assertEquals(Constants.VALID_RATING, feedback.getRating()),
                 () -> Assertions.assertEquals(StatusType.NEW, feedback.getStatus())
         );
     }
 
     @Test
-    public void setAssignee_Should_AssignName(){
+    public void setAssignee_Should_AssignName() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
         String expectedOutput = "Gosho";
         // Act
         feedback.setAssigneeName("Gosho");
@@ -82,19 +79,20 @@ public class FeedbackImplTest {
         // Assert
         Assertions.assertEquals(expectedOutput, feedback.getAssigneeName());
     }
+
     @Test
-    public void changeStatus_Should_ThrowException_When_InvalidStatusProvided(){
+    public void changeStatus_Should_ThrowException_When_InvalidStatusProvided() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
 
         // Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> feedback.changeStatus(StatusType.IN_PROGRESS));
     }
 
     @Test
-    public void changeStatus_Should_ChangeStatus_When_ValidStatusProvided(){
+    public void changeStatus_Should_ChangeStatus_When_ValidStatusProvided() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
 
         // Act
         feedback.changeStatus(StatusType.NEW);
@@ -107,9 +105,9 @@ public class FeedbackImplTest {
     }
 
     @Test
-    public void changeStatus_Should_LogChange_When_ValidStatusProvided(){
+    public void changeStatus_Should_LogChange_When_ValidStatusProvided() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
         String expectedOutput = String.format("Status changed from %s to %s.", StatusType.NEW, StatusType.DONE);
         // Act
         feedback.changeStatus(StatusType.DONE);
@@ -119,10 +117,10 @@ public class FeedbackImplTest {
     }
 
     @Test
-    public void changeRating_Should_ChangeRating(){
+    public void changeRating_Should_ChangeRating() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
-        int expectedRating  = 6;
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
+        int expectedRating = 6;
         // Act
         feedback.changeRating(expectedRating);
 
@@ -131,11 +129,11 @@ public class FeedbackImplTest {
     }
 
     @Test
-    public void changeRating_Should_LogChange(){
+    public void changeRating_Should_LogChange() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
         int newRating = 6;
-        String expectedOutput = String.format("Rating changed from %d to %d.", VALID_RATING, newRating);
+        String expectedOutput = String.format("Rating changed from %d to %d.", Constants.VALID_RATING, newRating);
 
         // Act
         feedback.changeRating(6);
@@ -145,59 +143,60 @@ public class FeedbackImplTest {
     }
 
     @Test
-    public void toString_Should_ConvertToStringWithProperFormat(){
+    public void toString_Should_ConvertToStringWithProperFormat() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
         String expectedResult = String.format("Task with id: %d%nTitle: %s%nStatus: %s%n" +
                         "Rating: %d%nAssigned to: %s",
-                currentId,
-                VALID_TITLE,
+                Constants.currentId,
+                Constants.VALID_TITLE,
                 StatusType.NEW,
-                VALID_RATING,
+                Constants.VALID_RATING,
                 null
         );
         // Act
         String actualOutput = feedback.toString();
 
         // Assert
-        Assertions.assertEquals(expectedResult,actualOutput);
+        Assertions.assertEquals(expectedResult, actualOutput);
     }
 
     @Test
-    public void addComment_Should_AddCommentInList(){
+    public void addComment_Should_AddCommentInList() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
-        Comment comment = new CommentImpl("Pesho","Long message");
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
+        Comment comment = new CommentImpl("Pesho", "Long message");
 
         // Act
         feedback.addComment(comment);
 
         // Assert
-        Assertions.assertEquals(1,feedback.getComments().size());
+        Assertions.assertEquals(1, feedback.getComments().size());
     }
 
     @Test
-    public void addComment_Should_LogAdding(){
+    public void addComment_Should_LogAdding() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
-        Comment comment = new CommentImpl("Pesho","Long message");
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
+        Comment comment = new CommentImpl("Pesho", "Long message");
         String expectedLog = "Comment added successfully";
         // Act
         feedback.addComment(comment);
 
         // Assert
-        Assertions.assertEquals(expectedLog,feedback.getEventLog().get(0));
+        Assertions.assertEquals(expectedLog, feedback.getEventLog().get(0));
     }
+
     @Test
-    public void getEventLog_Should_ReturnListOfLogs(){
+    public void getEventLog_Should_ReturnListOfLogs() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
-        feedback.addComment(new CommentImpl("Gosho","Some message"));
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
+        feedback.addComment(new CommentImpl("Gosho", "Some message"));
         int newRating = 6;
         feedback.changeRating(newRating);
         List<String> expectedOutput = new ArrayList<>(
                 Arrays.asList("Comment added successfully",
-                        String.format("Rating changed from %d to %d.", VALID_RATING, newRating)));
+                        String.format("Rating changed from %d to %d.", Constants.VALID_RATING, newRating)));
         // Act
         List<String> actualOutput = feedback.getEventLog();
 
@@ -206,14 +205,14 @@ public class FeedbackImplTest {
     }
 
     @Test
-    public void getComments_Should_ReturnListOfComments(){
+    public void getComments_Should_ReturnListOfComments() {
         // Arrange
-        Feedback feedback = initializeValidFeedback();
-        Comment firstComment = new CommentImpl("Gosho","Some message");
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
+        Comment firstComment = new CommentImpl("Gosho", "Some message");
         Comment secondComment = new CommentImpl("Pesho", "Other message");
         feedback.addComment(firstComment);
         feedback.addComment(secondComment);
-        List<Comment> expectedOutput = new ArrayList<>(Arrays.asList(firstComment,secondComment));
+        List<Comment> expectedOutput = new ArrayList<>(Arrays.asList(firstComment, secondComment));
 
         // Act
         List<Comment> actualOutput = feedback.getComments();
@@ -221,8 +220,5 @@ public class FeedbackImplTest {
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
-
-    private FeedbackImpl initializeValidFeedback(){
-        return new FeedbackImpl(currentId, VALID_TITLE, VALID_DESCRIPTION, VALID_RATING);
-    }
 }
+

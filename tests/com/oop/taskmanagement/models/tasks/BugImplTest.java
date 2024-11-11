@@ -7,6 +7,8 @@ import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.StatusType;
+import com.oop.taskmanagement.utils.Constants;
+import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,15 +18,11 @@ import java.util.List;
 
 public class BugImplTest {
 
-    private static final String VALID_TITLE = "10symb tit";
-    private static final String VALID_DESCRIPTION = "10symb des";
-    private static final List<String> VALID_LIST_TO_REPRODUCE = new ArrayList<>(Arrays.asList("Step1","Step2"));
-    private int currentId = 1;
 
     @Test
     public void BugImpl_Should_ImplementBugInterface(){
         // Arrange, Act
-        BugImpl bug = initializeValidBug();
+        BugImpl bug = ValidInitialization.initializeValidBug();
 
         // Assert
         Assertions.assertTrue(bug instanceof Bug);
@@ -33,7 +31,7 @@ public class BugImplTest {
     @Test
     public void BugImpl_Should_ImplementTaskBaseInterface(){
         // Arrange, Act
-        TaskBase bug = initializeValidBug();
+        TaskBase bug = ValidInitialization.initializeValidBug();
 
         // Assert
         Assertions.assertTrue(bug instanceof TaskBase);
@@ -43,10 +41,10 @@ public class BugImplTest {
     public void constructor_Should_ThrowException_When_InvalidNameProvided(){
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new BugImpl(currentId,
+                new BugImpl(Constants.currentId,
                         "Invalid",
-                        VALID_DESCRIPTION,
-                        VALID_LIST_TO_REPRODUCE,
+                        Constants.VALID_DESCRIPTION,
+                        Constants.VALID_LIST_TO_REPRODUCE,
                         PriorityType.LOW,
                         SeverityType.MINOR));
     }
@@ -55,10 +53,10 @@ public class BugImplTest {
     public void constructor_Should_ThrowException_When_InvalidDescriptionProvided(){
         // Arrange, Act, Assert
         Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new BugImpl(currentId,
-                        VALID_TITLE,
+                new BugImpl(Constants.currentId,
+                        Constants.VALID_TITLE,
                         "Invalid",
-                        VALID_LIST_TO_REPRODUCE,
+                        Constants.VALID_LIST_TO_REPRODUCE,
                         PriorityType.LOW,
                         SeverityType.MINOR));
     }
@@ -66,14 +64,14 @@ public class BugImplTest {
     @Test
     public void constructor_Should_createNewBug_When_ArgumentsAreValid() {
         // Arrange, Act
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
 
         // Assert
         Assertions.assertAll(
-                () -> Assertions.assertEquals(currentId, bug.getId()),
-                () -> Assertions.assertEquals(VALID_TITLE, bug.getTitle()),
-                () -> Assertions.assertEquals(VALID_DESCRIPTION, bug.getDescription()),
-                () -> Assertions.assertEquals(VALID_LIST_TO_REPRODUCE, bug.getStepsToReproduce()),
+                () -> Assertions.assertEquals(Constants.currentId, bug.getId()),
+                () -> Assertions.assertEquals(Constants.VALID_TITLE, bug.getTitle()),
+                () -> Assertions.assertEquals(Constants.VALID_DESCRIPTION, bug.getDescription()),
+                () -> Assertions.assertEquals(Constants.VALID_LIST_TO_REPRODUCE, bug.getStepsToReproduce()),
                 () -> Assertions.assertEquals(PriorityType.LOW, bug.getPriority()),
                 () -> Assertions.assertEquals(SeverityType.MINOR, bug.getSeverity()),
                 () -> Assertions.assertEquals(StatusType.ACTIVE, bug.getStatus())
@@ -83,7 +81,7 @@ public class BugImplTest {
     @Test
     public void setAssignee_Should_AssignName(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         String expectedOutput = "Gosho";
         // Act
         bug.setAssigneeName("Gosho");
@@ -94,7 +92,7 @@ public class BugImplTest {
     @Test
     public void changeStatus_Should_ThrowException_When_InvalidStatusProvided(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
 
         // Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> bug.changeStatus(StatusType.IN_PROGRESS));
@@ -103,7 +101,7 @@ public class BugImplTest {
     @Test
     public void changeStatus_Should_ChangeStatus_When_ValidStatusProvided(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
 
         // Act
         bug.changeStatus(StatusType.ACTIVE);
@@ -116,7 +114,7 @@ public class BugImplTest {
     @Test
     public void changeStatus_Should_LogChange_When_ValidStatusProvided(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         String expectedOutput = String.format("Status changed from %s to %s.", StatusType.ACTIVE, StatusType.DONE);
         // Act
         bug.changeStatus(StatusType.DONE);
@@ -128,7 +126,7 @@ public class BugImplTest {
     @Test
     public void changeSeverity_Should_ChangeSeverity(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
 
         // Act
         bug.changeSeverity(SeverityType.MAJOR);
@@ -140,7 +138,7 @@ public class BugImplTest {
     @Test
     public void changeSeverity_Should_LogChange_When_ValidSeverityProvided(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         String expectedOutput = String.format("Severity changed from %s to %s.", SeverityType.MINOR, SeverityType.MAJOR);
         // Act
         bug.changeSeverity(SeverityType.MAJOR);
@@ -152,7 +150,7 @@ public class BugImplTest {
     @Test
     public void changePriority_Should_ChangePriority(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
 
         // Act
         bug.changePriority(PriorityType.HIGH);
@@ -164,7 +162,7 @@ public class BugImplTest {
     @Test
     public void changePriority_Should_LogChange_When_ValidPriorityProvided(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         String expectedOutput = String.format("Priority changed from %s to %s.", PriorityType.LOW, PriorityType.HIGH);
         // Act
         bug.changePriority(PriorityType.HIGH);
@@ -176,11 +174,11 @@ public class BugImplTest {
     @Test
     public void toString_Should_ConvertToStringWithProperFormat(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         String expectedResult = String.format("Task with id: %d%nTitle: %s%nStatus: %s%n" +
                         "Priority: %s%nSeverity: %s%nAssigned to: %s",
-                currentId,
-                VALID_TITLE,
+                Constants.currentId,
+                Constants.VALID_TITLE,
                 StatusType.ACTIVE,
                 PriorityType.LOW,
                 SeverityType.MINOR,
@@ -196,7 +194,7 @@ public class BugImplTest {
     @Test
     public void addComment_Should_AddCommentInList(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         Comment comment = new CommentImpl("Pesho","Long message");
 
         // Act
@@ -209,7 +207,7 @@ public class BugImplTest {
     @Test
     public void addComment_Should_LogAdding(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         Comment comment = new CommentImpl("Pesho","Long message");
         String expectedLog = "Comment added successfully";
         // Act
@@ -221,7 +219,7 @@ public class BugImplTest {
     @Test
     public void getEventLog_Should_ReturnListOfLogs(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         bug.addComment(new CommentImpl("Gosho","Some message"));
         bug.changePriority(PriorityType.HIGH);
         List<String> expectedOutput = new ArrayList<>(
@@ -237,7 +235,7 @@ public class BugImplTest {
     @Test
     public void getComments_Should_ReturnListOfComments(){
         // Arrange
-        Bug bug = initializeValidBug();
+        Bug bug = ValidInitialization.initializeValidBug();
         Comment firstComment = new CommentImpl("Gosho","Some message");
         Comment secondComment = new CommentImpl("Pesho", "Other message");
         bug.addComment(firstComment);
@@ -251,7 +249,4 @@ public class BugImplTest {
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
-    private BugImpl initializeValidBug(){
-        return new BugImpl(currentId, VALID_TITLE, VALID_DESCRIPTION, VALID_LIST_TO_REPRODUCE,PriorityType.LOW, SeverityType.MINOR);
-    }
 }
