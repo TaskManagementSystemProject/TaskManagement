@@ -16,19 +16,19 @@ public class ValidationHelpers {
 
     public static void validateIntRange(int value, int min, int max, String message) {
         if (value < min || value > max) {
-            throw new IllegalArgumentException(message);
+            throw new InvalidUserInputException(message);
         }
     }
 
     public static void validateDecimalRange(double value, double min, double max, String message) {
         if (value < min || value > max) {
-            throw new IllegalArgumentException(message);
+            throw new InvalidUserInputException(message);
         }
     }
 
     public static void validateArgumentsCount(List<String> list, int expectedNumberOfParameters) {
         if (list.size() < expectedNumberOfParameters) {
-            throw new IllegalArgumentException(
+            throw new InvalidUserInputException(
                     String.format(INVALID_NUMBER_OF_ARGUMENTS, expectedNumberOfParameters, list.size())
             );
         }
@@ -38,7 +38,7 @@ public class ValidationHelpers {
         Pattern patternToMatch = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
         Matcher matcher = patternToMatch.matcher(value);
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(message);
+            throw new InvalidUserInputException(message);
         }
     }
 

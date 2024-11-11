@@ -1,5 +1,6 @@
 package com.oop.taskmanagement.models.team;
 
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.team.Team;
@@ -25,7 +26,7 @@ public class TeamImplTest {
     @Test
     public void constructor_Should_ThrowException_When_NameOutOfLowerBounds() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new TeamImpl(Constants.INVALID_TEAM_SHORT_NAME)
         );
     }
@@ -33,7 +34,7 @@ public class TeamImplTest {
     @Test
     public void constructor_Should_ThrowException_When_NameOutOfUpperBounds() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new TeamImpl(Constants.INVALID_TEAM_LONG_NAME)
         );
     }

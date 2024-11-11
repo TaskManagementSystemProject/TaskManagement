@@ -1,5 +1,7 @@
 package com.oop.taskmanagement.utils;
 
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
+
 public class ParsingHelpers {
     private static final String NO_SUCH_ENUM = "There is no %s in %ss.";
 
@@ -7,7 +9,7 @@ public class ParsingHelpers {
         try {
             return Double.parseDouble(valueToParse);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new InvalidUserInputException(errorMessage);
         }
     }
 
@@ -15,7 +17,7 @@ public class ParsingHelpers {
         try {
             return Integer.parseInt(valueToParse);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage);
+            throw new InvalidUserInputException(errorMessage);
         }
     }
 
@@ -24,7 +26,7 @@ public class ParsingHelpers {
         try {
             return Enum.valueOf(type, valueToParse.replace(" ", "_").toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(String.format(NO_SUCH_ENUM, valueToParse, type.getSimpleName()));
+            throw new InvalidUserInputException(String.format(NO_SUCH_ENUM, valueToParse, type.getSimpleName()));
         }
     }
 }

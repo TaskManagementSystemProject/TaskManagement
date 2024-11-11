@@ -1,5 +1,6 @@
 package com.oop.taskmanagement.models.tasks;
 
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.tasks.Comment;
 import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;
@@ -23,14 +24,14 @@ public class CommentImplTest {
     @Test
     public void constructor_Should_ThrowException_When_AuthorNameToShort() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new CommentImpl(INVALID_AUTHOR_SHORT_NAME, VALID_COMMENT_MESSAGE));
     }
 
     @Test
     public void constructor_Should_ThrowException_When_AuthorNameToLong() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new CommentImpl(INVALID_AUTHOR_LONG_NAME, VALID_COMMENT_MESSAGE));
     }
 
@@ -38,14 +39,14 @@ public class CommentImplTest {
     @Test
     public void constructor_Should_ThrowException_When_MessageToShort() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new CommentImpl(VALID_COMMENT_AUTHOR, INVALID_COMMENT_SHORT_MESSAGE));
     }
 
     @Test
     public void constructor_Should_ThrowException_When_MessageToLong() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new CommentImpl(VALID_COMMENT_AUTHOR, INVALID_COMMENT_LONG_MESSAGE));
     }
 

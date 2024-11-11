@@ -33,7 +33,7 @@ public class UnassignFromMemberCommandTest {
         List<String> parameters = TestUtilities.getList(ARGUMENT_COUNT - 1);
 
         // Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () -> unassignFromMemberCommand.execute(parameters));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> unassignFromMemberCommand.execute(parameters));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class UnassignFromMemberCommandTest {
         List<String> parameters = List.of("1a", "Gosho");
 
         // Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () -> unassignFromMemberCommand.execute(parameters));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> unassignFromMemberCommand.execute(parameters));
     }
 
     @Test

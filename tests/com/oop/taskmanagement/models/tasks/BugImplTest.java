@@ -40,7 +40,7 @@ public class BugImplTest {
     @Test
     public void constructor_Should_ThrowException_When_InvalidNameProvided(){
         // Arrange, Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new BugImpl(Constants.currentId,
                         "Invalid",
                         Constants.VALID_DESCRIPTION,
@@ -52,7 +52,7 @@ public class BugImplTest {
     @Test
     public void constructor_Should_ThrowException_When_InvalidDescriptionProvided(){
         // Arrange, Act, Assert
-        Assertions.assertThrows(IllegalArgumentException.class, () ->
+        Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new BugImpl(Constants.currentId,
                         Constants.VALID_TITLE,
                         "Invalid",
