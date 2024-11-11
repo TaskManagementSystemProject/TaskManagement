@@ -95,13 +95,19 @@ public class FeedbackImplTest {
         Feedback feedback = ValidInitialization.initializeValidFeedback();
 
         // Act
-        feedback.changeStatus(StatusType.NEW);
-        feedback.changeStatus(StatusType.UNSCHEDULED);
-        feedback.changeStatus(StatusType.SCHEDULED);
         feedback.changeStatus(StatusType.DONE);
 
         // Assert
         Assertions.assertEquals(StatusType.DONE, feedback.getStatus());
+    }
+
+    @Test
+    public void changeStatus_Should_ThrowException_When_TryingToChangeToSameStatus() {
+        // Arrange
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> feedback.changeStatus(StatusType.NEW));
     }
 
     @Test
@@ -126,6 +132,16 @@ public class FeedbackImplTest {
 
         // Assert
         Assertions.assertEquals(expectedRating, feedback.getRating());
+    }
+
+    @Test
+    public void changeRating_Should_ThrowException_SameRatingProvided() {
+        // Arrange
+        Feedback feedback = ValidInitialization.initializeValidFeedback();
+
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> feedback.changeRating(Constants.VALID_RATING));
     }
 
     @Test

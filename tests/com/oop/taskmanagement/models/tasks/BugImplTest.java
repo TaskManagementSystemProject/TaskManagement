@@ -104,11 +104,19 @@ public class BugImplTest {
         Bug bug = ValidInitialization.initializeValidBug();
 
         // Act
-        bug.changeStatus(StatusType.ACTIVE);
         bug.changeStatus(StatusType.DONE);
 
         // Assert
         Assertions.assertEquals(StatusType.DONE, bug.getStatus());
+    }
+
+    @Test
+    public void changeStatus_Should_ThrowException_When_TryingToChangeToTheSameStatus(){
+        // Arrange
+        Bug bug = ValidInitialization.initializeValidBug();
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> bug.changeStatus(StatusType.ACTIVE));
     }
 
     @Test
@@ -136,6 +144,15 @@ public class BugImplTest {
     }
 
     @Test
+    public void changeSeverity_Should_ThrowException_TryingToChangeToTheSameSeverity(){
+        // Arrange
+        Bug bug = ValidInitialization.initializeValidBug();
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> bug.changeSeverity(SeverityType.MINOR));
+    }
+
+    @Test
     public void changeSeverity_Should_LogChange_When_ValidSeverityProvided(){
         // Arrange
         Bug bug = ValidInitialization.initializeValidBug();
@@ -157,6 +174,15 @@ public class BugImplTest {
 
         // Assert
         Assertions.assertEquals(PriorityType.HIGH, bug.getPriority());
+    }
+
+    @Test
+    public void changePriority_Should_ThrowException_TryingToChangeToTheSamePriority(){
+        // Arrange
+        Bug bug = ValidInitialization.initializeValidBug();
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> bug.changePriority(PriorityType.LOW));
     }
 
     @Test
