@@ -7,7 +7,7 @@ import com.oop.taskmanagement.models.enums.StatusType;
 
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
-    private static final String TO_STRING_FORMAT ="%sRating: %d%nAssigned to: %s"; // new
+    private static final String TO_STRING_FORMAT = "%sRating: %d%nAssigned to: %s"; // new
     private int rating;
 
     public FeedbackImpl(int id, String title, String description, int rating) {
@@ -20,6 +20,9 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
     public void changeStatus(StatusType status) {
         if (status.equals(StatusType.NEW) || status.equals(StatusType.UNSCHEDULED)
                 || status.equals(StatusType.SCHEDULED) || status.equals(StatusType.DONE)) {
+            if (status.equals(this.status)) {
+                throw new InvalidUserInputException(String.format("Status is already at %s", status));
+            }
             addEvent(String.format(ADD_STATUS_CHANGED_TO_EVENTLOG, this.status, status));
             this.status = status;
         } else {
@@ -29,6 +32,9 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
     @Override
     public void changeRating(int rating) {
+        if (rating == this.rating) {
+            throw new InvalidUserInputException(String.format("Rating is already %d", rating));
+        }
         addEvent(String.format(ADD_RATING_CHANGED_TO_EVENTLOG, this.rating, rating));
         this.rating = rating;
     }
@@ -38,18 +44,7 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
         return rating;
     }
 
-    /*
-    @Override
-    public String toString() {
-        StringBuilder stringFromTaskBase = new StringBuilder(super.toString());
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Rating: %d", rating)).append(System.lineSeparator());
-        stringFromTaskBase.append(String.format(stringFromTaskBase.toString(), sb));
 
-        return stringFromTaskBase.toString();
-    }
-    old version
-    */
     @Override // new implementation
     public String toString() {
         return String.format(TO_STRING_FORMAT, super.toString(), getRating(), getAssigneeName());

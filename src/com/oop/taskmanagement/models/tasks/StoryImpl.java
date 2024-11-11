@@ -9,7 +9,7 @@ import com.oop.taskmanagement.models.enums.StatusType;
 
 public class StoryImpl extends TaskBaseImpl implements Story {
 
-    private static final String TO_STRING_FORMAT ="%sPriority: %s%nSize: %s%nAssigned to: %s"; // new
+    private static final String TO_STRING_FORMAT = "%sPriority: %s%nSize: %s%nAssigned to: %s"; // new
     private PriorityType priority;
     private SizeType size;
 
@@ -25,6 +25,9 @@ public class StoryImpl extends TaskBaseImpl implements Story {
     @Override
     public void changeStatus(StatusType status) {
         if (status.equals(StatusType.NOT_DONE) || status.equals(StatusType.IN_PROGRESS) || status.equals(StatusType.DONE)) {
+            if (status.equals(this.status)) {
+                throw new InvalidUserInputException(String.format("Status is already at %s", status));
+            }
             addEvent(String.format(ADD_STATUS_CHANGED_TO_EVENTLOG, this.status, status));
             this.status = status;
         } else {
@@ -34,12 +37,18 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 
     @Override
     public void changePriority(PriorityType priority) {
+        if (priority.equals(this.priority)) {
+            throw new InvalidUserInputException(String.format("Priority is already at %s", priority));
+        }
         addEvent(String.format(ADD_PRIORITY_CHANGED_TO_EVENTLOG, this.priority, priority));
         this.priority = priority;
     }
 
     @Override
     public void changeSize(SizeType size) {
+        if (size.equals(this.size)) {
+            throw new InvalidUserInputException(String.format("Size is already at %s", size));
+        }
         addEvent(String.format(ADD_SIZE_CHANGED_TO_EVENTLOG, this.size, size));
         this.size = size;
     }
@@ -56,23 +65,8 @@ public class StoryImpl extends TaskBaseImpl implements Story {
     }
 
 
-    /*
-    @Override
-    public String toString() {
-        StringBuilder stringFromTaskBase = new StringBuilder(super.toString());
-        StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Priority: %s", priority)).append(System.lineSeparator());
-        sb.append(String.format("Size: %s", size)).append(System.lineSeparator());
-        stringFromTaskBase.append(String.format(stringFromTaskBase.toString(), sb));
-        stringFromTaskBase.append(String.format("Assigned to: %s", getAssigneeName())).append(System.lineSeparator());
-
-        return stringFromTaskBase.toString();
-    }
-    old version
-     */
-
     @Override // new implementation
-    public String toString(){
+    public String toString() {
         return String.format(TO_STRING_FORMAT, super.toString(), getPriority(), getSize(), getAssigneeName());
     }
 
