@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.oop.taskmanagement.utils.Constants.FEEDBACK_STATUS_CHANGED_SUCCESSFULLY;
 import static com.oop.taskmanagement.utils.Constants.STORY_ATTRIBUTE_CHANGED_SUCCESSFULLY;
 
 public class ChangeStoryPriorityCommandTest {
