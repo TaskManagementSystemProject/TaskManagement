@@ -97,13 +97,20 @@ public class StoryImplTest {
     }
 
     @Test
+    public void changeStatus_Should_ThrowException_When_SameStatusProvided(){
+        // Arrange
+        StoryImpl story = ValidInitialization.initializeValidStory();
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> story.changeStatus(StatusType.NOT_DONE));
+    }
+
+    @Test
     public void changeStatus_Should_ChangeStatus_When_ValidStatusProvided(){
         // Arrange
         StoryImpl story = ValidInitialization.initializeValidStory();
 
         // Act
-        story.changeStatus(StatusType.NOT_DONE);
-        story.changeStatus(StatusType.IN_PROGRESS);
         story.changeStatus(StatusType.DONE);
 
         // Assert
@@ -135,6 +142,15 @@ public class StoryImplTest {
     }
 
     @Test
+    public void changeSize_Should_ThrowException_When_SameSizeProvided(){
+        // Arrange
+        StoryImpl story = ValidInitialization.initializeValidStory();
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> story.changeSize(SizeType.SMALL));
+    }
+
+    @Test
     public void changeSize_Should_LogChange_When_ValidSizeProvided(){
         // Arrange
         StoryImpl story = ValidInitialization.initializeValidStory();
@@ -156,6 +172,15 @@ public class StoryImplTest {
 
         // Assert
         Assertions.assertEquals(PriorityType.HIGH, story.getPriority());
+    }
+
+    @Test
+    public void changePriority_Should_ThrowException_When_SamePriorityProvided(){
+        // Arrange
+        StoryImpl story = ValidInitialization.initializeValidStory();
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> story.changePriority(PriorityType.LOW));
     }
 
     @Test
