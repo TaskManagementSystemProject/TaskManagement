@@ -33,4 +33,7 @@ public class Constants {
     public static final String INVALID_COMMENT_LONG_MESSAGE = "X".repeat(501);
     public static final String INVALID_AUTHOR_SHORT_NAME = "Bob";  // 5 - 15
     public static final String INVALID_AUTHOR_LONG_NAME = "DaveTheMagicalCheeseWizard";
+
+    // Commands
+    public final static String TASK_UNASSIGNED_SUCCESSFULLY = "Task with ID %d unassigned from member %s successfully.";
 }

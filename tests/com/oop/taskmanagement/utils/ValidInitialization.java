@@ -4,6 +4,7 @@ import com.oop.taskmanagement.commands.assigning.AssignToMemberCommand;
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.TaskManagementRepositoryImpl;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
+import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.team.Team;
@@ -79,6 +80,9 @@ public class ValidInitialization {
         repository.createStoryInBoard(VALID_TITLE, VALID_DESCRIPTION, PriorityType.LOW, SizeType.SMALL, team2, board2);
         team.addMember(member);
         team2.addMember(member2);
+        TaskBase feedback = repository.findTaskById(1);
+        member.addTask(feedback);
+        feedback.setAssigneeName(member.getName());
         return repository;
     }
 }

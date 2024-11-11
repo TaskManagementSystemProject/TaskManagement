@@ -1,7 +1,6 @@
 package com.oop.taskmanagement.commands.assigning;
 
 import com.oop.taskmanagement.commands.contracts.Command;
-import com.oop.taskmanagement.core.TaskManagementRepositoryImpl;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.utils.TestUtilities;
@@ -10,9 +9,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static com.oop.taskmanagement.utils.Constants.TASK_UNASSIGNED_SUCCESSFULLY;
 
 public class UnassignFromMemberCommandTest {
 
@@ -23,7 +22,7 @@ public class UnassignFromMemberCommandTest {
 
     @BeforeEach
     public void initialize() {
-        repository = new TaskManagementRepositoryImpl();
+        repository = ValidInitialization.createDummyRepository();
         unassignFromMemberCommand = new UnassignFromMemberCommand(repository);
     }
 
@@ -48,7 +47,7 @@ public class UnassignFromMemberCommandTest {
     @Test
     public void execute_Should_ThrowException_When_TaskWithIdNotFound() {
         // Arrange
-        List<String> parameters = List.of("1", "Gosho");
+        List<String> parameters = List.of("15", "Gosho");
 
         // Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> unassignFromMemberCommand.execute(parameters));
@@ -57,16 +56,53 @@ public class UnassignFromMemberCommandTest {
     @Test
     public void execute_Should_ThrowException_When_MemberDoesNotExist() {
         // Arrange
-        List<String> parameters = List.of("1", "Gosho");
-        repository = ValidInitialization.createDummyRepository();
-        // all that was to fill
+        List<String> parameters = List.of("1", "DoesNot");
 
         // Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> unassignFromMemberCommand.execute(parameters));
     }
 
+    @Test
+    public void execute_Should_ThrowException_When_MemberIsNotTheOwnerOfTheTask() {
+        // Arrange
+        List<String> parameters = List.of("1", "Pesho");
 
-    private List<String> getValidParameters() {
-        return new ArrayList<>(Arrays.asList("1", "Gosho"));
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> unassignFromMemberCommand.execute(parameters));
     }
+
+    @Test
+    public void execute_Should_UnassignFromMember_When_ValidParameters(){
+        // Arrange
+        List<String> parameters = List.of("1", "Gosho");
+
+        // Act
+        unassignFromMemberCommand.execute(parameters);
+
+        // Assert
+        Assertions.assertEquals(0, repository.findMemberByName("Gosho").getTasks().size());
+    }
+
+    @Test
+    public void execute_Should_SetTaskAssigneeToNull_When_ValidParameters(){
+        // Arrange
+        List<String> parameters = List.of("1", "Gosho");
+
+        // Act
+        unassignFromMemberCommand.execute(parameters);
+
+        // Assert
+        Assertions.assertNull(repository.findTaskById(1).getAssigneeName());
+    }
+
+    @Test
+    public void execute_Should_ReturnProperMessage_When_ValidParameters(){
+        // Arrange
+        List<String> parameters = List.of("1", "Gosho");
+        String expectedOutput = String.format(TASK_UNASSIGNED_SUCCESSFULLY,1,"Gosho");
+
+        // Act, Assert
+        Assertions.assertEquals(expectedOutput, unassignFromMemberCommand.execute(parameters));
+    }
+
 }
