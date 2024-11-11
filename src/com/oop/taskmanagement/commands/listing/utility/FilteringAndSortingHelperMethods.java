@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FilteringAndSortingHelperMethods {
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE = 2;
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE = 3;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE = 3;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE = 4;
 
     public static <T extends TaskBase> String filterTasks(List<T> tasks, List<String> parameters, FilterType filterType, boolean mustBeAssigned) {
 
@@ -38,21 +38,21 @@ public class FilteringAndSortingHelperMethods {
         return tasks.stream()
                 .filter(task -> task.getStatus() == statusType && (!mustBeAssigned || task.getAssigneeName() != null))
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 
     private static <T extends TaskBase> String filterAssigneeGeneric(List<T> tasks, String assigneeName){
         return tasks.stream()
                 .filter(task -> assigneeName.equalsIgnoreCase(task.getAssigneeName()))
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 
     private static <T extends TaskBase> String filterStatusAndAssigneeGeneric(List<T> tasks, StatusType statusType, String assigneeName){
         return tasks.stream()
                 .filter(task -> assigneeName.equalsIgnoreCase(task.getAssigneeName()) && task.getStatus() == statusType) // single filter -> faster
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 
     public static <T extends TaskBase> String sortTasksGeneric(List<T> tasks, Comparator<T> comparator, boolean mustBeAssigned) {
@@ -60,14 +60,14 @@ public class FilteringAndSortingHelperMethods {
                 .filter(task -> !mustBeAssigned || task.getAssigneeName() != null) // makes the check only if it has to be assigned
                 .sorted(comparator)// sorts by title
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 
     public static <T extends TaskBase> String getTasksGeneric(List<T> tasks, boolean mustBeAssigned){
         return tasks.stream()
                 .filter(task -> !mustBeAssigned || task.getAssigneeName() != null)
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 
 }
