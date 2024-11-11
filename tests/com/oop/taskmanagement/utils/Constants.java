@@ -36,4 +36,5 @@ public class Constants {
 
     // Commands
     public final static String TASK_UNASSIGNED_SUCCESSFULLY = "Task with ID %d unassigned from member %s successfully.";
+    public final static String FEEDBACK_STATUS_CHANGED_SUCCESSFULY = "Feedback with ID %d status changed to %s successfully.";
 }

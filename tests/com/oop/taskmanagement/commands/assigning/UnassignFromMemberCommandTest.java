@@ -101,8 +101,11 @@ public class UnassignFromMemberCommandTest {
         List<String> parameters = List.of("1", "Gosho");
         String expectedOutput = String.format(TASK_UNASSIGNED_SUCCESSFULLY,1,"Gosho");
 
-        // Act, Assert
-        Assertions.assertEquals(expectedOutput, unassignFromMemberCommand.execute(parameters));
+        // Act
+        String actualOutput = unassignFromMemberCommand.execute(parameters);
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
 }
