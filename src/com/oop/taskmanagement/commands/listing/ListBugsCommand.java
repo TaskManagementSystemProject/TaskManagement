@@ -26,10 +26,10 @@ public class ListBugsCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-
         if (parameters.isEmpty()) {
             return FilteringAndSortingHelperMethods.getTasksGeneric(taskManagementRepository.getBugs(), false);
         }
+
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
 
         return switch (listingType) {

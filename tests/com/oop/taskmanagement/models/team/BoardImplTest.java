@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
+import static com.oop.taskmanagement.utils.Constants.INVALID_BOARD_LONG_NAME;
 import static com.oop.taskmanagement.utils.Constants.INVALID_BOARD_SHORT_NAME;
 import static com.oop.taskmanagement.utils.ValidInitialization.initializeValidBoard;
 import static com.oop.taskmanagement.utils.ValidInitialization.initializeValidBug;
@@ -34,7 +35,7 @@ public class BoardImplTest {
     public void constructor_Should_ThrowException_When_NameOutOfUpperBounds() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () ->
-                new BoardImpl(INVALID_BOARD_SHORT_NAME)
+                new BoardImpl(INVALID_BOARD_LONG_NAME)
         );
     }
 
