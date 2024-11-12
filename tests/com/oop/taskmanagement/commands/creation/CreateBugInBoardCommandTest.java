@@ -12,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-/*
 import static com.oop.taskmanagement.utils.Constants.*;
 import static com.oop.taskmanagement.utils.Constants.VALID_BOARD_NAME;
 
@@ -196,4 +195,3 @@ public class CreateBugInBoardCommandTest {
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
 }
-*/
