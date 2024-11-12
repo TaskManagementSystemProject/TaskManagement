@@ -1,6 +1,7 @@
 package com.oop.taskmanagement.commands.showing;
 
 import com.oop.taskmanagement.commands.contracts.Command;
+import com.oop.taskmanagement.core.TaskManagementRepositoryImpl;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.utils.ValidInitialization;
@@ -13,7 +14,9 @@ import java.util.List;
 public class ShowTeamsCommandTest {
 
     private TaskManagementRepository repository;
+    private TaskManagementRepository repository1;
     private Command showTeams;
+    private Command showTeams1;
 
     @BeforeEach
     public void initialize() {
@@ -39,5 +42,20 @@ public class ShowTeamsCommandTest {
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
 
+
+    }
+
+    @Test
+    public void execute_Should_EmptyMembersMessage_When_RepoIsEmpty() {
+        // Arrange
+        repository1 = new TaskManagementRepositoryImpl();
+        showTeams1 = new ShowTeamsCommand(repository1);
+        String expectedOutput = "There are no teams yet.";
+
+        // Act
+        String actualOutput = showTeams1.execute(List.of());
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 }
