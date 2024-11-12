@@ -43,6 +43,7 @@ public class Constants {
     public static final String INVALID_AUTHOR_LONG_NAME = "DaveTheMagicalCheeseWizard";
 
     // Commands
+    public final static String TASK_ASSIGNED_SUCCESSFULLY = "Task with ID %d assigned to member %s successfully.";
     public final static String TASK_UNASSIGNED_SUCCESSFULLY = "Task with ID %d unassigned from member %s successfully.";
     public final static String FEEDBACK_STATUS_CHANGED_SUCCESSFULLY = "Feedback with ID %d status changed to %s successfully.";
     public final static String STORY_ATTRIBUTE_CHANGED_SUCCESSFULLY = "Story with ID %d %s changed to %s successfully.";
