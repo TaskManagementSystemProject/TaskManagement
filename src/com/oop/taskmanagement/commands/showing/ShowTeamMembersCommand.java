@@ -28,6 +28,6 @@ public class ShowTeamMembersCommand implements Command {
         return team.getMembers()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

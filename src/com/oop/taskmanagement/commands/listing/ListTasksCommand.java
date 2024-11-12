@@ -1,11 +1,18 @@
 package com.oop.taskmanagement.commands.listing;
 
 import com.oop.taskmanagement.commands.contracts.Command;
+import com.oop.taskmanagement.commands.enums.FilterType;
 import com.oop.taskmanagement.commands.enums.ListingType;
+import com.oop.taskmanagement.commands.enums.SortType;
+import com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
+import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
+import com.oop.taskmanagement.models.enums.StatusType;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
+import com.oop.taskmanagement.utils.enums.TaskTypes;
 
 import java.util.Comparator;
 import java.util.List;
@@ -13,6 +20,7 @@ import java.util.stream.Collectors;
 
 public class ListTasksCommand implements Command {
 
+    private static final String SORT_FIELD_ERROR = "Task cannot be sorted by field %s";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 1;
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING = 2;
 
@@ -26,7 +34,8 @@ public class ListTasksCommand implements Command {
     public String execute(List<String> parameters) {
 
         if (parameters.isEmpty()) {
-            return getAllTasks();
+            return FilteringAndSortingHelperMethods.getTasksGeneric(
+                    taskManagementRepository.getAllTasks(), false);
         }
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
@@ -34,7 +43,7 @@ public class ListTasksCommand implements Command {
         return switch (listingType) {
             case FILTER -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING);
-                String titlesToList = parameters.get(1);
+               String titlesToList = parameters.get(1);
                 yield filterTaskByTitle(titlesToList);
             }
             case SORT -> {
@@ -45,30 +54,19 @@ public class ListTasksCommand implements Command {
 
     }
 
-
     private String filterTaskByTitle(String titlesToList) {
-        return taskManagementRepository.getTeams()
+        return taskManagementRepository.getAllTasks()
                 .stream()
-                .flatMap(team -> team.getMembers().stream())
-                .flatMap(member -> member.getTasks().stream())
                 .filter(task -> task.getTitle().equals(titlesToList))
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 
     private String sortTasksByTitle() {
-        return taskManagementRepository.getTeams()
+        return taskManagementRepository.getAllTasks()
                 .stream()
-                .flatMap(team -> team.getMembers().stream())
-                .flatMap(member -> member.getTasks().stream())
                 .sorted(Comparator.comparing(TaskBase::getTitle))// sorts by title
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
-    }
-
-    private String getAllTasks() {
-        return taskManagementRepository.getAllTasks().stream()
-                .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

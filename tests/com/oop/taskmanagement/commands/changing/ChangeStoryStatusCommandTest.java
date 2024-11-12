@@ -65,7 +65,7 @@ public class ChangeStoryStatusCommandTest {
     public void execute_Should_ChangeStatus_When_ValidArguments() {
         // Arrange
         List<String> parameters = List.of("3", "Done");
-        String expectedOutput = String.format(STORY_ATTRIBUTE_CHANGED_SUCCESSFULLY, 3, "size", "Done");
+        String expectedOutput = String.format(STORY_ATTRIBUTE_CHANGED_SUCCESSFULLY, 3, "status", "Done");
 
         // Act
         String actualOutput = changeStoryStatus.execute(parameters);

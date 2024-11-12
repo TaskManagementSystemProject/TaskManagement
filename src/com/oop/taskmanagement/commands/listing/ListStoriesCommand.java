@@ -28,7 +28,7 @@ public class ListStoriesCommand implements Command {
     @Override
     public String execute(List<String> parameters) {
         if (parameters.isEmpty()) {
-            return taskManagementRepository.getStories().toString();
+            return FilteringAndSortingHelperMethods.getTasksGeneric(taskManagementRepository.getStories(), false);
         }
 
 
