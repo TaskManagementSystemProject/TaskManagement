@@ -28,6 +28,6 @@ public class ShowTeamBoardsCommand implements Command {
         return team.getBoards()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }
