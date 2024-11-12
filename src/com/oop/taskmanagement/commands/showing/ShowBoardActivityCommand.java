@@ -11,7 +11,7 @@ public class ShowBoardActivityCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String NO_ACTIVITY_MESSAGE = "There is no activity in board %s yet.";
-
+    private static final String BOARD_ACTIVITY_PREFIX_MESSAGE = "ACTIVITY for board %s in team %s:%n%s";
     private final TaskManagementRepository taskManagementRepository;
 
     public ShowBoardActivityCommand(TaskManagementRepository taskManagementRepository) {
@@ -28,6 +28,11 @@ public class ShowBoardActivityCommand implements Command {
         Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
 
         String toReturnMessage = String.join(System.lineSeparator(), board.getActivityHistory());
-        return toReturnMessage.isEmpty() ? String.format(NO_ACTIVITY_MESSAGE, boardName) : toReturnMessage;
+        return toReturnMessage.isEmpty() ?
+                String.format(NO_ACTIVITY_MESSAGE, boardName) :
+                String.format(BOARD_ACTIVITY_PREFIX_MESSAGE,
+                        boardName,
+                        teamName,
+                        toReturnMessage);
     }
 }
