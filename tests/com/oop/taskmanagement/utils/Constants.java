@@ -43,15 +43,20 @@ public class Constants {
     public static final String INVALID_AUTHOR_LONG_NAME = "DaveTheMagicalCheeseWizard";
 
     // Commands
-    public final static String TASK_ASSIGNED_SUCCESSFULLY = "Task with ID %d assigned to member %s successfully.";
     public final static String TASK_UNASSIGNED_SUCCESSFULLY = "Task with ID %d unassigned from member %s successfully.";
     public final static String FEEDBACK_STATUS_CHANGED_SUCCESSFULLY = "Feedback with ID %d status changed to %s successfully.";
     public final static String STORY_ATTRIBUTE_CHANGED_SUCCESSFULLY = "Story with ID %d %s changed to %s successfully.";
     public static final String CREATE_STORY_SUCCESS_MESSAGE = "Story with ID %d created successfully in board %s in team %s.";
+    public static final String CREATE_BUG_SUCCESS_MESSAGE = "Bug with ID %d created successfully in board %s in team %s.";
+    public static final String CREATE_FEEDBACK_SUCCESS_MESSAGE = "Feedback with ID %d created successfully in board %s in team %s.";
+    public static final String VALID_STEPS_TO_REPRODUCE = "Step1;Step2;Step3";
     public static final String CREATE_MEMBER_SUCCESS_MESSAGE = "Member %s created successfully.";
+    public static final String CREATE_BUG_SUCCESS_MESSAGE_IN_BOARD = "Bug with ID %d was added.";
+    public static final String CREATE_FEEDBACK_SUCCESS_MESSAGE_IN_BOARD = "Feedback with ID %d was added.";
     public static final String CREATE_TEAM_SUCCESS_MESSAGE = "Team %s created successfully.";
     public static final String CREATE_BOARD_SUCCESS_MESSAGE = "Story with ID %d was added.";
     public static final String VALID_PRIORITY_TYPE_STORY = "Low";
+    public static final String VALID_PRIORITY = "High";
     public static final String VALID_SIZE_TYPE_STORY = "Small";
 
     // To_STRING
