@@ -41,6 +41,20 @@ public class ShowTeamsCommandTest {
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnNoTeamsMessage_When_ValidArgumentsButNoTeams(){
+        // Arrange
+        String expectedOutput = "There are no teams yet.";
+        repository = new TaskManagementRepositoryImpl();
+        showTeams = new ShowTeamsCommand(repository);
+
+        // Act
+        String actualOutput = showTeams.execute(List.of());
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
 
 
     }
