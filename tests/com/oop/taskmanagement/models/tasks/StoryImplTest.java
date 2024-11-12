@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.oop.taskmanagement.utils.Constants.EXPECTED_STORY_TO_STRING_FORMAT;
 import static com.oop.taskmanagement.utils.Constants.VALID_DESCRIPTION;
 
 public class StoryImplTest {
@@ -199,8 +200,7 @@ public class StoryImplTest {
     public void toString_Should_ConvertToStringWithProperFormat(){
         // Arrange
         StoryImpl story = ValidInitialization.initializeValidStory();
-        String expectedResult = String.format("Task with id: %d%nTitle: %s%nStatus: %s%n" +
-                        "Priority: %s%nSize: %s%nAssigned to: %s",
+        String expectedResult = String.format(EXPECTED_STORY_TO_STRING_FORMAT,
                 Constants.currentId,
                 Constants.VALID_TITLE,
                 StatusType.NOT_DONE,

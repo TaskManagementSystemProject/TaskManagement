@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.oop.taskmanagement.utils.Constants.EXPECTED_BUG_TO_STRING_FORMAT;
+import static com.oop.taskmanagement.utils.Constants.EXPECTED_FEEDBACK_TO_STRING_FORMAT;
+
 public class BugImplTest {
 
 
@@ -201,8 +204,7 @@ public class BugImplTest {
     public void toString_Should_ConvertToStringWithProperFormat(){
         // Arrange
         Bug bug = ValidInitialization.initializeValidBug();
-        String expectedResult = String.format("Task with id: %d%nTitle: %s%nStatus: %s%n" +
-                        "Priority: %s%nSeverity: %s%nAssigned to: %s",
+        String expectedResult = String.format(EXPECTED_BUG_TO_STRING_FORMAT,
                 Constants.currentId,
                 Constants.VALID_TITLE,
                 StatusType.ACTIVE,

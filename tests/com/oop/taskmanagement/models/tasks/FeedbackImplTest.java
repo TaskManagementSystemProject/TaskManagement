@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.oop.taskmanagement.utils.Constants.EXPECTED_FEEDBACK_TO_STRING_FORMAT;
+import static com.oop.taskmanagement.utils.Constants.EXPECTED_STORY_TO_STRING_FORMAT;
+
 public class FeedbackImplTest {
     @Test
     public void FeedbackImpl_Should_ImplementFeedbackInterface() {
@@ -162,8 +165,7 @@ public class FeedbackImplTest {
     public void toString_Should_ConvertToStringWithProperFormat() {
         // Arrange
         Feedback feedback = ValidInitialization.initializeValidFeedback();
-        String expectedResult = String.format("Task with id: %d%nTitle: %s%nStatus: %s%n" +
-                        "Rating: %d%nAssigned to: %s",
+        String expectedResult = String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
                 Constants.currentId,
                 Constants.VALID_TITLE,
                 StatusType.NEW,
