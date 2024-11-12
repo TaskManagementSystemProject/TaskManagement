@@ -14,8 +14,9 @@ import java.util.List;
 
 public class CreateStoryInBoardCommand implements Command {
 
+    private static final String LOG_ACTIVITY_IN_BOARD_MESSAGE = "Story with ID %d was added.";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 6;
-    private static final String CREATE_STORY_SUCCESS_MESSAGE = "Story with ID %d created successfully in board %s in team %s";
+    private static final String CREATE_STORY_SUCCESS_MESSAGE = "Story with ID %d created successfully in board %s in team %s.";
     private final TaskManagementRepository taskManagementRepository;
 
     public CreateStoryInBoardCommand(TaskManagementRepository taskManagementRepository) {
@@ -34,10 +35,10 @@ public class CreateStoryInBoardCommand implements Command {
         String boardName = parameters.get(5);
 
         Team team = taskManagementRepository.findTeamByName(teamName);
-        Board board = taskManagementRepository.findBoardByTeamName(teamName, boardName);
+        Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
         Story newStory = taskManagementRepository.createStoryInBoard(title, description, priorityType, sizeType, team, board);
 
-        board.logActivity(String.format("Story with ID %d was added", newStory.getId()));
+        board.logActivity(String.format(LOG_ACTIVITY_IN_BOARD_MESSAGE, newStory.getId()));
         return String.format(CREATE_STORY_SUCCESS_MESSAGE, newStory.getId(), boardName, teamName);
     }
 }
