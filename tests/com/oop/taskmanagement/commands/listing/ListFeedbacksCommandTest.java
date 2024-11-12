@@ -29,7 +29,7 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ReturnAllFeedbacksAsString_When_NoParametersPassed(){
         // Arrange
-        String expectedOutput = getExpectedFeedbackToString();
+        String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString());
 
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of());
@@ -89,7 +89,7 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatus_When_ValidArgumentsForFilteringStatus() {
         // Arrange
-        String expectedOutput = getExpectedFeedbackToString();
+        String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("filter", "status", "NEW"));
 
@@ -111,7 +111,7 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
         // Arrange
-        String expectedOutput = getExpectedFeedbackToString();
+        String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString());
 
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("filter", "assignee", "Gosho"));
@@ -123,7 +123,7 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatusAndAssignee_When_ValidArgumentsForFilteringStatusAndAssignee() {
         // Arrange
-        String expectedOutput = getExpectedFeedbackToString();
+        String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("filter", "statusandassignee","NEW" ,"Gosho"));
 
@@ -146,7 +146,7 @@ public class ListFeedbacksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s",FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "title"));
 
@@ -163,7 +163,7 @@ public class ListFeedbacksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
+        String expectedOutput = String.format("%s%n%s%n%n%s",FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "rating"));
 

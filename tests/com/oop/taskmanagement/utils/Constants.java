@@ -59,6 +59,12 @@ public class Constants {
     public static final String VALID_PRIORITY = "High";
     public static final String VALID_SIZE_TYPE_STORY = "Small";
 
+    // LISTING
+    public static final String ASSIGNED_TASK_PREFIX_MESSAGE = "LIST MATCHING ASSIGNED TASKS:";
+    public static final String BUGS_PREFIX_MESSAGE = "LIST MATCHING BUGS:";
+    public static final String FEEDBACKS_PREFIX_MESSAGE = "LIST MATCHING FEEDBACKS:";
+    public static final String STORIES_PREFIX_MESSAGE = "LIST MATCHING STORIES:";
+    public static final String ALL_TASK_PREFIX_MESSAGE = "LIST MATCHING TASKS:";
     // To_STRING
     public static final String FEEDBACK_TO_STRING_DUMMY_REPO = String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
             1,

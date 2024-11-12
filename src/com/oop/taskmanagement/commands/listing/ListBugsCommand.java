@@ -19,6 +19,7 @@ public class ListBugsCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 2;
     private static final String SORT_FIELD_ERROR = "Bug cannot be sorted by field %s";
     private static final String NO_RESULTS_FOUND_MESSAGE = "There are NO bugs matching the given parameters.";
+    private static final String BUGS_PREFIX_MESSAGE = "LIST MATCHING BUGS:%n%s";
     private final TaskManagementRepository taskManagementRepository;
 
     public ListBugsCommand(TaskManagementRepository taskManagementRepository) {
@@ -30,13 +31,13 @@ public class ListBugsCommand implements Command {
         String toReturnMessage;
         if (parameters.isEmpty()) {
             toReturnMessage = FilteringAndSortingHelperMethods.getTasksGeneric(taskManagementRepository.getBugs(), false);
-            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(BUGS_PREFIX_MESSAGE, toReturnMessage);
         }
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
 
         toReturnMessage = listingResultMessage(parameters, listingType);
-        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(BUGS_PREFIX_MESSAGE, toReturnMessage);
     }
 
     private Comparator<Bug> getComparator(SortType sortType) {

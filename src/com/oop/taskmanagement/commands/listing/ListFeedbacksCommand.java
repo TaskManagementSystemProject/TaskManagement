@@ -20,6 +20,7 @@ public class ListFeedbacksCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 2;
     private static final String NO_RESULTS_FOUND_MESSAGE = "There are NO feedbacks matching the given parameters.";
+    private static final String FEEDBACKS_PREFIX_MESSAGE = "LIST MATCHING FEEDBACKS:%n%s";
     private final TaskManagementRepository taskManagementRepository;
 
     public ListFeedbacksCommand(TaskManagementRepository taskManagementRepository) {
@@ -32,13 +33,13 @@ public class ListFeedbacksCommand implements Command {
         if (parameters.isEmpty()) {
             toReturnMessage = FilteringAndSortingHelperMethods.getTasksGeneric(
                     taskManagementRepository.getFeedbacks(), false);
-            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(FEEDBACKS_PREFIX_MESSAGE, toReturnMessage);
         }
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
 
         toReturnMessage = listingResultMessage(parameters, listingType);
-        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(FEEDBACKS_PREFIX_MESSAGE, toReturnMessage);
     }
 
     private Comparator<Feedback> getComparator(SortType sortType) {

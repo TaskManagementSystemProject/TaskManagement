@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 
 public class ListTasksCommand implements Command {
 
-    private static final String SORT_FIELD_ERROR = "Task cannot be sorted by field %s";
     private static final String NO_RESULTS_FOUND_MESSAGE = "There are NO tasks matching the given parameters.";
+    private static final String ALL_TASK_PREFIX_MESSAGE = "LIST MATCHING TASKS:%n%s";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 1;
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING = 2;
 
@@ -37,13 +37,13 @@ public class ListTasksCommand implements Command {
         if (parameters.isEmpty()) {
             toReturnMessage =  FilteringAndSortingHelperMethods.getTasksGeneric(
                     taskManagementRepository.getAllTasks(), false);
-            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(ALL_TASK_PREFIX_MESSAGE, toReturnMessage);
         }
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
 
         toReturnMessage = listingResultMessage(parameters, listingType);
-        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(ALL_TASK_PREFIX_MESSAGE, toReturnMessage);
 
 
     }

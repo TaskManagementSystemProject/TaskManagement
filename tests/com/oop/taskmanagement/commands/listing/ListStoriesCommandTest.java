@@ -27,9 +27,9 @@ public class ListStoriesCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnAllStoriesAsString_When_NoParametersPassed(){
+    public void execute_Should_ReturnAllStoriesAsString_When_NoParametersPassed() {
         // Arrange
-        String expectedOutput = getExpectedStoriesToString();
+        String expectedOutput = String.format("%s%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString());
 
         // Act
         String actualOutput = listStoriesCommand.execute(List.of());
@@ -89,7 +89,7 @@ public class ListStoriesCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatus_When_ValidArgumentsForFilteringStatus() {
         // Arrange
-        String expectedOutput = getExpectedStoriesToString();
+        String expectedOutput = String.format("%s%n%s", STORIES_PREFIX_MESSAGE,getExpectedStoriesToString());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("filter", "status", "not done"));
 
@@ -111,7 +111,7 @@ public class ListStoriesCommandTest {
     @Test
     public void execute_Should_ReturnFilteredStories_When_ValidFilteringArguments() {
         // Arrange
-        String expectedOutput = getExpectedStoriesToString();
+        String expectedOutput = String.format("%s%n%s", STORIES_PREFIX_MESSAGE,getExpectedStoriesToString());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("filter", "assignee", "Pesho"));
 
@@ -122,7 +122,7 @@ public class ListStoriesCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatusAndAssignee_When_ValidArgumentsForFilteringStatusAndAssignee() {
         // Arrange
-        String expectedOutput = getExpectedStoriesToString();
+        String expectedOutput = String.format("%s%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("filter", "statusandassignee","Not Done" ,"Pesho"));
 
@@ -146,7 +146,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "title"));
 
@@ -164,7 +164,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "priority"));
 
@@ -182,7 +182,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "size"));
 

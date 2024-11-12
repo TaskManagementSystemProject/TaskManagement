@@ -18,6 +18,7 @@ public class ListAssignedTasksCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 1;
 
     private static final String NO_RESULTS_FOUND_MESSAGE = "There are NO assigned tasks matching the given parameters.";
+    private static final String ASSIGNED_TASK_PREFIX_MESSAGE = "LIST MATCHING ASSIGNED TASKS:%n%s";
     private final TaskManagementRepository taskManagementRepository;
 
     public ListAssignedTasksCommand(TaskManagementRepository taskManagementRepository) {
@@ -30,12 +31,12 @@ public class ListAssignedTasksCommand implements Command {
         String toReturnMessage;
         if (parameters.isEmpty()) {
             toReturnMessage = FilteringAndSortingHelperMethods.getTasksGeneric(taskManagementRepository.getAllTasks(), true);
-            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(ASSIGNED_TASK_PREFIX_MESSAGE, toReturnMessage);
         }
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
         toReturnMessage = listingResultMessage(parameters, listingType);
-        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(ASSIGNED_TASK_PREFIX_MESSAGE, toReturnMessage);
     }
 
     private String listingResultMessage(List<String> parameters,ListingType listingType){

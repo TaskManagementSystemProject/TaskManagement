@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class ListStoriesCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 2;
     private static final String NO_RESULTS_FOUND_MESSAGE = "There are NO stories matching the given parameters.";
-
+    private static final String STORIES_PREFIX_MESSAGE = "LIST MATCHING STORIES:%n%s";
     private final TaskManagementRepository taskManagementRepository;
 
     public ListStoriesCommand(TaskManagementRepository taskManagementRepository) {
@@ -31,14 +31,14 @@ public class ListStoriesCommand implements Command {
         String toReturnMessage;
         if (parameters.isEmpty()) {
             toReturnMessage = FilteringAndSortingHelperMethods.getTasksGeneric(taskManagementRepository.getStories(), false);
-            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(STORIES_PREFIX_MESSAGE, toReturnMessage);
         }
 
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
 
         toReturnMessage = listingResultMessage(parameters, listingType);
-        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(STORIES_PREFIX_MESSAGE, toReturnMessage);
     }
 
     private Comparator<Story> getComparator(SortType sortType) {

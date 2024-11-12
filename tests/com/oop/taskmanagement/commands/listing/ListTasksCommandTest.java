@@ -28,7 +28,8 @@ public class ListTasksCommandTest {
     @Test
     public void execute_Should_ReturnAllTasksAsString_When_NoParametersPassed(){
         // Arrange
-        String expectedOutput = String.format("%s%n%n%s%n%n%s",
+        String expectedOutput = String.format("%s%n%s%n%n%s%n%n%s",
+                ALL_TASK_PREFIX_MESSAGE,
                 BUG_TO_STRING_DUMMY_REPO,
                 FEEDBACK_TO_STRING_DUMMY_REPO,
                 STORY_TO_STRING_DUMMY_REPO);
@@ -68,7 +69,8 @@ public class ListTasksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s%n%s%n%s",
+        String expectedOutput = String.format("%s%n%s%n%s%n%s%n%s",
+                ALL_TASK_PREFIX_MESSAGE,
                 getDummyFeedback(),
                 BUG_TO_STRING_DUMMY_REPO,
                 FEEDBACK_TO_STRING_DUMMY_REPO,
@@ -91,7 +93,7 @@ public class ListTasksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = getDummyFeedback();
+        String expectedOutput = String.format("%s%n%s", ALL_TASK_PREFIX_MESSAGE, getDummyFeedback());
 
         // Act
         String actualOutput = listTasksCommand.execute(List.of("filter","0000000000"));

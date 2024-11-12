@@ -29,7 +29,7 @@ public class ListBugsCommandTest {
     @Test
     public void execute_Should_ReturnAllStoriesAsString_When_NoParametersPassed() {
         // Arrange
-        String expectedOutput = getExpectedBugToString();
+        String expectedOutput = String.format("%s%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString());
 
         // Act
         String actualOutput = listBugsCommand.execute(List.of());
@@ -100,7 +100,7 @@ public class ListBugsCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatus_When_ValidArgumentsForFilteringStatus() {
         // Arrange
-        String expectedOutput = getExpectedBugToString();
+        String expectedOutput = String.format("%s%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString());
         // Act
         String actualOutput = listBugsCommand.execute(List.of("filter", "status", "Active"));
 
@@ -111,7 +111,7 @@ public class ListBugsCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
         // Arrange
-        String expectedOutput = getExpectedBugToStringWithAssignee();
+        String expectedOutput = String.format("%s%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToStringWithAssignee());
         repository.findBugById(2).setAssigneeName("Pesho");
         // Act
         String actualOutput = listBugsCommand.execute(List.of("filter", "assignee", "Pesho"));
@@ -123,7 +123,7 @@ public class ListBugsCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatusAndAssignee_When_ValidArgumentsForFilteringStatusAndAssignee() {
         // Arrange
-        String expectedOutput = getExpectedBugToStringWithAssignee();
+        String expectedOutput = String.format("%s%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToStringWithAssignee());
         repository.findBugById(2).setAssigneeName("Pesho");
         // Act
         String actualOutput = listBugsCommand.execute(List.of("filter", "statusandassignee", "Active", "Pesho"));
@@ -149,7 +149,7 @@ public class ListBugsCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s", getExpectedBugToString(), getExpectedBugToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s",BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
         // Act
         String actualOutput = listBugsCommand.execute(List.of("sort", "title"));
 
@@ -168,7 +168,7 @@ public class ListBugsCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s", getExpectedBugToString(), getExpectedBugToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
         // Act
         String actualOutput = listBugsCommand.execute(List.of("sort", "priority"));
 
@@ -187,7 +187,7 @@ public class ListBugsCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s", getExpectedBugToString(), getExpectedBugToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
         // Act
         String actualOutput = listBugsCommand.execute(List.of("sort", "severity"));
 
