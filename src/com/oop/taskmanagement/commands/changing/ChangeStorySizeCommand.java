@@ -13,7 +13,7 @@ import java.util.List;
 public class ChangeStorySizeCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private final static String STORY_SIZE_CHANGED_SUCCESSFULLY = "Story size changed successfully.";
+    private final static String STORY_SIZE_CHANGED_SUCCESSFULLY = "Story with ID %d size changed to %s successfully.";
     private static final String TASK_ID_PARSING_ERROR = "Task ID must be a number!";
 
     private final TaskManagementRepository taskManagementRepository;
@@ -32,6 +32,6 @@ public class ChangeStorySizeCommand implements Command {
         Story storyToChangeSize = taskManagementRepository.findStoryById(storyID);
         storyToChangeSize.changeSize(newSizeType);
 
-        return String.format(STORY_SIZE_CHANGED_SUCCESSFULLY);
+        return String.format(STORY_SIZE_CHANGED_SUCCESSFULLY,storyID,newSizeType);
     }
 }
