@@ -4,7 +4,6 @@ import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.team.Board;
-import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.utils.TestUtilities;
 import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;

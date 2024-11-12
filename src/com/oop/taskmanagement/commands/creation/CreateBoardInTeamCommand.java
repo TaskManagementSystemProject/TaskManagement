@@ -12,8 +12,8 @@ public class CreateBoardInTeamCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
-    private static final String CREATE_BOARD_SUCCESS_MESSAGE = "Board %s created successfully in team %s";
-    private static final String LOG_ACTIVITY_IN_BOARD_MESSAGE = "Board %s added to team %s";
+    private static final String CREATE_BOARD_SUCCESS_MESSAGE = "Board %s created successfully in team %s.";
+    private static final String LOG_ACTIVITY_IN_BOARD_MESSAGE = "Board %s added to team %s.";
 
     private final TaskManagementRepository taskManagementRepository;
 
