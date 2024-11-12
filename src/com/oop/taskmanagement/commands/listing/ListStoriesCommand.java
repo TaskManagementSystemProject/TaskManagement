@@ -10,6 +10,7 @@ import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
+import com.oop.taskmanagement.utils.enums.TaskTypes;
 
 import java.util.Comparator;
 import java.util.List;
@@ -37,7 +38,7 @@ public class ListStoriesCommand implements Command {
             case FILTER -> {
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
                 yield FilteringAndSortingHelperMethods.filterTasks(
-                        taskManagementRepository.getStories(), parameters, filterType,false);
+                        taskManagementRepository.getStories(), parameters, filterType,false, TaskTypes.STORY);
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);

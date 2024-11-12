@@ -10,6 +10,7 @@ import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
+import com.oop.taskmanagement.utils.enums.TaskTypes;
 
 import java.util.Comparator;
 import java.util.List;
@@ -35,7 +36,7 @@ public class ListBugsCommand implements Command {
         return switch (listingType) {
             case FILTER -> {
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getBugs(), parameters, filterType, false);
+                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getBugs(), parameters, filterType, false, TaskTypes.BUG);
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);

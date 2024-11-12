@@ -120,6 +120,12 @@ public class ListFeedbacksCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_InvalidStatusTypeForFeedback() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee","Active" ,"Gosho")));
+    }
+
+    @Test
     public void execute_Should_ReturnSortedByTitle_When_ValidArgumentsForSortingByTitle() {
         // Arrange
         repository.createFeedbackInBoard("mustbefirst",

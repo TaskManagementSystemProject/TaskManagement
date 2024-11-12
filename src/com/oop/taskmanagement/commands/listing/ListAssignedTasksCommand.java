@@ -8,6 +8,7 @@ import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
+import com.oop.taskmanagement.utils.enums.TaskTypes;
 
 import java.util.Comparator;
 import java.util.List;
@@ -33,7 +34,7 @@ public class ListAssignedTasksCommand implements Command {
         return switch (listingType) {
             case FILTER -> {
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, true);
+                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, true, TaskTypes.ALL);
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);

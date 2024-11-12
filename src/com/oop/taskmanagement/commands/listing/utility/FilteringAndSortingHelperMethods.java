@@ -5,6 +5,7 @@ import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.enums.StatusType;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
+import com.oop.taskmanagement.utils.enums.TaskTypes;
 
 import java.util.Comparator;
 import java.util.List;
@@ -14,12 +15,13 @@ public class FilteringAndSortingHelperMethods {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE = 3;
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE = 4;
 
-    public static <T extends TaskBase> String filterTasks(List<T> tasks, List<String> parameters, FilterType filterType, boolean mustBeAssigned) {
+    public static <T extends TaskBase> String filterTasks(List<T> tasks, List<String> parameters, FilterType filterType, boolean mustBeAssigned, TaskTypes taskType) {
 
         return switch (filterType) {
             case STATUS -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE);
                 StatusType statusType = ParsingHelpers.tryParseEnum(parameters.get(2), StatusType.class);
+                ValidationHelpers.validateStatusType(statusType, taskType);
                 yield filterStatusGeneric(tasks, statusType, mustBeAssigned);
             }
             case ASSIGNEE -> {
@@ -29,6 +31,7 @@ public class FilteringAndSortingHelperMethods {
             case STATUSANDASSIGNEE -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
                 StatusType statusType = ParsingHelpers.tryParseEnum(parameters.get(2), StatusType.class);
+                ValidationHelpers.validateStatusType(statusType, taskType);
                 yield filterStatusAndAssigneeGeneric(tasks, statusType, parameters.get(3));
             }
         };

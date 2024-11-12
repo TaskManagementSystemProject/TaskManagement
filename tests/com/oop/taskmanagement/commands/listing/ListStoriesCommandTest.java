@@ -120,6 +120,12 @@ public class ListStoriesCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_InvalidStatusTypeForStories() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter", "statusandassignee","Active" ,"Gosho")));
+    }
+
+    @Test
     public void execute_Should_ReturnSortedByTitle_When_ValidArgumentsForSortingByTitle() {
         // Arrange
         repository.createStoryInBoard("mustbefirst",
