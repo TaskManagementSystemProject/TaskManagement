@@ -98,11 +98,23 @@ public class ListFeedbacksCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
+    public void execute_Should_ReturnInformativeMessage_When_ValidFilterButNothingWasFound() {
         // Arrange
-        String expectedOutput = "";
+        String expectedOutput = "There are NO feedbacks matching the given parameters.";
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("filter", "assignee", "NOTFOUND"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
+        // Arrange
+        String expectedOutput = getExpectedFeedbackToString();
+
+        // Act
+        String actualOutput = listFeedbacksCommand.execute(List.of("filter", "assignee", "Gosho"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);

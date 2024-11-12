@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class ShowTeamActivityCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-
+    private static final String NO_ACTIVITY_MESSAGE = "There is no activity in team %s yet.";
     private final TaskManagementRepository taskManagementRepository;
 
     public ShowTeamActivityCommand(TaskManagementRepository taskManagementRepository) {
@@ -26,9 +26,12 @@ public class ShowTeamActivityCommand implements Command {
         String teamName = parameters.get(0);
         Team team = taskManagementRepository.findTeamByName(teamName);
 
-        return Stream.concat(team.getMembers().stream(), team.getBoards().stream())
+        String toReturnMessage =  Stream.concat(team.getMembers().stream(), team.getBoards().stream())
                 .flatMap(teamAsset -> teamAsset.getActivityHistory().stream())
                 .collect(Collectors.joining(System.lineSeparator()));
+
+        return toReturnMessage.isEmpty() ? String.format(NO_ACTIVITY_MESSAGE, teamName) : toReturnMessage;
+
     }
 
 }

@@ -52,7 +52,7 @@ public class ShowTeamBoardsCommandTest {
     @Test
     public void execute_Should_ReturnEmptyStringWhenNoBoardsOfTeam_When_ValidArguments(){
         // Arrange
-        String expectedOutput = "";
+        String expectedOutput = "There are no boards in team Otbor2 yet.";
         repository.createTeam("Otbor2");
 
         // Act

@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class ListTasksCommand implements Command {
 
     private static final String SORT_FIELD_ERROR = "Task cannot be sorted by field %s";
+    private static final String NO_RESULTS_FOUND_MESSAGE = "There are NO tasks matching the given parameters.";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 1;
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING = 2;
 
@@ -32,25 +33,18 @@ public class ListTasksCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-
+        String toReturnMessage;
         if (parameters.isEmpty()) {
-            return FilteringAndSortingHelperMethods.getTasksGeneric(
+            toReturnMessage =  FilteringAndSortingHelperMethods.getTasksGeneric(
                     taskManagementRepository.getAllTasks(), false);
+            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
         }
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
 
-        return switch (listingType) {
-            case FILTER -> {
-                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING);
-               String titlesToList = parameters.get(1);
-                yield filterTaskByTitle(titlesToList);
-            }
-            case SORT -> {
-                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
-                yield sortTasksByTitle();
-            }
-        };
+        toReturnMessage = listingResultMessage(parameters, listingType);
+        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+
 
     }
 
@@ -68,5 +62,19 @@ public class ListTasksCommand implements Command {
                 .sorted(Comparator.comparing(TaskBase::getTitle))// sorts by title
                 .map(Object::toString)
                 .collect(Collectors.joining(System.lineSeparator()));
+    }
+
+    private String listingResultMessage(List<String> parameters,ListingType listingType){
+        return switch (listingType) {
+            case FILTER -> {
+                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING);
+                String titlesToList = parameters.get(1);
+                yield filterTaskByTitle(titlesToList);
+            }
+            case SORT -> {
+                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
+                yield sortTasksByTitle();
+            }
+        };
     }
 }
