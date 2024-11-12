@@ -13,7 +13,7 @@ import java.util.List;
 public class ChangeStoryStatusCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private final static String STORY_STATUS_CHANGED_SUCCESSFULLY = "Story status changed successfully.";
+    private final static String STORY_STATUS_CHANGED_SUCCESSFULLY = "Story with ID %d status changed to %s successfully.";
     private static final String TASK_ID_PARSING_ERROR = "Task ID must be a number!";
 
     private final TaskManagementRepository taskManagementRepository;
@@ -32,6 +32,6 @@ public class ChangeStoryStatusCommand implements Command {
         Story storyToChangeStatus = taskManagementRepository.findStoryById(storyID);
         storyToChangeStatus.changeStatus(newStatusType);
 
-        return String.format(STORY_STATUS_CHANGED_SUCCESSFULLY);
+        return String.format(STORY_STATUS_CHANGED_SUCCESSFULLY,storyID,newStatusType);
     }
 }
