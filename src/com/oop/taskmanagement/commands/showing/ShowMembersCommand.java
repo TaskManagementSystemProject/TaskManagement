@@ -20,6 +20,6 @@ public class ShowMembersCommand implements Command {
         return taskManagementRepository.getMembers()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

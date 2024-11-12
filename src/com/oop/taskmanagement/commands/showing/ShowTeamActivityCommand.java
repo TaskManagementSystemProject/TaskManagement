@@ -28,7 +28,7 @@ public class ShowTeamActivityCommand implements Command {
 
         return Stream.concat(team.getMembers().stream(), team.getBoards().stream())
                 .flatMap(teamAsset -> teamAsset.getActivityHistory().stream())
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 
 }
