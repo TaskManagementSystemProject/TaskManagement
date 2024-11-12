@@ -12,7 +12,6 @@ import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Member;
 import com.oop.taskmanagement.models.contracts.team.Team;
-import com.oop.taskmanagement.models.contracts.team.TeamAsset;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.SizeType;
@@ -121,7 +120,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
 
-    // gosho
     @Override
     public Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Team team, Board board) {
 
@@ -169,6 +167,8 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public List<Story> getStories(){
         return new ArrayList<>(stories);
     }
+
+    // TODO TEST GOSHO ^
 
     @Override
     public List<Feedback> getFeedbacks(){

@@ -52,11 +52,11 @@ public class ValidInitialization {
     }
 
     /**
-     * Creates a repository with two teams "Otbor" and "Otbor1" each of them having a board with name "White"
-     * Having two members with name "Gosho" in "Otbor" and "Pesho" in "Otbor1"
-     * Id:1 Feedback in "Otbor" with Title "10symb tit", Description: "10symb des" Rating: 5 -> in board "White" assigned to "Gosho"
-     * Id:2 Bug in "Otbor" with Title "10symb tit", Description: "10symb des", ListToReproduce: ("Step1", "Step2"), Priority: LOW, Severity: MINOR -> in board "White"
-     * Id:3 Story in "Otbor1" with Title "10symb tit", Description: "10symb des", Priority: LOW, Size: SMALL -> in board "White", team "Otbor1" assigned to "Pesho"
+     * Creates a repository with two teams "Otbor" and "Otbor1" each of them having a board with name "White" <br>
+     * Having two members with name "Gosho" in "Otbor" and "Pesho" in "Otbor1" <br>
+     * Id:1 Feedback in "Otbor" with Title "10symb tit", Description: "10symb des" Rating: 5 -> in board "White" assigned to "Gosho" <br>
+     * Id:2 Bug in "Otbor" with Title "10symb tit", Description: "10symb des", ListToReproduce: ("Step1", "Step2"), Priority: LOW, Severity: MINOR -> in board "White" <br>
+     * Id:3 Story in "Otbor1" with Title "10symb tit", Description: "10symb des", Priority: LOW, Size: SMALL -> in board "White", team "Otbor1" assigned to "Pesho" <br>
      *
      * @return repository that was described
      */
