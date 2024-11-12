@@ -15,6 +15,9 @@ import com.oop.taskmanagement.utils.enums.TaskTypes;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE;
+import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE;
+
 public class ListBugsCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 2;
     private static final String SORT_FIELD_ERROR = "Bug cannot be sorted by field %s";
@@ -53,6 +56,7 @@ public class ListBugsCommand implements Command {
     private String listingResultMessage(List<String> parameters,ListingType listingType){
         return switch (listingType) {
             case FILTER -> {
+                ValidationHelpers.validateArgumentsCountMultiple(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
                 yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getBugs(), parameters, filterType, false, TaskTypes.BUG);
             }

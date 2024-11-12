@@ -13,6 +13,9 @@ import com.oop.taskmanagement.utils.enums.TaskTypes;
 import java.util.Comparator;
 import java.util.List;
 
+import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE;
+import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE;
+
 public class ListAssignedTasksCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 1;
@@ -42,6 +45,7 @@ public class ListAssignedTasksCommand implements Command {
     private String listingResultMessage(List<String> parameters,ListingType listingType){
         return switch (listingType) {
             case FILTER -> {
+                ValidationHelpers.validateArgumentsCountMultiple(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
                 yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, true, TaskTypes.ALL);
             }

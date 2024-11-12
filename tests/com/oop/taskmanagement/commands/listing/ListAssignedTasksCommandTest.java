@@ -28,7 +28,8 @@ public class ListAssignedTasksCommandTest {
     @Test
     public void execute_Should_ReturnAllTasksAsString_When_NoParametersPassed() {
         // Arrange
-        String expectedOutput = String.format("%s%n%n%s",
+        String expectedOutput = String.format("%s%n%s%n%n%s",
+                ASSIGNED_TASK_PREFIX_MESSAGE,
                 FEEDBACK_TO_STRING_DUMMY_REPO,
                 STORY_TO_STRING_DUMMY_REPO);
 
@@ -68,7 +69,8 @@ public class ListAssignedTasksCommandTest {
 
         repository.findTaskById(4).setAssigneeName("Pesho");
 
-        String expectedOutput = String.format("%s%n%n%s%n%n%s",
+        String expectedOutput = String.format("%s%n%s%n%n%s%n%n%s",
+                ASSIGNED_TASK_PREFIX_MESSAGE,
                 getDummy(),
                 FEEDBACK_TO_STRING_DUMMY_REPO,
                 STORY_TO_STRING_DUMMY_REPO);
@@ -96,7 +98,7 @@ public class ListAssignedTasksCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatus_When_ValidArgumentsForFilteringStatus() {
         // Arrange
-        String expectedOutput = getDummyFeedback();
+        String expectedOutput = String.format("%s%n%s", ASSIGNED_TASK_PREFIX_MESSAGE, getDummyFeedback());
         // Act
         String actualOutput = listAssignedTasksCommand.execute(List.of("filter", "status", "nEw"));
 
@@ -107,7 +109,7 @@ public class ListAssignedTasksCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
         // Arrange
-        String expectedOutput = getDummyFeedback();
+        String expectedOutput = String.format("%s%n%s", ASSIGNED_TASK_PREFIX_MESSAGE, getDummyFeedback());
         // Act
         String actualOutput = listAssignedTasksCommand.execute(List.of("filter", "assignee", "Gosho"));
 
@@ -118,7 +120,7 @@ public class ListAssignedTasksCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatusAndAssignee_When_ValidArgumentsForFilteringStatusAndAssignee() {
         // Arrange
-        String expectedOutput = getDummyFeedback();
+        String expectedOutput = String.format("%s%n%s", ASSIGNED_TASK_PREFIX_MESSAGE, getDummyFeedback());
 
         // Act
         String actualOutput = listAssignedTasksCommand.execute(List.of("filter", "statusandassignee", "New", "Gosho"));

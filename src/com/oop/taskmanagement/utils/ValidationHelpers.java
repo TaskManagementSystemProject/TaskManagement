@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 public class ValidationHelpers {
 
     private static final String INVALID_NUMBER_OF_ARGUMENTS = "Invalid number of arguments. Expected: %d; received: %d.";
+    private static final String INVALID_NUMBER_OF_ARGUMENTS_MULTIPLE = "Invalid number of arguments. Expected: %d or %d; received: %d.";
     private static final String INVALID_STATUS_TYPE_MESSAGE = "%s cannot be filtered by status %s.";
     private static final String RATING_TO_BIG_MESSAGE = "Rating can't be more than %d!";
     private static final int RATING_MAX_VALUE = 100;
@@ -43,6 +44,14 @@ public class ValidationHelpers {
         if (list.size() != expectedNumberOfParameters) {
             throw new InvalidUserInputException(
                     String.format(INVALID_NUMBER_OF_ARGUMENTS, expectedNumberOfParameters, list.size())
+            );
+        }
+    }
+
+    public static void validateArgumentsCountMultiple(List<String> list, int expectedNumberOfParametersOne, int expectedNumberOfParametersTwo) {
+        if (list.size() != expectedNumberOfParametersOne && list.size() != expectedNumberOfParametersTwo) {
+            throw new InvalidUserInputException(
+                    String.format(INVALID_NUMBER_OF_ARGUMENTS_MULTIPLE, expectedNumberOfParametersOne, expectedNumberOfParametersTwo, list.size())
             );
         }
     }
