@@ -16,7 +16,6 @@ public class ShowTeamBoardsCommandTest {
     private TaskManagementRepository repository;
     private Command showTeamBoards;
 
-
     @BeforeEach
     public void initialize() {
         repository = ValidInitialization.createDummyRepository();
@@ -60,5 +59,4 @@ public class ShowTeamBoardsCommandTest {
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
-
 }
