@@ -28,7 +28,7 @@ public class ListTasksCommandTest {
     @Test
     public void execute_Should_ReturnAllTasksAsString_When_NoParametersPassed(){
         // Arrange
-        String expectedOutput = String.format("%s%n%s%n%s",
+        String expectedOutput = String.format("%s%n%n%s%n%n%s",
                 BUG_TO_STRING_DUMMY_REPO,
                 FEEDBACK_TO_STRING_DUMMY_REPO,
                 STORY_TO_STRING_DUMMY_REPO);

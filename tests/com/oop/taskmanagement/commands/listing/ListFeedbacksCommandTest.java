@@ -98,11 +98,23 @@ public class ListFeedbacksCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
+    public void execute_Should_ReturnInformativeMessage_When_ValidFilterButNothingWasFound() {
         // Arrange
-        String expectedOutput = "";
+        String expectedOutput = "There are NO feedbacks matching the given parameters.";
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("filter", "assignee", "NOTFOUND"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
+        // Arrange
+        String expectedOutput = getExpectedFeedbackToString();
+
+        // Act
+        String actualOutput = listFeedbacksCommand.execute(List.of("filter", "assignee", "Gosho"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -134,7 +146,7 @@ public class ListFeedbacksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "title"));
 
@@ -151,7 +163,7 @@ public class ListFeedbacksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "rating"));
 

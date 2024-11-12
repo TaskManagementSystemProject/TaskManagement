@@ -10,6 +10,7 @@ import java.util.List;
 public class ShowBoardActivityCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    private static final String NO_ACTIVITY_MESSAGE = "There is no activity in board %s yet.";
 
     private final TaskManagementRepository taskManagementRepository;
 
@@ -26,6 +27,7 @@ public class ShowBoardActivityCommand implements Command {
 
         Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
 
-        return String.join(System.lineSeparator(), board.getActivityHistory());
+        String toReturnMessage = String.join(System.lineSeparator() + System.lineSeparator(), board.getActivityHistory());
+        return toReturnMessage.isEmpty() ? String.format(NO_ACTIVITY_MESSAGE, boardName) : toReturnMessage;
     }
 }

@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class ShowMembersCommand implements Command {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
-
+    private static final String NO_MEMBERS_MESSAGE = "There are no members yet.";
     private final TaskManagementRepository taskManagementRepository;
 
     public ShowMembersCommand(TaskManagementRepository taskManagementRepository) {
@@ -20,9 +20,11 @@ public class ShowMembersCommand implements Command {
     public String execute(List<String> parameters) {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        return taskManagementRepository.getMembers()
+        String toReturnMessage = taskManagementRepository.getMembers()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+
+        return toReturnMessage.isEmpty() ? NO_MEMBERS_MESSAGE : toReturnMessage;
     }
 }

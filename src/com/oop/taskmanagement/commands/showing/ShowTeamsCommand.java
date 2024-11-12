@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public class ShowTeamsCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 0;
+    private static final String NO_TEAMS_MESSAGE = "There are no teams yet.";
     private final TaskManagementRepository taskManagementRepository;
 
     public ShowTeamsCommand(TaskManagementRepository taskManagementRepository) {
@@ -21,9 +22,12 @@ public class ShowTeamsCommand implements Command {
 
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
 
-        return taskManagementRepository.getTeams()
+        String toReturnMessage =  taskManagementRepository.getTeams()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+
+        return toReturnMessage.isEmpty() ? NO_TEAMS_MESSAGE : toReturnMessage;
+
     }
 }

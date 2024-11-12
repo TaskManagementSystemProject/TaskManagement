@@ -37,12 +37,11 @@ public class ShowTeamMembersCommandTest {
     @Test
     public void execute_Should_ReturnMembersOfTeamAsString_When_ValidArguments(){
         // Arrange
-        String expectedOutput = String.format("Name: Pesho, type: member.%nName: TestMember, type: member.");
+        String expectedOutput = String.format("Name: Pesho, type: member.%n%nName: TestMember, type: member.");
         repository.createMember("TestMember");
         Team team = repository.findTeamByName("Otbor1");
         team.addMember(repository.findMemberByName("TestMember"));
 
-        // TODO for all listings to put some counter in front, to 1. data then 2.data etc
 
         // Act
         String actualOutput = showTeamMembers.execute(List.of("Otbor1"));
@@ -52,9 +51,9 @@ public class ShowTeamMembersCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnEmptyStringWhenNoBoardsOfTeam_When_ValidArguments(){
+    public void execute_Should_ReturnProperStringWhenNoBoardsOfTeam_When_ValidArguments(){
         // Arrange
-        String expectedOutput = "";
+        String expectedOutput = "There are no members in team Otbor2 yet.";
         repository.createTeam("Otbor2");
 
         // Act

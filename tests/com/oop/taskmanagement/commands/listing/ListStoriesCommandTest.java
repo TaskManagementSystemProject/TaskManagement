@@ -98,11 +98,22 @@ public class ListStoriesCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
+    public void execute_Should_ReturnInformativeMessage_When_NoStoriesFoundMatchingTheArguments() {
         // Arrange
-        String expectedOutput = "";
+        String expectedOutput = "There are NO stories matching the given parameters.";
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("filter", "assignee", "NOTFOUND"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredStories_When_ValidFilteringArguments() {
+        // Arrange
+        String expectedOutput = getExpectedStoriesToString();
+        // Act
+        String actualOutput = listStoriesCommand.execute(List.of("filter", "assignee", "Pesho"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -135,7 +146,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "title"));
 
@@ -153,7 +164,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "priority"));
 
@@ -171,7 +182,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "size"));
 

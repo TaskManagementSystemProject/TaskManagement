@@ -58,6 +58,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
             throw new InvalidUserInputException(String.format("Team %s does not exist.", team.getName()));
         }
+        if(team.getBoards().stream()
+                .anyMatch(board -> board.getName().equalsIgnoreCase(name))){
+            throw new InvalidUserInputException(String.format("Board %s already exists", name));
+        }
         Board newBoard = new BoardImpl(name);
         team.addBoard(newBoard);
         return newBoard;

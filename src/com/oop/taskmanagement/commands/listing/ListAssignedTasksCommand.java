@@ -17,6 +17,7 @@ public class ListAssignedTasksCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 1;
 
+    private static final String NO_RESULTS_FOUND_MESSAGE = "There are NO assigned tasks matching the given parameters.";
     private final TaskManagementRepository taskManagementRepository;
 
     public ListAssignedTasksCommand(TaskManagementRepository taskManagementRepository) {
@@ -26,11 +27,18 @@ public class ListAssignedTasksCommand implements Command {
     @Override
     public String execute(List<String> parameters) {
 
+        String toReturnMessage;
         if (parameters.isEmpty()) {
-            return FilteringAndSortingHelperMethods.getTasksGeneric(taskManagementRepository.getAllTasks(), true);
+            toReturnMessage = FilteringAndSortingHelperMethods.getTasksGeneric(taskManagementRepository.getAllTasks(), true);
+            return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
         }
 
         ListingType listingType = ParsingHelpers.tryParseEnum(parameters.get(0), ListingType.class);
+        toReturnMessage = listingResultMessage(parameters, listingType);
+        return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : toReturnMessage;
+    }
+
+    private String listingResultMessage(List<String> parameters,ListingType listingType){
         return switch (listingType) {
             case FILTER -> {
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
@@ -42,5 +50,4 @@ public class ListAssignedTasksCommand implements Command {
             }
         };
     }
-
 }

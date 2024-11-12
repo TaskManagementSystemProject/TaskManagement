@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ShowTeamBoardsCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
-
+    private static final String NO_BOARDS_MESSAGE_IN_TEAM = "There are no boards in team %s yet.";
     private final TaskManagementRepository taskManagementRepository;
 
     public ShowTeamBoardsCommand(TaskManagementRepository taskManagementRepository) {
@@ -25,9 +25,11 @@ public class ShowTeamBoardsCommand implements Command {
         String teamName = parameters.get(0);
         Team team = taskManagementRepository.findTeamByName(teamName);
 
-        return team.getBoards()
+        String toReturnMessage = team.getBoards()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+
+        return toReturnMessage.isEmpty() ? String.format(NO_BOARDS_MESSAGE_IN_TEAM, teamName) : toReturnMessage;
     }
 }
