@@ -14,7 +14,7 @@ import java.util.List;
 public class ChangeFeedbackStatusCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private final static String FEEDBACK_CHANGED_SUCCESSFULLY = "Feedback status changed successfully.";
+    private final static String FEEDBACK_CHANGED_SUCCESSFULLY = "Feedback with ID %d status changed to %s successfully.";
     private static final String TASK_ID_PARSING_ERROR = "Task ID must be a number!";
 
     private final TaskManagementRepository taskManagementRepository;
@@ -33,6 +33,6 @@ public class ChangeFeedbackStatusCommand implements Command {
         Feedback feedbackToChangeStatus = taskManagementRepository.findFeedbackById(feedbackId);
         feedbackToChangeStatus.changeStatus(newStatus);
 
-        return String.format(FEEDBACK_CHANGED_SUCCESSFULLY);
+        return String.format(FEEDBACK_CHANGED_SUCCESSFULLY,feedbackId,newStatus);
     }
 }
