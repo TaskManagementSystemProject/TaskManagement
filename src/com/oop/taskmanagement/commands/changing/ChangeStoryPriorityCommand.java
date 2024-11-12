@@ -14,7 +14,7 @@ import java.util.List;
 public class ChangeStoryPriorityCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
-    private final static String STORY_PRIORITY_CHANGED_SUCCESSFULLY = "Story priority changed successfully.";
+    private final static String STORY_PRIORITY_CHANGED_SUCCESSFULLY = "Story with ID %d priority changed to %s successfully.";
     private static final String TASK_ID_PARSING_ERROR = "Task ID must be a number!";
 
     private final TaskManagementRepository taskManagementRepository;
@@ -33,7 +33,7 @@ public class ChangeStoryPriorityCommand implements Command {
         Story storyToChangePriority = taskManagementRepository.findStoryById(storyID);
         storyToChangePriority.changePriority(newPriorityType);
 
-        return String.format(STORY_PRIORITY_CHANGED_SUCCESSFULLY);
+        return String.format(STORY_PRIORITY_CHANGED_SUCCESSFULLY,storyID,newPriorityType);
 
     }
 }
