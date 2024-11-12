@@ -46,7 +46,7 @@ public class CreateBoardInTeamCommandTest {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_NameAlreadyExistsInTeam() {
+    public void execute_Should_ThrowException_When_NameOfBoardAlreadyExistsInTeam() {
 
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> createBoardInTeamCommand.execute(List.of("White", "Otbor")));

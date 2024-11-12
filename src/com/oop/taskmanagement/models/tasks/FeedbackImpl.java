@@ -4,6 +4,7 @@ import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.enums.StatusType;
+import com.oop.taskmanagement.utils.ValidationHelpers;
 
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
@@ -35,9 +36,12 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
         if (rating == this.rating) {
             throw new InvalidUserInputException(String.format("Rating is already %d", rating));
         }
+        ValidationHelpers.ValidateRating(rating);
         addEvent(String.format(ADD_RATING_CHANGED_TO_EVENTLOG, this.rating, rating));
         this.rating = rating;
     }
+
+
 
     @Override
     public int getRating() {
