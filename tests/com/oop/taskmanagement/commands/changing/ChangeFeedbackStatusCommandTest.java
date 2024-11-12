@@ -69,7 +69,6 @@ public class ChangeFeedbackStatusCommandTest {
         String expectedOutput = String.format(FEEDBACK_STATUS_CHANGED_SUCCESSFULLY, 1, "Done");
         // Act
         String actualOutput = changeFeedbackStatus.execute(parameters);
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
-
 }

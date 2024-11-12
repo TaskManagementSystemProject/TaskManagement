@@ -82,7 +82,7 @@ public class ChangeBugPriorityCommandTest {
         String actualOutput = changeBugPriority.execute(parameters);
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -91,7 +91,6 @@ public class ChangeBugPriorityCommandTest {
         List<String> parameters = List.of("2", "LOW");
 
         // Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class,() ->changeBugPriority.execute(parameters));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> changeBugPriority.execute(parameters));
     }
-
 }

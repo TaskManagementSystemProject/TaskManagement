@@ -81,7 +81,7 @@ public class ChangeBugStatusCommandTest {
         String actualOutput = changeBugStatus.execute(parameters);
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -90,6 +90,6 @@ public class ChangeBugStatusCommandTest {
         List<String> parameters = List.of("2", "ACTIVE");
 
         // Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class,() ->changeBugStatus.execute(parameters));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> changeBugStatus.execute(parameters));
     }
 }

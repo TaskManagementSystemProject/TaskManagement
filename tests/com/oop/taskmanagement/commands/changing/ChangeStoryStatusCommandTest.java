@@ -71,6 +71,6 @@ public class ChangeStoryStatusCommandTest {
         String actualOutput = changeStoryStatus.execute(parameters);
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 }
