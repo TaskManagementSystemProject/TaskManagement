@@ -18,6 +18,7 @@ public abstract class TaskBaseImpl implements TaskBase {
     protected static final String ADD_RATING_CHANGED_TO_EVENTLOG = "Rating changed from %d to %d.";
     private static final String NEW_COMMENT_ADDED = "Comment added successfully";
     private static final String TO_STRING_FORMAT = "Task with id: %d%nTitle: %s%nStatus: %s%n";  // new
+    private static final String EXTRA_INFO_FORMAT = " with id: %d%nTitle: %s%nStatus: %s%n";  // new
 
     private final int id;
     private String title;
@@ -97,7 +98,10 @@ public abstract class TaskBaseImpl implements TaskBase {
         return new ArrayList<>(eventLog);
     }
 
+    protected String baseInfo(){
+        return String.format(EXTRA_INFO_FORMAT, getId(),getTitle(),getStatus());
 
+    }
     @Override // new implementation
     public String toString(){
         return String.format(TO_STRING_FORMAT, getId(),getTitle(),getStatus());

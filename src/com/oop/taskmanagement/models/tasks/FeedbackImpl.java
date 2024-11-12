@@ -42,7 +42,6 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
     }
 
 
-
     @Override
     public int getRating() {
         return rating;
@@ -51,7 +50,7 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
     @Override // new implementation
     public String toString() {
-        return String.format(TO_STRING_FORMAT, super.toString(), getRating(), getAssigneeName());
+        return String.format("Feedback" + TO_STRING_FORMAT, baseInfo(), getRating(), getAssigneeName());
     }
 
 }
