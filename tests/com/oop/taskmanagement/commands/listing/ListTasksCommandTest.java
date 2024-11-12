@@ -68,7 +68,7 @@ public class ListTasksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s%n%s%n%s%n",
+        String expectedOutput = String.format("%s%n%s%n%s%n%s",
                 getDummyFeedback(),
                 BUG_TO_STRING_DUMMY_REPO,
                 FEEDBACK_TO_STRING_DUMMY_REPO,
