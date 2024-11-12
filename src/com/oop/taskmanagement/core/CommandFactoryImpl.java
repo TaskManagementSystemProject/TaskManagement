@@ -45,7 +45,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case CHANGEFEEDBACKRATING -> new ChangeFeedbackRatingCommand(taskManagementRepository);
             case CHANGEFEEDBACKSTATUS -> new ChangeFeedbackStatusCommand(taskManagementRepository);
             case ASSIGNTOMEMBER -> new AssignToMemberCommand(taskManagementRepository);
-            case UNASSINGFROMMEMBER -> new UnassignFromMemberCommand(taskManagementRepository);
+            case UNASSIGNFROMMEMBER -> new UnassignFromMemberCommand(taskManagementRepository);
             case LISTTASKS -> new ListTasksCommand(taskManagementRepository);
             case LISTASSIGNEDTASKS -> new ListAssignedTasksCommand(taskManagementRepository);
             case LISTBUGS -> new ListBugsCommand(taskManagementRepository);

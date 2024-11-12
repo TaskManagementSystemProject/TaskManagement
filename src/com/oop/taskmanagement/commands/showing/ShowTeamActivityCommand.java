@@ -28,7 +28,7 @@ public class ShowTeamActivityCommand implements Command {
 
         String toReturnMessage =  Stream.concat(team.getMembers().stream(), team.getBoards().stream())
                 .flatMap(teamAsset -> teamAsset.getActivityHistory().stream())
-                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator()));
 
         return toReturnMessage.isEmpty() ? String.format(NO_ACTIVITY_MESSAGE, teamName) : toReturnMessage;
 

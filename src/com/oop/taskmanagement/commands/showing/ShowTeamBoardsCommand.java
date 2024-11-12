@@ -28,7 +28,7 @@ public class ShowTeamBoardsCommand implements Command {
         String toReturnMessage = team.getBoards()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator()));
 
         return toReturnMessage.isEmpty() ? String.format(NO_BOARDS_MESSAGE_IN_TEAM, teamName) : toReturnMessage;
     }
