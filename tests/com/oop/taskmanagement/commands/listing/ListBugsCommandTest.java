@@ -224,6 +224,5 @@ public class ListBugsCommandTest {
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
                 null);
-
     }
 }

@@ -1,10 +1,8 @@
 package com.oop.taskmanagement.commands.creation;
 
-import com.oop.taskmanagement.commands.assigning.UnassignFromMemberCommand;
 import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
-import com.oop.taskmanagement.utils.Constants;
 import com.oop.taskmanagement.utils.TestUtilities;
 import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;
@@ -38,7 +36,7 @@ public class CreateMemberCommandTest {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_NameAlreadyExists(){
+    public void execute_Should_ThrowException_When_NameAlreadyExists() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> createMemberCommand.execute(List.of(VALID_MEMBER_NAME_ONE)));
     }

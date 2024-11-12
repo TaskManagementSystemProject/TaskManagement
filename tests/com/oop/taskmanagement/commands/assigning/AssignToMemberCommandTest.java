@@ -92,6 +92,4 @@ public class AssignToMemberCommandTest {
         // Assert
         Assertions.assertNull(originalAssigneeOfTask);
     }
-
-
 }

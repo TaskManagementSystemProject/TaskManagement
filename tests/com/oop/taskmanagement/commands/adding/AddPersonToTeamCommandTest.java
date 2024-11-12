@@ -71,5 +71,4 @@ public class AddPersonToTeamCommandTest {
         // Act, Assert
         Assertions.assertEquals("Member Gosho added to team Otbor successfully.", history);
     }
-
 }

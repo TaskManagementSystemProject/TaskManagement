@@ -36,7 +36,7 @@ public class CreateStoryInBoardCommandTest {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidPriorityType(){
+    public void execute_Should_ThrowException_When_InvalidPriorityType() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> createStoryInBoardCommand
                 .execute(List.of(VALID_TITLE,
@@ -48,7 +48,7 @@ public class CreateStoryInBoardCommandTest {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidSizeType(){
+    public void execute_Should_ThrowException_When_InvalidSizeType() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> createStoryInBoardCommand
                 .execute(List.of(VALID_TITLE,
@@ -60,7 +60,7 @@ public class CreateStoryInBoardCommandTest {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_TeamNotFound(){
+    public void execute_Should_ThrowException_When_TeamNotFound() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> createStoryInBoardCommand
                 .execute(List.of(VALID_TITLE,
@@ -72,7 +72,7 @@ public class CreateStoryInBoardCommandTest {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_BoardNotFound(){
+    public void execute_Should_ThrowException_When_BoardNotFound() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> createStoryInBoardCommand
                 .execute(List.of(VALID_TITLE,
@@ -87,7 +87,7 @@ public class CreateStoryInBoardCommandTest {
     public void execute_Should_LogInBoard_When_ValidArguments() {
         // Arrange
         String expectedLog = String.format(CREATE_BOARD_SUCCESS_MESSAGE, 4);
-        Board currentBoard = repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME);
+        Board currentBoard = repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME);
 
         // Act
         createStoryInBoardCommand.execute(List.of(VALID_TITLE,
@@ -104,7 +104,7 @@ public class CreateStoryInBoardCommandTest {
     @Test
     public void execute_Should_CreateStoryInBoard_When_ValidArguments() {
         // Arrange
-        Board currentBoard = repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME);
+        Board currentBoard = repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME);
         int expectedLengthOfStories = currentBoard.getTasks().size() + 1;
 
         // Act
@@ -122,8 +122,8 @@ public class CreateStoryInBoardCommandTest {
     @Test
     public void execute_Should_ReturnProperMessage_When_ValidArguments() {
         // Arrange
-        Board currentBoard = repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME);
-        String expectedOutput = String.format(CREATE_STORY_SUCCESS_MESSAGE,4,VALID_BOARD_NAME,VALID_TEAM_NAME);
+        Board currentBoard = repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME);
+        String expectedOutput = String.format(CREATE_STORY_SUCCESS_MESSAGE, 4, VALID_BOARD_NAME, VALID_TEAM_NAME);
 
         // Act
         String actualOutput = createStoryInBoardCommand.execute(List.of(VALID_TITLE,

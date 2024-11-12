@@ -14,7 +14,6 @@ import com.oop.taskmanagement.utils.enums.TaskTypes;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ListStoriesCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 2;

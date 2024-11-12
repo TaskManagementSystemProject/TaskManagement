@@ -71,6 +71,6 @@ public class ChangeStorySizeCommandTest {
         String actualOutput = changeStorySize.execute(parameters);
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 }

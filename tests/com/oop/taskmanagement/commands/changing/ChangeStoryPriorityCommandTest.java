@@ -71,6 +71,6 @@ public class ChangeStoryPriorityCommandTest {
         String actualOutput = changeStoryPriority.execute(parameters);
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 }

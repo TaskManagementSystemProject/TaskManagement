@@ -72,7 +72,7 @@ public class UnassignFromMemberCommandTest {
     }
 
     @Test
-    public void execute_Should_UnassignFromMember_When_ValidParameters(){
+    public void execute_Should_UnassignFromMember_When_ValidParameters() {
         // Arrange
         List<String> parameters = List.of("1", "Gosho");
 
@@ -84,7 +84,7 @@ public class UnassignFromMemberCommandTest {
     }
 
     @Test
-    public void execute_Should_SetTaskAssigneeToNull_When_ValidParameters(){
+    public void execute_Should_SetTaskAssigneeToNull_When_ValidParameters() {
         // Arrange
         List<String> parameters = List.of("1", "Gosho");
 
@@ -96,10 +96,10 @@ public class UnassignFromMemberCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnProperMessage_When_ValidParameters(){
+    public void execute_Should_ReturnProperMessage_When_ValidParameters() {
         // Arrange
         List<String> parameters = List.of("1", "Gosho");
-        String expectedOutput = String.format(TASK_UNASSIGNED_SUCCESSFULLY,1,"Gosho");
+        String expectedOutput = String.format(TASK_UNASSIGNED_SUCCESSFULLY, 1, "Gosho");
 
         // Act
         String actualOutput = unassignFromMemberCommand.execute(parameters);
@@ -107,5 +107,4 @@ public class UnassignFromMemberCommandTest {
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
-
 }

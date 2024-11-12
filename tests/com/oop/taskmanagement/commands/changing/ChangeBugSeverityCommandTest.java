@@ -92,5 +92,4 @@ public class ChangeBugSeverityCommandTest {
         // Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class,() ->changeBugSeverity.execute(parameters));
     }
-
 }
