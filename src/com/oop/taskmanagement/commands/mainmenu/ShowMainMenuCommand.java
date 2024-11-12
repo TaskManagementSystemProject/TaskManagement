@@ -30,8 +30,8 @@ public class ShowMainMenuCommand implements Command {
         StringBuilder stringBuilder = new StringBuilder(REPORT_SEPARATOR).append(System.lineSeparator());
         stringBuilder.append(printCommandsMenuMessage());
         int index = 1;
-        for(CommandType cmt : CommandType.values()){
-            stringBuilder.append(System.lineSeparator()).append(String.format("# " + index + ". %-" + (MAX_COMMAND_LENGTH + (index++ < 10 ? 1 : 0)) + "s #", cmt));
+        for (CommandType cmt : CommandType.values()) {
+            stringBuilder.append(System.lineSeparator()).append(String.format("# %2d. %-" + MAX_COMMAND_LENGTH + "s #", index++, cmt));
         }
         return stringBuilder.toString();
     }

@@ -41,15 +41,15 @@ public class ShowMainMenuCommandTest {
         return """
                 #############################
                 #       Commands Menu       #
-                # 1. CREATETEAM             #
-                # 2. CREATEMEMBER           #
-                # 3. CREATEBOARDINTEAM      #
-                # 4. CREATEBUGINBOARD       #
-                # 5. CREATESTORYINBOARD     #
-                # 6. CREATEFEEDBACKINBOARD  #
-                # 7. ADDPERSONTOTEAM        #
-                # 8. ASSIGNTOMEMBER         #
-                # 9. UNASSINGFROMMEMBER     #
+                #  1. CREATETEAM            #
+                #  2. CREATEMEMBER          #
+                #  3. CREATEBOARDINTEAM     #
+                #  4. CREATEBUGINBOARD      #
+                #  5. CREATESTORYINBOARD    #
+                #  6. CREATEFEEDBACKINBOARD #
+                #  7. ADDPERSONTOTEAM       #
+                #  8. ASSIGNTOMEMBER        #
+                #  9. UNASSINGFROMMEMBER    #
                 # 10. SHOWTEAMS             #
                 # 11. SHOWMEMBERS           #
                 # 12. SHOWTEAMMEMBERS       #
