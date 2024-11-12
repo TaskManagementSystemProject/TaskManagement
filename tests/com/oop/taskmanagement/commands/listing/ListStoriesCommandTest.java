@@ -27,7 +27,7 @@ public class ListStoriesCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnAllStoriesAsString_When_NoParametersPassed(){
+    public void execute_Should_ReturnAllStoriesAsString_When_NoParametersPassed() {
         // Arrange
         String expectedOutput = getExpectedStoriesToString();
 
@@ -35,7 +35,7 @@ public class ListStoriesCommandTest {
         String actualOutput = listStoriesCommand.execute(List.of());
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -47,25 +47,25 @@ public class ListStoriesCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidFilteringType() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter","InvalidFilter")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter", "InvalidFilter")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatus() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter","status")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter", "status")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter","assignee")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter", "assignee")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatusAndAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter","statusandassignee")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter", "statusandassignee")));
     }
 
     @Test
@@ -77,13 +77,13 @@ public class ListStoriesCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgument() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("sort","INVALID")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("sort", "INVALID")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgumentForStory() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("sort","severity")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("sort", "severity")));
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ListStoriesCommandTest {
         // Arrange
         String expectedOutput = getExpectedStoriesToString();
         // Act
-        String actualOutput = listStoriesCommand.execute(List.of("filter", "statusandassignee","Not Done" ,"Pesho"));
+        String actualOutput = listStoriesCommand.execute(List.of("filter", "statusandassignee", "Not Done", "Pesho"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -133,7 +133,7 @@ public class ListStoriesCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidStatusTypeForStories() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter", "statusandassignee","Active" ,"Gosho")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter", "statusandassignee", "Active", "Gosho")));
     }
 
     @Test
@@ -144,9 +144,9 @@ public class ListStoriesCommandTest {
                 PriorityType.MEDIUM,
                 SizeType.MEDIUM,
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
-                repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s", getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "title"));
 
@@ -162,9 +162,9 @@ public class ListStoriesCommandTest {
                 PriorityType.MEDIUM,
                 SizeType.MEDIUM,
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
-                repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s", getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "priority"));
 
@@ -180,9 +180,9 @@ public class ListStoriesCommandTest {
                 PriorityType.MEDIUM,
                 SizeType.MEDIUM,
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
-                repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s", getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "size"));
 
@@ -191,8 +191,7 @@ public class ListStoriesCommandTest {
     }
 
 
-
-    private String getExpectedStoriesToString(){
+    private String getExpectedStoriesToString() {
         return String.format(EXPECTED_STORY_TO_STRING_FORMAT,
                 3,
                 VALID_TITLE,
@@ -202,7 +201,7 @@ public class ListStoriesCommandTest {
                 VALID_MEMBER_NAME_TWO);
     }
 
-    private String getExpectedStoriesToStringSecond(){
+    private String getExpectedStoriesToStringSecond() {
         return String.format(EXPECTED_STORY_TO_STRING_FORMAT,
                 4,
                 "mustbefirst",

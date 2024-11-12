@@ -27,7 +27,7 @@ public class ListFeedbacksCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnAllFeedbacksAsString_When_NoParametersPassed(){
+    public void execute_Should_ReturnAllFeedbacksAsString_When_NoParametersPassed() {
         // Arrange
         String expectedOutput = getExpectedFeedbackToString();
 
@@ -35,7 +35,7 @@ public class ListFeedbacksCommandTest {
         String actualOutput = listFeedbacksCommand.execute(List.of());
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -47,25 +47,25 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidFilteringType() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter","InvalidFilter")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "InvalidFilter")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatus() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter","status")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "status")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter","assignee")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "assignee")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatusAndAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter","statusandassignee")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee")));
     }
 
     @Test
@@ -77,13 +77,13 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgument() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort","INVALID")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort", "INVALID")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgumentForFeedback() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort","size")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort", "size")));
     }
 
     @Test
@@ -125,7 +125,7 @@ public class ListFeedbacksCommandTest {
         // Arrange
         String expectedOutput = getExpectedFeedbackToString();
         // Act
-        String actualOutput = listFeedbacksCommand.execute(List.of("filter", "statusandassignee","NEW" ,"Gosho"));
+        String actualOutput = listFeedbacksCommand.execute(List.of("filter", "statusandassignee", "NEW", "Gosho"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -134,7 +134,7 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidStatusTypeForFeedback() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee","Active" ,"Gosho")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee", "Active", "Gosho")));
     }
 
     @Test
@@ -144,9 +144,9 @@ public class ListFeedbacksCommandTest {
                 VALID_DESCRIPTION,
                 4,
                 repository.findTeamByName(VALID_TEAM_NAME),
-                repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s", getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "title"));
 
@@ -161,9 +161,9 @@ public class ListFeedbacksCommandTest {
                 VALID_DESCRIPTION,
                 4,
                 repository.findTeamByName(VALID_TEAM_NAME),
-                repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%n%s",getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
+        String expectedOutput = String.format("%s%n%n%s", getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "rating"));
 
@@ -172,8 +172,7 @@ public class ListFeedbacksCommandTest {
     }
 
 
-
-    private String getExpectedFeedbackToString(){
+    private String getExpectedFeedbackToString() {
         return String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
                 1,
                 VALID_TITLE,
@@ -182,7 +181,7 @@ public class ListFeedbacksCommandTest {
                 VALID_MEMBER_NAME_ONE);
     }
 
-    private String getExpectedFeedbackToStringSecond(){
+    private String getExpectedFeedbackToStringSecond() {
         return String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
                 4,
                 "mustbefirst",

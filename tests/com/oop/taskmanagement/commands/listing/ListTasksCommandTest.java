@@ -26,7 +26,7 @@ public class ListTasksCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnAllTasksAsString_When_NoParametersPassed(){
+    public void execute_Should_ReturnAllTasksAsString_When_NoParametersPassed() {
         // Arrange
         String expectedOutput = String.format("%s%n%n%s%n%n%s",
                 BUG_TO_STRING_DUMMY_REPO,
@@ -37,7 +37,7 @@ public class ListTasksCommandTest {
         String actualOutput = listTasksCommand.execute(List.of());
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -94,14 +94,14 @@ public class ListTasksCommandTest {
         String expectedOutput = getDummyFeedback();
 
         // Act
-        String actualOutput = listTasksCommand.execute(List.of("filter","0000000000"));
+        String actualOutput = listTasksCommand.execute(List.of("filter", "0000000000"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
 
     }
 
-    private String getDummyFeedback(){
+    private String getDummyFeedback() {
         return String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
                 4,
                 "0000000000",
@@ -109,7 +109,4 @@ public class ListTasksCommandTest {
                 10,
                 null);
     }
-
-
-
 }
