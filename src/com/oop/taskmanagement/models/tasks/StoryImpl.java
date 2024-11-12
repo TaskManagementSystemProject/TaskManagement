@@ -67,7 +67,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
 
     @Override // new implementation
     public String toString() {
-        return String.format(TO_STRING_FORMAT, super.toString(), getPriority(), getSize(), getAssigneeName());
+        return String.format("Story" + TO_STRING_FORMAT, baseInfo(), getPriority(), getSize(), getAssigneeName());
     }
 
 }

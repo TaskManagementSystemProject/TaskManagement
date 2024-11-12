@@ -80,6 +80,6 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
     @Override // new implementation
     public String toString() {
-        return String.format(TO_STRING_FORMAT, super.toString(), getPriority(), getSeverity(), getAssigneeName());
+        return String.format("Bug" + TO_STRING_FORMAT, baseInfo(), getPriority(), getSeverity(), getAssigneeName());
     }
 }
