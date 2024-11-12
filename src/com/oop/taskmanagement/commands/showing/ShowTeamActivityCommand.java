@@ -13,6 +13,7 @@ public class ShowTeamActivityCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String NO_ACTIVITY_MESSAGE = "There is no activity in team %s yet.";
+    private static final String TEAM_ACTIVITY_PREFIX_MESSAGE = "ACTIVITY in team %s:%n%s";
     private final TaskManagementRepository taskManagementRepository;
 
     public ShowTeamActivityCommand(TaskManagementRepository taskManagementRepository) {
@@ -28,9 +29,11 @@ public class ShowTeamActivityCommand implements Command {
 
         String toReturnMessage =  Stream.concat(team.getMembers().stream(), team.getBoards().stream())
                 .flatMap(teamAsset -> teamAsset.getActivityHistory().stream())
-                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator()));
 
-        return toReturnMessage.isEmpty() ? String.format(NO_ACTIVITY_MESSAGE, teamName) : toReturnMessage;
+        return toReturnMessage.isEmpty() ?
+                String.format(NO_ACTIVITY_MESSAGE, teamName) :
+                String.format(TEAM_ACTIVITY_PREFIX_MESSAGE, teamName, toReturnMessage);
 
     }
 

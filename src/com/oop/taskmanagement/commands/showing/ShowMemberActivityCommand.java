@@ -11,6 +11,7 @@ public class ShowMemberActivityCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String NO_ACTIVITY_MESSAGE = "There is no activity in member %s yet.";
+    private static final String MEMBER_ACTIVITY_PREFIX_MESSAGE = "ACTIVITY for member %s:%n%s";
     private final TaskManagementRepository taskManagementRepository;
 
     public ShowMemberActivityCommand(TaskManagementRepository taskManagementRepository) {
@@ -24,7 +25,11 @@ public class ShowMemberActivityCommand implements Command {
         String memberName = parameters.get(0);
         Member member = taskManagementRepository.findMemberByName(memberName);
 
-        String toReturnMessage = String.join(System.lineSeparator() + System.lineSeparator(), member.getActivityHistory());
-        return toReturnMessage.isEmpty() ? String.format(NO_ACTIVITY_MESSAGE, memberName) : toReturnMessage;
+        String toReturnMessage = String.join(System.lineSeparator(), member.getActivityHistory());
+        return toReturnMessage.isEmpty() ?
+                String.format(NO_ACTIVITY_MESSAGE, memberName) :
+                String.format(MEMBER_ACTIVITY_PREFIX_MESSAGE,
+                        memberName,
+                        toReturnMessage);
     }
 }

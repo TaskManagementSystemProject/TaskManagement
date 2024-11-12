@@ -12,6 +12,7 @@ public class ShowTeamBoardsCommand implements Command {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String NO_BOARDS_MESSAGE_IN_TEAM = "There are no boards in team %s yet.";
+    private static final String TEAM_BOARDS_PREFIX_MESSAGE = "BOARDS in team %s:%n%s";
     private final TaskManagementRepository taskManagementRepository;
 
     public ShowTeamBoardsCommand(TaskManagementRepository taskManagementRepository) {
@@ -28,8 +29,10 @@ public class ShowTeamBoardsCommand implements Command {
         String toReturnMessage = team.getBoards()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator()));
 
-        return toReturnMessage.isEmpty() ? String.format(NO_BOARDS_MESSAGE_IN_TEAM, teamName) : toReturnMessage;
+        return toReturnMessage.isEmpty() ?
+                String.format(NO_BOARDS_MESSAGE_IN_TEAM, teamName) :
+                String.format(TEAM_BOARDS_PREFIX_MESSAGE, teamName, toReturnMessage);
     }
 }

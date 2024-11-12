@@ -49,7 +49,7 @@ public class ShowMainMenuCommandTest {
                 #  6. CREATEFEEDBACKINBOARD #
                 #  7. ADDPERSONTOTEAM       #
                 #  8. ASSIGNTOMEMBER        #
-                #  9. UNASSINGFROMMEMBER    #
+                #  9. UNASSIGNFROMMEMBER    #
                 # 10. SHOWTEAMS             #
                 # 11. SHOWMEMBERS           #
                 # 12. SHOWTEAMMEMBERS       #
