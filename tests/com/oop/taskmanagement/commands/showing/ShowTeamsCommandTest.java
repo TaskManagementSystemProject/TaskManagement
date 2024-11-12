@@ -1,6 +1,7 @@
 package com.oop.taskmanagement.commands.showing;
 
 import com.oop.taskmanagement.commands.contracts.Command;
+import com.oop.taskmanagement.core.TaskManagementRepositoryImpl;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.utils.ValidInitialization;
@@ -32,6 +33,20 @@ public class ShowTeamsCommandTest {
         // Arrange
         String expectedOutput = String.format("TEAMS:%nName: Otbor, type: team.%nName: Otbor1, type: team.%nName: TestTeam, type: team.");
         repository.createTeam("TestTeam");
+
+        // Act
+        String actualOutput = showTeams.execute(List.of());
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnNoTeamsMessage_When_ValidArgumentsButNoTeams(){
+        // Arrange
+        String expectedOutput = "There are no teams yet.";
+        repository = new TaskManagementRepositoryImpl();
+        showTeams = new ShowTeamsCommand(repository);
 
         // Act
         String actualOutput = showTeams.execute(List.of());
