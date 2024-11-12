@@ -16,10 +16,10 @@ import java.util.List;
 
 
 public class TaskManagementRepositoryTest {
-    TaskManagementRepository repository;
+    private TaskManagementRepository repository;
 
     @BeforeEach
-    public void beforeEach() {
+    public void initialize() {
         repository = ValidInitialization.createDummyRepository();
     }
 
