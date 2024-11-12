@@ -8,6 +8,7 @@ import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.commands.creation.*;
 import com.oop.taskmanagement.commands.enums.CommandType;
 import com.oop.taskmanagement.commands.listing.*;
+import com.oop.taskmanagement.commands.mainmenu.ShowMainMenuCommand;
 import com.oop.taskmanagement.commands.showing.*;
 import com.oop.taskmanagement.core.contracts.CommandFactory;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
@@ -50,6 +51,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case LISTBUGS -> new ListBugsCommand(taskManagementRepository);
             case LISTFEEDBACKS -> new ListFeedbacksCommand(taskManagementRepository);
             case LISTSTORIES -> new ListStoriesCommand(taskManagementRepository);
+            case SHOWMAINMENU -> new ShowMainMenuCommand();
         };
     }
 }

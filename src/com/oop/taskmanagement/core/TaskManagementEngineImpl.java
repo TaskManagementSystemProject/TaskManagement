@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.oop.taskmanagement.commands.enums.CommandType.SHOWMAINMENU;
+
 public class TaskManagementEngineImpl implements TaskManagementEngine {
     private static final String TERMINATION_COMMAND = "Exit";
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
     private static final char MAIN_SPLIT_SYMBOL = ' ';
     private static final char SENTENCE_SEPARATOR = '^';
-    private static final String REPORT_SEPARATOR = "####################";
+    public static final String REPORT_SEPARATOR = "#############################";
 
     private final CommandFactory commandFactory;
     private final TaskManagementRepository taskManagementRepository;
@@ -26,6 +28,7 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
+        processCommand(String.valueOf(SHOWMAINMENU));
         while (scanner.hasNext()) {
             try {
                 String inputLine = scanner.nextLine();
@@ -135,6 +138,7 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
         }
         return result;
     }
+
 
     private void print(String result) {
         System.out.println(result);
