@@ -38,9 +38,8 @@ public class ShowTeamBoardsCommandTest {
     @Test
     public void execute_Should_ReturnBoardsOfTeamAsString_When_ValidArguments(){
         // Arrange
-        String expectedOutput = String.format("Name: White, type: board.%nName: Black, type: board.");
+        String expectedOutput = String.format("Name: White, type: board.%n%nName: Black, type: board.");
         repository.createBoardInTeam("Black", repository.findTeamByName("Otbor"));
-        // TODO for all listings to put some counter in front, to 1. data then 2.data etc
 
         // Act
         String actualOutput = showTeamBoards.execute(List.of("Otbor"));

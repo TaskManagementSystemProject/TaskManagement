@@ -146,7 +146,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "title"));
 
@@ -164,7 +164,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "priority"));
 
@@ -182,7 +182,7 @@ public class ListStoriesCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("sort", "size"));
 

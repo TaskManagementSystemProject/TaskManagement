@@ -146,7 +146,7 @@ public class ListFeedbacksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "title"));
 
@@ -163,7 +163,7 @@ public class ListFeedbacksCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%s",getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
+        String expectedOutput = String.format("%s%n%n%s",getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "rating"));
 

@@ -28,7 +28,7 @@ public class ShowTeamMembersCommand implements Command {
         String toReturnMessage =  team.getMembers()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
 
         return toReturnMessage.isEmpty() ? String.format(NO_MEMBERS_MESSAGE_IN_TEAM, teamName) : toReturnMessage;
     }

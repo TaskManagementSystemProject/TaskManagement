@@ -24,7 +24,7 @@ public class ShowMemberActivityCommand implements Command {
         String memberName = parameters.get(0);
         Member member = taskManagementRepository.findMemberByName(memberName);
 
-        String toReturnMessage = String.join(System.lineSeparator(), member.getActivityHistory());
+        String toReturnMessage = String.join(System.lineSeparator() + System.lineSeparator(), member.getActivityHistory());
         return toReturnMessage.isEmpty() ? String.format(NO_ACTIVITY_MESSAGE, memberName) : toReturnMessage;
     }
 }

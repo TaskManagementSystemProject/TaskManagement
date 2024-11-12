@@ -25,7 +25,7 @@ public class ShowTeamsCommand implements Command {
         String toReturnMessage =  taskManagementRepository.getTeams()
                 .stream()
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
 
         return toReturnMessage.isEmpty() ? NO_TEAMS_MESSAGE : toReturnMessage;
 
