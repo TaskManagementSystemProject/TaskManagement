@@ -7,15 +7,10 @@ public enum PriorityType {
 
     @Override
     public String toString() {
-        switch (this) {
-            case HIGH:
-                return "High";
-            case MEDIUM:
-                return "Medium";
-            case LOW:
-                return "Low";
-            default:
-                return "";
-        }
+        return switch (this) {
+            case HIGH -> "High";
+            case MEDIUM -> "Medium";
+            case LOW -> "Low";
+        };
     }
 }

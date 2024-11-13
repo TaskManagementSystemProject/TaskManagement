@@ -61,7 +61,6 @@ public class BugImpl extends TaskBaseImpl implements Bug {
         this.priority = priority;
     }
 
-
     @Override
     public List<String> getStepsToReproduce() {
         return new ArrayList<>(stepsToReproduce);    // TODO
@@ -76,7 +75,6 @@ public class BugImpl extends TaskBaseImpl implements Bug {
     public SeverityType getSeverity() {
         return severity;
     }
-
 
     @Override // new implementation
     public String toString() {

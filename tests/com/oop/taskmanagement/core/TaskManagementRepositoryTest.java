@@ -1,11 +1,16 @@
 package com.oop.taskmanagement.core;
 
+import com.oop.taskmanagement.commands.contracts.Command;
+import com.oop.taskmanagement.commands.creation.CreateBugInBoardCommand;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
+import com.oop.taskmanagement.models.contracts.team.Team;
+import com.oop.taskmanagement.models.enums.PriorityType;
+import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.oop.taskmanagement.utils.Constants.*;
 
 
 public class TaskManagementRepositoryTest {
@@ -51,12 +58,11 @@ public class TaskManagementRepositoryTest {
     }
 
     @Test
-    public void getTasks_Should_ReturnShallowCopyOfListWithAllTasks(){
+    public void getTasks_Should_ReturnShallowCopyOfListWithAllTasks() {
         // Arrange
         List<TaskBase> expectedList = new ArrayList<>(repository.getBugs());
         expectedList.addAll(repository.getFeedbacks());
         expectedList.addAll(repository.getStories());
-
 
         // Act
         List<TaskBase> actualList = repository.getAllTasks();
@@ -66,7 +72,7 @@ public class TaskManagementRepositoryTest {
     }
 
     @Test
-    public void findMemberByName_Should_ReturnExpectedMember_When_MemberFound(){
+    public void findMemberByName_Should_ReturnExpectedMember_When_MemberFound() {
         // Arrange
         String expectedMemberName = "Gosho";
 
@@ -78,13 +84,13 @@ public class TaskManagementRepositoryTest {
     }
 
     @Test
-    public void findMemberByName_Should_ThrowException_When_MemberNotFound(){
+    public void findMemberByName_Should_ThrowException_When_MemberNotFound() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> repository.findMemberByName("NOTFOUND"));
     }
 
     @Test
-    public void findTeamByName_Should_ReturnExpectedTeam_When_TeamFound(){
+    public void findTeamByName_Should_ReturnExpectedTeam_When_TeamFound() {
         // Arrange
         String expectedTeamName = "Otbor";
 
@@ -96,13 +102,13 @@ public class TaskManagementRepositoryTest {
     }
 
     @Test
-    public void findTeamByName_Should_ThrowException_When_TeamNotFound(){
+    public void findTeamByName_Should_ThrowException_When_TeamNotFound() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> repository.findTeamByName("NOTFOUND"));
     }
 
     @Test
-    public void findBoardByTeamName_Should_ReturnExpectedMember_When_BoardFound(){
+    public void findBoardByTeamName_Should_ReturnExpectedMember_When_BoardFound() {
         // Arrange
         String expectedBoardName = "White";
 
@@ -112,14 +118,15 @@ public class TaskManagementRepositoryTest {
         // Assert
         Assertions.assertEquals(expectedBoardName, actualBoardName);
     }
+
     @Test
-    public void findBoardByTeamName_Should_ThrowException_When_TeamNotFound(){
+    public void findBoardByTeamName_Should_ThrowException_When_TeamNotFound() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> repository.findBoardByTeamName("White", "NOTFOUND"));
     }
 
     @Test
-    public void findBoardByTeamName_Should_ThrowException_When_BoardNotFound(){
+    public void findBoardByTeamName_Should_ThrowException_When_BoardNotFound() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> repository.findBoardByTeamName("NOTFOUND", "Otbor"));
     }
@@ -231,6 +238,85 @@ public class TaskManagementRepositoryTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> repository.findTaskById(5));
     }
+
+
+
+
+
+
+
+    @Test
+    public void createTeam_Should_ThrowException_When_TeamAlreadyExists() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> repository.createTeam("Otbor"));
+    }
+
+    @Test
+    public void createBoardInTeam_Should_ThrowException_When_TeamNameInvalid() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> repository.createBoardInTeam(
+                        "Valid name", repository.findTeamByName("Invalid name")));
+    }
+
+    @Test
+    public void createBoardInTeam_Should_ThrowException_When_BoardNameInvalid() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> repository.createBoardInTeam("White", repository.findTeamByName("Otbor")));
+    }
+
+    @Test
+    public void createMember_Should_ThrowException_When_MemberNameNotUnique() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> repository.createMember("Gosho"));
+    }
+
+    @Test
+    public void createBug_Should_ThrowException_When_TeamNameInvalid() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> repository.createBugInBoard(
+                        VALID_TITLE,
+                        VALID_DESCRIPTION,
+                        VALID_LIST_TO_REPRODUCE,
+                        PriorityType.HIGH,
+                        SeverityType.MAJOR,
+                        repository.findTeamByName("Invalid team name"),
+                        repository.findBoardByTeamName("White", "Invalid team name")));
+    }
+
+    @Test
+    public void createBug_Should_ThrowException_When_BoardNameInvalid() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> repository.createBugInBoard(
+                        VALID_TITLE,
+                        VALID_DESCRIPTION,
+                        VALID_LIST_TO_REPRODUCE,
+                        PriorityType.HIGH,
+                        SeverityType.MAJOR,
+                        repository.findTeamByName("Otbor"),
+                        repository.findBoardByTeamName("Invalid board name", "Otbor")));
+
+    }
+
+
+/*    @Test
+    public void createBug_Should_ThrowException_When_BoardNameInvalid() {
+        // Arrange, Act
+        Command createBugCommand = new CreateBugInBoardCommand(repository);
+        String output = createBugCommand.execute(List.of(VALID_TITLE,
+                VALID_DESCRIPTION,
+                VALID_STEPS_TO_REPRODUCE,
+                VALID_PRIORITY,
+                "MAJOR",
+                "Otbor",
+                "Invalid"));
+        // Arrange, Act, Assert
+        Assertions.assertTh("2", output);
+    }
+*/
 
 
 

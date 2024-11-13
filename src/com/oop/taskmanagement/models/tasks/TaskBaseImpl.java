@@ -1,11 +1,9 @@
 package com.oop.taskmanagement.models.tasks;
 
 import com.oop.taskmanagement.models.contracts.tasks.Comment;
-
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.enums.StatusType;
 import com.oop.taskmanagement.utils.TaskValidation;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,6 @@ public abstract class TaskBaseImpl implements TaskBase {
     protected static final String ADD_SEVERITY_CHANGED_TO_EVENTLOG = "Severity changed from %s to %s.";
     protected static final String ADD_RATING_CHANGED_TO_EVENTLOG = "Rating changed from %d to %d.";
     private static final String NEW_COMMENT_ADDED = "Comment added successfully.";
-    private static final String TO_STRING_FORMAT = "Task with id: %d%nTitle: %s%nStatus: %s%n";  // new
     private static final String EXTRA_INFO_FORMAT = " with id: %d%nTitle: %s%nStatus: %s%n";  // new
 
     private final int id;
@@ -27,6 +24,7 @@ public abstract class TaskBaseImpl implements TaskBase {
     private final List<Comment> comments;
     private final List<String> eventLog;
     private String assigneeName;
+
     protected TaskBaseImpl(int id, String title, String description) {
         this.id = id;
         setTitle(title);
@@ -98,12 +96,8 @@ public abstract class TaskBaseImpl implements TaskBase {
         return new ArrayList<>(eventLog);
     }
 
-    protected String baseInfo(){
-        return String.format(EXTRA_INFO_FORMAT, getId(),getTitle(),getStatus());
+    protected String baseInfo() {
+        return String.format(EXTRA_INFO_FORMAT, getId(), getTitle(), getStatus());
 
-    }
-    @Override // new implementation
-    public String toString(){
-        return String.format(TO_STRING_FORMAT, getId(),getTitle(),getStatus());
     }
 }

@@ -54,10 +54,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Board createBoardInTeam(String name, Team team) {
-        if(teams.stream()
-                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
-            throw new InvalidUserInputException(String.format("Team %s does not exist.", team.getName()));
-        }
+
         if(team.getBoards().stream()
                 .anyMatch(board -> board.getName().equalsIgnoreCase(name))){
             throw new InvalidUserInputException(String.format("Board %s already exists", name));
@@ -91,14 +88,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Bug createBugInBoard(String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board) {
-        if(teams.stream()
-                        .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
-            throw new InvalidUserInputException(String.format("Creating a bug failed! Team %s does not exist.", team.getName()));
-        }
-        if(team.getBoards().stream()
-                .noneMatch(currentBoard -> currentBoard.getName().equalsIgnoreCase(board.getName()))){
-            throw new InvalidUserInputException(String.format("Creating a bug failed! Board %s does not exist.", board.getName()));
-        }
+
         Bug newBug = new BugImpl(nextId, title, description, stepsToReproduce, priority, severity);
         nextId++;
         board.addTask(newBug);
@@ -108,14 +98,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Feedback createFeedbackInBoard(String title, String description, int rating, Team team, Board board) {
-        if (teams.stream()
-                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))) {
-            throw new InvalidUserInputException(String.format("Creating feedback failed! Team %s does not exist.", team.getName()));
-        }
-        if (team.getBoards().stream()
-                .noneMatch(currentBoard -> currentBoard.getName().equalsIgnoreCase(board.getName()))) {
-            throw new InvalidUserInputException(String.format("Creating feedback failed! Board %s does not exist.", board.getName()));
-        }
         Feedback newFeedback = new FeedbackImpl(nextId, title, description, rating);
         nextId++;
         board.addTask(newFeedback);
@@ -127,14 +109,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Team team, Board board) {
 
-        if (teams.stream()
-                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))) {
-            throw new InvalidUserInputException(String.format("Creating a Story failed! Team %s does not exist.", team.getName()));
-        }
-        if (team.getBoards().stream()
-                .noneMatch(currentBoard -> currentBoard.getName().equalsIgnoreCase(board.getName()))) {
-            throw new InvalidUserInputException(String.format("Creating a Story failed! Board %s does not exist.", board.getName()));
-        }
 
         Story newStory = new StoryImpl(nextId, title, description, priority, size);
         nextId++;
