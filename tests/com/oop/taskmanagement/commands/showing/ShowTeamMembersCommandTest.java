@@ -37,7 +37,7 @@ public class ShowTeamMembersCommandTest {
     @Test
     public void execute_Should_ReturnMembersOfTeamAsString_When_ValidArguments(){
         // Arrange
-        String expectedOutput = String.format("MEMBERS in team Otbor1:%nName: Pesho.%nName: TestMember.");
+        String expectedOutput = String.format("MEMBERS in team Otbor1:%nName: Pesho%nName: TestMember");
         repository.createMember("TestMember");
         Team team = repository.findTeamByName("Otbor1");
         team.addMember(repository.findMemberByName("TestMember"));

@@ -61,7 +61,7 @@ public class BoardImplTest {
     public void toString_Should_ConvertToStringWithProperFormat() {
         // Arrange
         Board board = new BoardImpl("ValidName");
-        String expectedResult = "Name: ValidName.";
+        String expectedResult = "Name: ValidName";
 
         // Act
         String actualOutput = board.toString();

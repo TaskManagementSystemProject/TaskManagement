@@ -73,12 +73,12 @@ Task with ID 2 assigned to member NewMember successfully.
 #############################
 ACTIVITY for member SeniorDeveloper:
 Member SeniorDeveloper added to team TeamName successfully.
-Assigned task with ID 1
-Assigned task with ID 2
-Assigned task with ID 3
-Assigned task with ID 4
-Unassigned task with ID 1
-Unassigned task with ID 2
+Assigned task with ID 1.
+Assigned task with ID 2.
+Assigned task with ID 3.
+Assigned task with ID 4.
+Unassigned task with ID 1.
+Unassigned task with ID 2.
 #############################
 LIST MATCHING BUGS:
 Bug with id: 3

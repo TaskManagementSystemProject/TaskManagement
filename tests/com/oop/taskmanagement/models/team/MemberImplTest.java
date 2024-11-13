@@ -60,7 +60,7 @@ public class MemberImplTest {
     public void toString_Should_ConvertToStringWithProperFormat() {
         // Arrange
         Member member = new MemberImpl("ValidName");
-        String expectedResult = "Name: ValidName.";
+        String expectedResult = "Name: ValidName";
 
         // Act
         String actualOutput = member.toString();

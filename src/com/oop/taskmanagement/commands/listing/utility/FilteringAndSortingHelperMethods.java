@@ -53,7 +53,7 @@ public class FilteringAndSortingHelperMethods {
 
     private static <T extends TaskBase> String filterStatusAndAssigneeGeneric(List<T> tasks, StatusType statusType, String assigneeName) {
         return tasks.stream()
-                .filter(task -> assigneeName.equalsIgnoreCase(task.getAssigneeName()) && task.getStatus() == statusType) // single filter -> faster
+                .filter(task ->task.getStatus() == statusType && assigneeName.equalsIgnoreCase(task.getAssigneeName())) // single filter -> faster
                 .map(Object::toString)
                 .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
     }

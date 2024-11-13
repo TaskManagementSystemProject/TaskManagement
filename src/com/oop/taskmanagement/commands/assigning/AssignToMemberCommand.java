@@ -15,8 +15,8 @@ public class AssignToMemberCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
     private final static String TASK_ASSIGNED_SUCCESSFULLY = "Task with ID %d assigned to member %s successfully.";
-    private final static String ACTIVITY_LOG_ASSIGN_MESSAGE = "Assigned task with ID %d";
-    private final static String ACTIVITY_LOG_UNASSIGN_MESSAGE = "Unassigned task with ID %d";
+    private final static String ACTIVITY_LOG_ASSIGN_MESSAGE = "Assigned task with ID %d.";
+    private final static String ACTIVITY_LOG_UNASSIGN_MESSAGE = "Unassigned task with ID %d.";
     private static final String TASK_ID_PARSING_ERROR = "Task ID must be a number!";
 
     private final TaskManagementRepository taskManagementRepository;

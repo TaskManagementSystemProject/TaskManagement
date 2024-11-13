@@ -41,15 +41,15 @@
 Team TeamName created successfully.
 #############################
 TEAMS:
-Name: TeamName.
+Name: TeamName
 #############################
 Member SeniorDeveloper created successfully.
 #############################
 Member JuniorDeveloper created successfully.
 #############################
 MEMBERS:
-Name: SeniorDeveloper.
-Name: JuniorDeveloper.
+Name: SeniorDeveloper
+Name: JuniorDeveloper
 #############################
 There are no members in team TeamName yet.
 #############################
@@ -58,8 +58,8 @@ Member SeniorDeveloper added to team TeamName successfully.
 Member JuniorDeveloper added to team TeamName successfully.
 #############################
 MEMBERS in team TeamName:
-Name: SeniorDeveloper.
-Name: JuniorDeveloper.
+Name: SeniorDeveloper
+Name: JuniorDeveloper
 #############################
 Board BoardName created successfully in team TeamName.
 #############################
@@ -94,13 +94,13 @@ Bug with ID 1 status changed to Done successfully.
 Task with ID 1 unassigned from member SeniorDeveloper successfully.
 #############################
 MEMBERS:
-Name: SeniorDeveloper.
-Name: JuniorDeveloper.
+Name: SeniorDeveloper
+Name: JuniorDeveloper
 #############################
 ACTIVITY in team TeamName:
 Member SeniorDeveloper added to team TeamName successfully.
-Assigned task with ID 1
-Unassigned task with ID 1
+Assigned task with ID 1.
+Unassigned task with ID 1.
 Member JuniorDeveloper added to team TeamName successfully.
 Board BoardName added to team TeamName.
 Bug with ID 1 was added.
@@ -108,8 +108,8 @@ Board NewBoard added to team TeamName.
 #############################
 ACTIVITY for member SeniorDeveloper:
 Member SeniorDeveloper added to team TeamName successfully.
-Assigned task with ID 1
-Unassigned task with ID 1
+Assigned task with ID 1.
+Unassigned task with ID 1.
 #############################
 ACTIVITY for member JuniorDeveloper:
 Member JuniorDeveloper added to team TeamName successfully.

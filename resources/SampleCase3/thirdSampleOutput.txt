@@ -79,8 +79,8 @@ Bug with ID 1 status changed to Done successfully.
 #############################
 ACTIVITY for member NewMember:
 Member NewMember added to team TeamName successfully.
-Assigned task with ID 1
-Assigned task with ID 2
+Assigned task with ID 1.
+Assigned task with ID 2.
 Added a comment about Task 1.
 #############################
 LOG HISTORY for task 1:

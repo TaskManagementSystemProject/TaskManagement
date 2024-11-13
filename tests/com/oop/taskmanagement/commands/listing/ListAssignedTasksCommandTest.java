@@ -122,6 +122,19 @@ public class ListAssignedTasksCommandTest {
     }
 
     @Test
+    public void execute_Should_ReturnFilteredByStatusButAlsoFilteringUnassigned_When_ValidArgumentsForFilteringStatus() {
+        // Arrange
+        String expectedOutput = String.format("%s%n%s", ASSIGNED_TASK_PREFIX_MESSAGE, getDummyFeedback());
+        repository.createFeedbackInBoard("11111111111111", "222222222222222", 15, repository.findTeamByName("Otbor"), repository.findBoardByTeamName("White", "Otbor"));
+        // Act
+        String actualOutput = listAssignedTasksCommand.execute(List.of("filter", "status", "nEw"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+
+    @Test
     public void execute_Should_ReturnFilteredByAssignee_When_ValidArgumentsForFilteringAssignee() {
         // Arrange
         String expectedOutput = String.format("%s%n%s", ASSIGNED_TASK_PREFIX_MESSAGE, getDummyFeedback());
