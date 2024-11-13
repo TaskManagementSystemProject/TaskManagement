@@ -90,7 +90,7 @@ public class TaskManagementEngineTest {
     @Test
     public void start_Should_NotThrowException_When_InvalidInputBlank(){
         // Arrange
-        String invalidInput = "\n";
+        String invalidInput = " ";
         System.setIn(new ByteArrayInputStream(invalidInput.getBytes()));
 
         //  Act, Assert

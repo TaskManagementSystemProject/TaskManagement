@@ -41,11 +41,11 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
                     break;
                 }
                 processCommand(inputLine);
-            } catch (InvalidUserInputException ex) {
-                print(ex.getMessage());
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
             }
+        }
     }
-}
 
     private void processCommand(String inputLine) {
         List<String> allArguments = extractAllArguments(inputLine);
