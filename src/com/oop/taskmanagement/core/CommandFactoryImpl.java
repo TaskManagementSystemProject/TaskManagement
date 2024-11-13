@@ -1,5 +1,6 @@
 package com.oop.taskmanagement.core;
 
+import com.oop.taskmanagement.commands.adding.AddCommentToTaskCommand;
 import com.oop.taskmanagement.commands.adding.AddPersonToTeamCommand;
 import com.oop.taskmanagement.commands.assigning.AssignToMemberCommand;
 import com.oop.taskmanagement.commands.assigning.UnassignFromMemberCommand;
@@ -29,6 +30,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case SHOWTEAMS -> new ShowTeamsCommand(taskManagementRepository);
             case SHOWTEAMACTIVITY -> new ShowTeamActivityCommand(taskManagementRepository);
             case ADDPERSONTOTEAM -> new AddPersonToTeamCommand(taskManagementRepository);
+            case ADDCOMMENTTOTASK -> new AddCommentToTaskCommand(taskManagementRepository);
             case SHOWTEAMMEMBERS -> new ShowTeamMembersCommand(taskManagementRepository);
             case CREATEBOARDINTEAM -> new CreateBoardInTeamCommand(taskManagementRepository);
             case SHOWTEAMBOARDS -> new ShowTeamBoardsCommand(taskManagementRepository);
