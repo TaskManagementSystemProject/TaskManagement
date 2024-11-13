@@ -1,5 +1,3 @@
-First sample input:
-
 CreateTeam TeamName
 ShowTeams
 CreateMember SeniorDeveloper

@@ -1,5 +1,3 @@
-************************************************Program should start with************************************************
-
 #############################
 #       Commands Menu       #
 #  1. CREATETEAM            #
@@ -35,9 +33,6 @@
 # 31. LISTSTORIES           #
 # 32. SHOWMAINMENU          #
 #############################
-
-**********************************************Expected output from firstSampleInput**********************************************
-
 Team TeamName created successfully.
 #############################
 TEAMS:
@@ -76,8 +71,8 @@ Assigned to: None
 Board NewBoard created successfully in team TeamName.
 #############################
 BOARDS in team TeamName:
-Name: BoardName.
-Name: NewBoard.
+Name: BoardName
+Name: NewBoard
 #############################
 Task with ID 1 assigned to member SeniorDeveloper successfully.
 #############################

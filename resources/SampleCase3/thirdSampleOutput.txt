@@ -1,5 +1,3 @@
-************************************************Program should start with************************************************
-
 #############################
 #       Commands Menu       #
 #  1. CREATETEAM            #
@@ -35,9 +33,6 @@
 # 31. LISTSTORIES           #
 # 32. SHOWMAINMENU          #
 #############################
-
-**********************************************Expected output from thirdSampleInput**********************************************
-
 Team TeamName created successfully.
 #############################
 Member SeniorDeveloper created successfully.

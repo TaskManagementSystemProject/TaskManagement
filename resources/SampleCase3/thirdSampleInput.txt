@@ -1,5 +1,3 @@
-Third sample input:
-
 CreateTeam TeamName
 CreateMember SeniorDeveloper
 AddPersonToTeam SeniorDeveloper TeamName
@@ -21,4 +19,3 @@ ChangeBugStatus 1 Done
 ShowMemberActivity NewMember
 ShowTaskHistory 1
 Exit
-
