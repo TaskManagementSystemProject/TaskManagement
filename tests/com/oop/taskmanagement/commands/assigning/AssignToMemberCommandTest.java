@@ -36,6 +36,16 @@ public class AssignToMemberCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_MemberIsInDifferentTeam() {
+        // Arrange
+        List<String> parameters = List.of("1", "Pesho");
+
+
+        // Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> assignToMemberCommand.execute(parameters));
+    }
+
+    @Test
     public void execute_Should_ThrowException_When_IdNotDigit() {
         // Arrange
         List<String> parameters = List.of("1a", "Gosho");
