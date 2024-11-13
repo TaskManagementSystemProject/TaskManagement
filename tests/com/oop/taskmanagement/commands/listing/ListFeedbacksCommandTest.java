@@ -139,9 +139,10 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ReturnFilteredByStatusAndAssignee_When_ValidArgumentsForFilteringStatusAndAssignee() {
         // Arrange
-        String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString());
+        String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToStringThree());
+        repository.findFeedbackById(1).changeStatus(StatusType.SCHEDULED);
         // Act
-        String actualOutput = listFeedbacksCommand.execute(List.of("filter", "statusandassignee","NEW" ,"Gosho"));
+        String actualOutput = listFeedbacksCommand.execute(List.of("filter", "statusandassignee","scheduled" ,"Gosho"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -205,5 +206,14 @@ public class ListFeedbacksCommandTest {
                 StatusType.NEW,
                 4,
                 "None");
+    }
+
+    private String getExpectedFeedbackToStringThree(){
+        return String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
+                1,
+                VALID_TITLE,
+                StatusType.SCHEDULED,
+                VALID_RATING,
+                VALID_MEMBER_NAME_ONE);
     }
 }

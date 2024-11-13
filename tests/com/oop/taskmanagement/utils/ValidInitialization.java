@@ -11,6 +11,7 @@ import com.oop.taskmanagement.models.contracts.team.Team;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
 import com.oop.taskmanagement.models.enums.SizeType;
+import com.oop.taskmanagement.models.enums.StatusType;
 import com.oop.taskmanagement.models.tasks.BugImpl;
 import com.oop.taskmanagement.models.tasks.CommentImpl;
 import com.oop.taskmanagement.models.tasks.FeedbackImpl;

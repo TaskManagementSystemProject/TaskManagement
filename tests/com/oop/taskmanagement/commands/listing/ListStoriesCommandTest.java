@@ -58,6 +58,12 @@ public class ListStoriesCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_InvalidStatusFeedbackFilterStatus() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter","status", "unscheduled")));
+    }
+
+    @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterAssignee() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("filter","assignee")));

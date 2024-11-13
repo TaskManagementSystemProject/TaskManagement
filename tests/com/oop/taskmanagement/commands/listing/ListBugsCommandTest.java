@@ -58,6 +58,12 @@ public class ListBugsCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_InvalidStatusInFilterArgumentForBug() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "status", "In progress")));
+    }
+
+    @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterAssignee() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "assignee")));
@@ -86,6 +92,7 @@ public class ListBugsCommandTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("sort", "rating")));
     }
+
 
     @Test
     public void execute_Should_ReturnInformativeMessage_When_NoStoriesFoundMatchingTheArguments() {
