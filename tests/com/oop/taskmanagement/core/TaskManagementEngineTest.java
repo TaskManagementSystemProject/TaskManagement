@@ -1,6 +1,7 @@
 package com.oop.taskmanagement.core;
 
 import com.oop.taskmanagement.core.contracts.TaskManagementEngine;
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -74,5 +75,25 @@ public class TaskManagementEngineTest {
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void start_Should_NotThrowException_When_InvalidInput(){
+        // Arrange
+        String invalidInput = "asdfasjfgajsfkaskd";
+        System.setIn(new ByteArrayInputStream(invalidInput.getBytes()));
+
+        //  Act, Assert
+        Assertions.assertDoesNotThrow(() -> taskManagementEngine.start());
+    }
+
+    @Test
+    public void start_Should_NotThrowException_When_InvalidInputBlank(){
+        // Arrange
+        String invalidInput = "\n";
+        System.setIn(new ByteArrayInputStream(invalidInput.getBytes()));
+
+        //  Act, Assert
+        Assertions.assertDoesNotThrow(() -> taskManagementEngine.start());
     }
 }

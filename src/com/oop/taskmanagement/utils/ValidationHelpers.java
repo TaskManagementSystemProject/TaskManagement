@@ -2,6 +2,7 @@ package com.oop.taskmanagement.utils;
 
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
+import com.oop.taskmanagement.models.contracts.functionality.Nameable;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.contracts.team.Board;
 import com.oop.taskmanagement.models.contracts.team.Team;
@@ -9,6 +10,7 @@ import com.oop.taskmanagement.models.enums.StatusType;
 import com.oop.taskmanagement.utils.enums.TaskTypes;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ValidationHelpers {
 
@@ -45,6 +47,13 @@ public class ValidationHelpers {
             throw new InvalidUserInputException(
                     String.format(INVALID_NUMBER_OF_ARGUMENTS_MULTIPLE, expectedNumberOfParametersOne, expectedNumberOfParametersTwo, list.size())
             );
+        }
+    }
+
+    public static void validateNameUniqueness(List<? extends Nameable> firstList, List<? extends Nameable> secondList, String nameToCheck, String message) {
+        if (Stream.concat(firstList.stream(), secondList.stream())
+                .anyMatch(element -> element.getName().equalsIgnoreCase(nameToCheck))) {
+            throw new InvalidUserInputException(message);
         }
     }
 

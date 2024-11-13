@@ -17,4 +17,21 @@ AssignToMember 2 NewMember
 ShowMemberActivity SeniorDeveloper
 ListBugs filter assignee SeniorDeveloper
 ListBugs filter assignee NewMember
+ChangeBugSeverity 1 Minor
+ChangeBugPriority 1 Medium
+CreateTeam TestingTeam
+CreateBoardInTeam ToTestAll TestingTeam
+CreateStoryInBoard ^test story^ ^test description^ high large TestingTeam ToTestAll
+CreateFeedbackInBoard ^test feedback^ ^test description^ 100 TestingTeam ToTestAll
+ChangeStoryPriority 5 low
+ChangeStorySize 5 small
+ChangeStoryStatus 5 ^in progress^
+ChangeFeedbackRating 6 50
+ChangeFeedbackStatus 6 Scheduled
+ListTasks
+ListAssignedTasks
+ListFeedbacks
+ListStories
+ShowTaskHistory 5
+ShowTaskHistory 6
 Exit

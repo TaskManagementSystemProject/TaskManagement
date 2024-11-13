@@ -1,9 +1,10 @@
 package com.oop.taskmanagement.models.contracts.team;
 
+import com.oop.taskmanagement.models.contracts.functionality.Nameable;
+
 import java.util.List;
 
-public interface Team {
-    String getName();
+public interface Team extends Nameable {
     List<String> getTeamActivity();
     List<String> getBoardActivity();
     List<String> getMemberActivity();

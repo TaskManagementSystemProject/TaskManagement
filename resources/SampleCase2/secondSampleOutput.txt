@@ -104,3 +104,120 @@ Priority: High
 Severity: Critical
 Assigned to: NewMember
 #############################
+Bug with ID 1 severity changed to Minor successfully.
+#############################
+Bug with ID 1 priority changed to Medium successfully.
+#############################
+Team TestingTeam created successfully.
+#############################
+Board ToTestAll created successfully in team TestingTeam.
+#############################
+Story with ID 5 created successfully in board ToTestAll in team TestingTeam.
+#############################
+Feedback with ID 6 created successfully in board ToTestAll in team TestingTeam.
+#############################
+Story with ID 5 priority changed to Low successfully.
+#############################
+Story with ID 5 size changed to Small successfully.
+#############################
+Story with ID 5 status changed to In progress successfully.
+#############################
+Feedback with ID 6 rating changed to 50 successfully.
+#############################
+Feedback with ID 6 status changed to Scheduled successfully.
+#############################
+LIST MATCHING TASKS:
+Bug with id: 1
+Title: The program freezes when the Log in button is clicked.
+Status: Active
+Priority: Medium
+Severity: Minor
+Assigned to: NewMember
+
+Bug with id: 2
+Title: Computer crash the moment Submit button is clicked
+Status: Active
+Priority: High
+Severity: Critical
+Assigned to: NewMember
+
+Bug with id: 3
+Title: This is a special test
+Status: Active
+Priority: High
+Severity: Minor
+Assigned to: SeniorDeveloper
+
+Bug with id: 4
+Title: Another special test that wont be included
+Status: Active
+Priority: High
+Severity: Major
+Assigned to: SeniorDeveloper
+
+Feedback with id: 6
+Title: test feedback
+Status: Scheduled
+Rating: 50
+Assigned to: None
+
+Story with id: 5
+Title: test story
+Status: In progress
+Priority: Low
+Size: Small
+Assigned to: None
+#############################
+LIST MATCHING ASSIGNED TASKS:
+Bug with id: 1
+Title: The program freezes when the Log in button is clicked.
+Status: Active
+Priority: Medium
+Severity: Minor
+Assigned to: NewMember
+
+Bug with id: 2
+Title: Computer crash the moment Submit button is clicked
+Status: Active
+Priority: High
+Severity: Critical
+Assigned to: NewMember
+
+Bug with id: 3
+Title: This is a special test
+Status: Active
+Priority: High
+Severity: Minor
+Assigned to: SeniorDeveloper
+
+Bug with id: 4
+Title: Another special test that wont be included
+Status: Active
+Priority: High
+Severity: Major
+Assigned to: SeniorDeveloper
+#############################
+LIST MATCHING FEEDBACKS:
+Feedback with id: 6
+Title: test feedback
+Status: Scheduled
+Rating: 50
+Assigned to: None
+#############################
+LIST MATCHING STORIES:
+Story with id: 5
+Title: test story
+Status: In progress
+Priority: Low
+Size: Small
+Assigned to: None
+#############################
+LOG HISTORY for task 5:
+Priority changed from High to Low.
+Size changed from Large to Small.
+Status changed from Not done to In progress.
+#############################
+LOG HISTORY for task 6:
+Rating changed from 100 to 50.
+Status changed from New to Scheduled.
+#############################

@@ -4,6 +4,7 @@ import com.oop.taskmanagement.commands.contracts.Command;
 import com.oop.taskmanagement.core.contracts.CommandFactory;
 import com.oop.taskmanagement.core.contracts.TaskManagementEngine;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
+import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,15 +41,11 @@ public class TaskManagementEngineImpl implements TaskManagementEngine {
                     break;
                 }
                 processCommand(inputLine);
-            } catch (Exception ex) {
-                if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
-                    print(ex.getMessage());
-                } else {
-                    print(ex.toString());
-                }
+            } catch (InvalidUserInputException ex) {
+                print(ex.getMessage());
             }
-        }
     }
+}
 
     private void processCommand(String inputLine) {
         List<String> allArguments = extractAllArguments(inputLine);

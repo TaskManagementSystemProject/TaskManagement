@@ -18,6 +18,7 @@ import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.models.tasks.BugImpl;
 import com.oop.taskmanagement.models.tasks.FeedbackImpl;
 import com.oop.taskmanagement.models.tasks.StoryImpl;
+import com.oop.taskmanagement.utils.ValidationHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,16 @@ import java.util.stream.Stream;
 
 public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
+
+    private static final String NAME_ALREADY_IN_USE = "The name %s is already in use.";
+    private static final String BOARD_ALREADY_EXISTS_MESSAGE = "Board %s already exists.";
+    private static final String MEMBER_NOT_FOUND_MESSAGE = "There is no member with name %s.";
+    private static final String TEAM_NOT_FOUND_MESSAGE = "There is no team with name %s.";
+    private static final String BOARD_NOT_FOUND_MESSAGE = "There is no board %s in team %s.";
+    private static final String BUG_NOT_FOUND_MESSAGE = "Bug with ID %d not found.";
+    private static final String STORY_NOT_FOUND_MESSAGE = "Story with ID %d not found.";
+    private static final String FEEDBACK_NOT_FOUND_MESSAGE = "Feedback with ID %d not found.";
+    private static final String TASK_NOT_FOUND_MESSAGE = "Task with ID %d not found.";
 
     private final List<Team> teams;
     private final List<Member> members;
@@ -44,10 +55,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public void createTeam(String name) {
-        if(teams.stream()
-                .anyMatch(team -> team.getName().equalsIgnoreCase(name))){
-            throw new InvalidUserInputException(String.format("Team %s already exists.", name));
-        }
+        ValidationHelpers.validateNameUniqueness(teams, members, name, String.format(NAME_ALREADY_IN_USE, name));
         Team newTeam = new TeamImpl(name);
         teams.add(newTeam);
     }
@@ -57,7 +65,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
         if(team.getBoards().stream()
                 .anyMatch(board -> board.getName().equalsIgnoreCase(name))){
-            throw new InvalidUserInputException(String.format("Board %s already exists", name));
+            throw new InvalidUserInputException(String.format(BOARD_ALREADY_EXISTS_MESSAGE, name));
         }
         Board newBoard = new BoardImpl(name);
         team.addBoard(newBoard);
@@ -78,10 +86,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
      */
     @Override
     public void createMember(String name) {
-        if (members.stream()
-                .anyMatch(member -> member.getName().equalsIgnoreCase(name))) {
-            throw new InvalidUserInputException(String.format("Member %s already exists.", name));
-        }
+        ValidationHelpers.validateNameUniqueness(members, teams, name, String.format(NAME_ALREADY_IN_USE, name));
         Member newMember = new MemberImpl(name);
         members.add(newMember);
     }
@@ -167,7 +172,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return member;
             }
         }
-        throw new InvalidUserInputException(String.format("There is no member with name %s", name));
+        throw new InvalidUserInputException(String.format(MEMBER_NOT_FOUND_MESSAGE, name));
     }
 
     @Override
@@ -178,7 +183,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return team;
             }
         }
-        throw new InvalidUserInputException(String.format("There is no team with name %s", name));
+        throw new InvalidUserInputException(String.format(TEAM_NOT_FOUND_MESSAGE, name));
     }
 
     @Override
@@ -189,7 +194,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
                 return board;
             }
         }
-        throw new InvalidUserInputException(String.format("There is no board %s in team %s", boardName, teamName));
+        throw new InvalidUserInputException(String.format(BOARD_NOT_FOUND_MESSAGE, boardName, teamName));
     }
 
     /*
@@ -279,21 +284,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public Bug findBugById(int id) {
         Bug result = findTaskByIdHelper(bugs, id);
-        ifNullThrow(result, String.format("Bug with ID %d not found.", id));
+        ifNullThrow(result, String.format(BUG_NOT_FOUND_MESSAGE, id));
         return result;
     }
 
     @Override
     public Story findStoryById(int id) {
         Story result = findTaskByIdHelper(stories, id);
-        ifNullThrow(result, String.format("Story with ID %d not found.", id));
+        ifNullThrow(result, String.format(STORY_NOT_FOUND_MESSAGE, id));
         return result;
     }
 
     @Override
     public Feedback findFeedbackById(int id) {
         Feedback result = findTaskByIdHelper(feedbacks, id);
-        ifNullThrow(result, String.format("Feedback with ID %d not found.", id));
+        ifNullThrow(result, String.format(FEEDBACK_NOT_FOUND_MESSAGE, id));
         return result;
     }
 
@@ -302,7 +307,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return Stream.concat(bugs.stream(), Stream.concat(stories.stream(), feedbacks.stream())) // creating a stream of TaskBase
                 .filter(task -> task.getId() == id)
                 .findFirst()
-                .orElseThrow(() -> new InvalidUserInputException(String.format("Task with ID %d not found.", id)));
+                .orElseThrow(() -> new InvalidUserInputException(String.format(TASK_NOT_FOUND_MESSAGE, id)));
     }
 
     private <T extends TaskBase> T findTaskByIdHelper(List<T> elements, int id){
