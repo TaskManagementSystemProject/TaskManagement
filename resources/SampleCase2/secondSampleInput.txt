@@ -1,0 +1,22 @@
+Second sample input:
+
+CreateTeam TeamName
+CreateMember SeniorDeveloper
+AddPersonToTeam SeniorDeveloper TeamName
+CreateBoardInTeam BoardName TeamName
+CreateBugInBoard ^The program freezes when the Log in button is clicked.^ ^This needs to be fixed quickly!^ ^1. Open the application; 2. Click "Log In"; 3. The application freezes!^ High Critical TeamName BoardName
+CreateBugInBoard ^Computer crash the moment Submit button is clicked^ ^This needs to be fixed immediatelly^ ^1. Open the application; 2. Click "Log In"; 3. Click on Profile 4. Edit address 5. Click "Submit" 6. The computer crashes^ High Critical TeamName BoardName
+CreateBugInBoard ^This is a special test^ ^It is just informative^ ^1. Do nothing; 2. Yes I agree^ High Minor TeamName BoardName
+CreateBugInBoard ^Another special test that wont be included^ ^Special test for bug^ Nothing High Major TeamName BoardName
+AssignToMember 1 SeniorDeveloper
+AssignToMember 2 SeniorDeveloper
+AssignToMember 3 SeniorDeveloper
+AssignToMember 4 SeniorDeveloper
+CreateMember NewMember
+AddPersonToTeam NewMember TeamName
+AssignToMember 1 NewMember
+AssignToMember 2 NewMember
+ShowMemberActivity SeniorDeveloper
+ListBugs filter assignee SeniorDeveloper
+ListBugs filter assignee NewMember
+Exit

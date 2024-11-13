@@ -34,85 +34,77 @@
 # 30. SHOWMAINMENU          #
 #############################
 
-**********************************************Expected output from firstSampleInput**********************************************
+**********************************************Expected output from secondSampleInput**********************************************
+
 
 Team TeamName created successfully.
 #############################
-TEAMS:
-Name: TeamName, type: team.
-#############################
 Member SeniorDeveloper created successfully.
 #############################
-Member JuniorDeveloper created successfully.
-#############################
-MEMBERS:
-Name: SeniorDeveloper, type: member.
-Name: JuniorDeveloper, type: member.
-#############################
-There are no members in team TeamName yet.
-#############################
 Member SeniorDeveloper added to team TeamName successfully.
-#############################
-Member JuniorDeveloper added to team TeamName successfully.
-#############################
-MEMBERS in team TeamName:
-Name: SeniorDeveloper, type: member.
-Name: JuniorDeveloper, type: member.
 #############################
 Board BoardName created successfully in team TeamName.
 #############################
 Bug with ID 1 created successfully in board BoardName in team TeamName.
 #############################
-LIST MATCHING BUGS:
-Bug with id: 1
-Title: The program freezes when the Log in button is clicked.
-Status: Active
-Priority: High
-Severity: Critical
-Assigned to: null
+Bug with ID 2 created successfully in board BoardName in team TeamName.
 #############################
-Board NewBoard created successfully in team TeamName.
+Bug with ID 3 created successfully in board BoardName in team TeamName.
 #############################
-BOARDS in team TeamName:
-Name: BoardName, type: board.
-Name: NewBoard, type: board.
+Bug with ID 4 created successfully in board BoardName in team TeamName.
 #############################
 Task with ID 1 assigned to member SeniorDeveloper successfully.
 #############################
-LIST MATCHING BUGS:
-Bug with id: 1
-Title: The program freezes when the Log in button is clicked.
-Status: Active
-Priority: High
-Severity: Critical
-Assigned to: SeniorDeveloper
+Task with ID 2 assigned to member SeniorDeveloper successfully.
 #############################
-Bug with ID 1 status changed to Done successfully.
+Task with ID 3 assigned to member SeniorDeveloper successfully.
 #############################
-Task with ID 1 unassigned from member SeniorDeveloper successfully.
+Task with ID 4 assigned to member SeniorDeveloper successfully.
 #############################
-MEMBERS:
-Name: SeniorDeveloper, type: member.
-Name: JuniorDeveloper, type: member.
+Member NewMember created successfully.
 #############################
-ACTIVITY in team TeamName:
-Member SeniorDeveloper added to team TeamName successfully.
-Assigned task with ID 1
-Unassigned task with ID 1
-Member JuniorDeveloper added to team TeamName successfully.
-Board BoardName added to team TeamName.
-Bug with ID 1 was added.
-Board NewBoard added to team TeamName.
+Member NewMember added to team TeamName successfully.
+#############################
+Task with ID 1 assigned to member NewMember successfully.
+#############################
+Task with ID 2 assigned to member NewMember successfully.
 #############################
 ACTIVITY for member SeniorDeveloper:
 Member SeniorDeveloper added to team TeamName successfully.
 Assigned task with ID 1
+Assigned task with ID 2
+Assigned task with ID 3
+Assigned task with ID 4
 Unassigned task with ID 1
+Unassigned task with ID 2
 #############################
-ACTIVITY for member JuniorDeveloper:
-Member JuniorDeveloper added to team TeamName successfully.
+LIST MATCHING BUGS:
+Bug with id: 3
+Title: This is a special test
+Status: Active
+Priority: High
+Severity: Minor
+Assigned to: SeniorDeveloper
+
+Bug with id: 4
+Title: Another special test that wont be included
+Status: Active
+Priority: High
+Severity: Major
+Assigned to: SeniorDeveloper
 #############################
-Member Somebody created successfully.
-#############################
-There is no activity in member Somebody yet.
+LIST MATCHING BUGS:
+Bug with id: 1
+Title: The program freezes when the Log in button is clicked.
+Status: Active
+Priority: High
+Severity: Critical
+Assigned to: NewMember
+
+Bug with id: 2
+Title: Computer crash the moment Submit button is clicked
+Status: Active
+Priority: High
+Severity: Critical
+Assigned to: NewMember
 #############################

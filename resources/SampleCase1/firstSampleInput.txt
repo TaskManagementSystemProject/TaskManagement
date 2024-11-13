@@ -25,3 +25,4 @@ ShowMemberActivity JuniorDeveloper
 CreateMember Somebody
 ShowMemberActivity Somebody
 ShowBoardActivity BoardName TeamName
+Exit
