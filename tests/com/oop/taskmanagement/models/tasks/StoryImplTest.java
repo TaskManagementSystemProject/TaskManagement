@@ -233,7 +233,7 @@ public class StoryImplTest {
         // Arrange
         StoryImpl story = ValidInitialization.initializeValidStory();
         Comment comment = new CommentImpl("Pesho","Long message");
-        String expectedLog = "Comment added successfully";
+        String expectedLog = "Comment added successfully.";
         // Act
         story.addComment(comment);
 
@@ -247,7 +247,7 @@ public class StoryImplTest {
         story.addComment(new CommentImpl("Gosho","Some message"));
         story.changePriority(PriorityType.HIGH);
         List<String> expectedOutput = new ArrayList<>(
-                Arrays.asList("Comment added successfully",
+                Arrays.asList("Comment added successfully.",
                         String.format("Priority changed from %s to %s.", PriorityType.LOW, PriorityType.HIGH)));
         // Act
         List<String> actualOutput = story.getEventLog();

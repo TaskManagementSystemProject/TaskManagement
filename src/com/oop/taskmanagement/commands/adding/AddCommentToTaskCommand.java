@@ -14,6 +14,7 @@ import java.util.List;
 public class AddCommentToTaskCommand implements Command {
     private final static String COMMENT_ADDED_SUCCESSFULLY = "Comment '%s' added to task %d successfully.";
     private static final String TASK_ID_PARSING_ERROR = "Task ID must be a number!";
+    private static final String MEMBER_LOG_MESSAGE = "Added a comment about Task %d.";
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
     private final TaskManagementRepository taskManagementRepository;
@@ -33,7 +34,7 @@ public class AddCommentToTaskCommand implements Command {
         Member commentOwner = taskManagementRepository.findMemberByName(commentatorName);
         Comment comment = new CommentImpl(commentatorName, commentContent);
         task.addComment(comment);
-        commentOwner.logActivity(String.format("Added comment to task %d", taskId));
+        commentOwner.logActivity(String.format(MEMBER_LOG_MESSAGE, taskId));
 
         return String.format(COMMENT_ADDED_SUCCESSFULLY, comment, taskId);
     }

@@ -197,7 +197,7 @@ public class FeedbackImplTest {
         // Arrange
         Feedback feedback = ValidInitialization.initializeValidFeedback();
         Comment comment = new CommentImpl("Pesho", "Long message");
-        String expectedLog = "Comment added successfully";
+        String expectedLog = "Comment added successfully.";
         // Act
         feedback.addComment(comment);
 
@@ -213,7 +213,7 @@ public class FeedbackImplTest {
         int newRating = 6;
         feedback.changeRating(newRating);
         List<String> expectedOutput = new ArrayList<>(
-                Arrays.asList("Comment added successfully",
+                Arrays.asList("Comment added successfully.",
                         String.format("Rating changed from %d to %d.", Constants.VALID_RATING, newRating)));
         // Act
         List<String> actualOutput = feedback.getEventLog();

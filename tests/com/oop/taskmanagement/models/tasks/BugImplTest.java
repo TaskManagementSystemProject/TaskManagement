@@ -237,7 +237,7 @@ public class BugImplTest {
         // Arrange
         Bug bug = ValidInitialization.initializeValidBug();
         Comment comment = new CommentImpl("Pesho","Long message");
-        String expectedLog = "Comment added successfully";
+        String expectedLog = "Comment added successfully.";
         // Act
         bug.addComment(comment);
 
@@ -251,7 +251,7 @@ public class BugImplTest {
         bug.addComment(new CommentImpl("Gosho","Some message"));
         bug.changePriority(PriorityType.HIGH);
         List<String> expectedOutput = new ArrayList<>(
-                Arrays.asList("Comment added successfully",
+                Arrays.asList("Comment added successfully.",
                         String.format("Priority changed from %s to %s.", PriorityType.LOW, PriorityType.HIGH)));
         // Act
         List<String> actualOutput = bug.getEventLog();

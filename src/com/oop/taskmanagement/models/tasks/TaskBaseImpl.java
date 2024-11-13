@@ -16,7 +16,7 @@ public abstract class TaskBaseImpl implements TaskBase {
     protected static final String ADD_SIZE_CHANGED_TO_EVENTLOG = "Size changed from %s to %s.";
     protected static final String ADD_SEVERITY_CHANGED_TO_EVENTLOG = "Severity changed from %s to %s.";
     protected static final String ADD_RATING_CHANGED_TO_EVENTLOG = "Rating changed from %d to %d.";
-    private static final String NEW_COMMENT_ADDED = "Comment added successfully";
+    private static final String NEW_COMMENT_ADDED = "Comment added successfully.";
     private static final String TO_STRING_FORMAT = "Task with id: %d%nTitle: %s%nStatus: %s%n";  // new
     private static final String EXTRA_INFO_FORMAT = " with id: %d%nTitle: %s%nStatus: %s%n";  // new
 

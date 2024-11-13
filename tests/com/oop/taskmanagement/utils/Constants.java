@@ -13,6 +13,7 @@ public class Constants {
 
     // Tasks
     public static int currentId = 1;
+    public static final String VALID_TASK_ID = "1";
     public static final String VALID_TITLE = "10symb tit";
     public static final String VALID_DESCRIPTION = "10symb des";
     public static final List<String> VALID_LIST_TO_REPRODUCE = new ArrayList<>(Arrays.asList("Step1","Step2"));
@@ -41,6 +42,9 @@ public class Constants {
     public static final String INVALID_COMMENT_LONG_MESSAGE = "X".repeat(501);
     public static final String INVALID_AUTHOR_SHORT_NAME = "Bob";  // 5 - 15
     public static final String INVALID_AUTHOR_LONG_NAME = "DaveTheMagicalCheeseWizard";
+    public static final String MEMBER_EXPECTED_LOG = "Added a comment about Task 1.";
+    public static final String TASK_SUCCESSFUL_LOG = "Comment added successfully.";
+    public static final String EXPECTED_COMMENT_TO_STRING = "Author: Gosho%nComment: Messages can be from 5 to 500 characters%n";
 
     // Commands
     public final static String TASK_UNASSIGNED_SUCCESSFULLY = "Task with ID %d unassigned from member %s successfully.";
