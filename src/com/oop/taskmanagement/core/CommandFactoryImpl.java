@@ -32,6 +32,7 @@ public class CommandFactoryImpl implements CommandFactory {
             case ADDPERSONTOTEAM -> new AddPersonToTeamCommand(taskManagementRepository);
             case ADDCOMMENTTOTASK -> new AddCommentToTaskCommand(taskManagementRepository);
             case SHOWTEAMMEMBERS -> new ShowTeamMembersCommand(taskManagementRepository);
+            case SHOWTASKHISTORY -> new ShowTaskHistoryCommand(taskManagementRepository);
             case CREATEBOARDINTEAM -> new CreateBoardInTeamCommand(taskManagementRepository);
             case SHOWTEAMBOARDS -> new ShowTeamBoardsCommand(taskManagementRepository);
             case SHOWBOARDACTIVITY -> new ShowBoardActivityCommand(taskManagementRepository);
