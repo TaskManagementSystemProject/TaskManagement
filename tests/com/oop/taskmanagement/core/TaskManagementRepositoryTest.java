@@ -316,7 +316,7 @@ public class TaskManagementRepositoryTest {
     @Test
     public void createBug_ShouldHaveUniqueID_When_ArgumentsAreValid() {
         // Arrange, Act
-        int lastIDBeforeNewBug = repository.getAllTasks().getLast().getId();
+        int lastIDBeforeNewBug = repository.getAllTasks().get(repository.getAllTasks().size() - 1).getId();
         Bug bug = repository.createBugInBoard(
                 "New bug title",
                 VALID_DESCRIPTION,
@@ -352,7 +352,7 @@ public class TaskManagementRepositoryTest {
     @Test
     public void createStory_ShouldHaveUniqueID_When_ArgumentsAreValid() {
         // Arrange, Act
-        int lastIDBeforeNewStory = repository.getAllTasks().getLast().getId();
+        int lastIDBeforeNewStory = repository.getAllTasks().get(repository.getAllTasks().size() - 1).getId();
         Story story = repository.createStoryInBoard(
                 "New story title",
                 VALID_DESCRIPTION,
@@ -386,7 +386,7 @@ public class TaskManagementRepositoryTest {
     @Test
     public void createFeedback_ShouldHaveUniqueID_When_ArgumentsAreValid() {
         // Arrange, Act
-        int lastIDBeforeNewFeedback = repository.getAllTasks().getLast().getId();
+        int lastIDBeforeNewFeedback = repository.getAllTasks().get(repository.getAllTasks().size() - 1).getId();
         Feedback feedback = repository.createFeedbackInBoard(
                 "New story title",
                 VALID_DESCRIPTION,
