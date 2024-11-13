@@ -9,7 +9,7 @@ import com.oop.taskmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class ShowTaskHistoryCommand implements Command {
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     private static final String NO_ACTIVITY_MESSAGE = "There is no activity in task %d yet.";
     private static final String TASK_ID_PARSING_ERROR = "Task ID must be a number!";
     private static final String TASK_ACTIVITY_PREFIX_MESSAGE = "LOG HISTORY for task %d:%n%s";

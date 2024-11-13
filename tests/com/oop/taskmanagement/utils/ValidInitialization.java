@@ -62,7 +62,6 @@ public class ValidInitialization {
      */
     public static TaskManagementRepository createDummyRepository() {
         TaskManagementRepository repository = new TaskManagementRepositoryImpl();
-        Command assignCommand = new AssignToMemberCommand(repository);
         repository.createTeam(VALID_TEAM_NAME);
         repository.createTeam(VALID_TEAM_NAME_TWO);
         Team team = repository.findTeamByName(VALID_TEAM_NAME);
