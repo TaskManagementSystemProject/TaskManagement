@@ -44,7 +44,7 @@ public class Constants {
     public static final String INVALID_AUTHOR_LONG_NAME = "DaveTheMagicalCheeseWizard";
     public static final String MEMBER_EXPECTED_LOG = "Added a comment about Task 1.";
     public static final String TASK_SUCCESSFUL_LOG = "Comment added successfully.";
-    public static final String EXPECTED_COMMENT_TO_STRING = "Author: Gosho%nComment: Messages can be from 5 to 500 characters%n";
+    public static final String EXPECTED_COMMENT_TO_STRING = "Author: Gosho%nContent: Messages can be from 5 to 500 characters%n";
 
     // Commands
     public final static String TASK_UNASSIGNED_SUCCESSFULLY = "Task with ID %d unassigned from member %s successfully.";

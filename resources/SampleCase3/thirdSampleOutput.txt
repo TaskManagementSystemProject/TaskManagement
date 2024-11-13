@@ -1,0 +1,89 @@
+************************************************Program should start with************************************************
+
+#############################
+#       Commands Menu       #
+#  1. CREATETEAM            #
+#  2. CREATEMEMBER          #
+#  3. CREATEBOARDINTEAM     #
+#  4. CREATEBUGINBOARD      #
+#  5. CREATESTORYINBOARD    #
+#  6. CREATEFEEDBACKINBOARD #
+#  7. ADDPERSONTOTEAM       #
+#  8. ADDCOMMENTTOTASK      #
+#  9. ASSIGNTOMEMBER        #
+# 10. UNASSIGNFROMMEMBER    #
+# 11. SHOWTEAMS             #
+# 12. SHOWMEMBERS           #
+# 13. SHOWTEAMMEMBERS       #
+# 14. SHOWTEAMBOARDS        #
+# 15. SHOWTEAMACTIVITY      #
+# 16. SHOWMEMBERACTIVITY    #
+# 17. SHOWBOARDACTIVITY     #
+# 18. SHOWTASKHISTORY       #
+# 19. CHANGEBUGSTATUS       #
+# 20. CHANGEBUGPRIORITY     #
+# 21. CHANGEBUGSEVERITY     #
+# 22. CHANGESTORYSTATUS     #
+# 23. CHANGESTORYPRIORITY   #
+# 24. CHANGESTORYSIZE       #
+# 25. CHANGEFEEDBACKSTATUS  #
+# 26. CHANGEFEEDBACKRATING  #
+# 27. LISTTASKS             #
+# 28. LISTASSIGNEDTASKS     #
+# 29. LISTBUGS              #
+# 30. LISTFEEDBACKS         #
+# 31. LISTSTORIES           #
+# 32. SHOWMAINMENU          #
+#############################
+
+**********************************************Expected output from thirdSampleInput**********************************************
+
+Team TeamName created successfully.
+#############################
+Member SeniorDeveloper created successfully.
+#############################
+Member SeniorDeveloper added to team TeamName successfully.
+#############################
+Board BoardName created successfully in team TeamName.
+#############################
+Bug with ID 1 created successfully in board BoardName in team TeamName.
+#############################
+Bug with ID 2 created successfully in board BoardName in team TeamName.
+#############################
+Bug with ID 3 created successfully in board BoardName in team TeamName.
+#############################
+Bug with ID 4 created successfully in board BoardName in team TeamName.
+#############################
+Task with ID 1 assigned to member SeniorDeveloper successfully.
+#############################
+Task with ID 2 assigned to member SeniorDeveloper successfully.
+#############################
+Task with ID 3 assigned to member SeniorDeveloper successfully.
+#############################
+Task with ID 4 assigned to member SeniorDeveloper successfully.
+#############################
+Member NewMember created successfully.
+#############################
+Member NewMember added to team TeamName successfully.
+#############################
+Task with ID 1 assigned to member NewMember successfully.
+#############################
+Task with ID 2 assigned to member NewMember successfully.
+#############################
+COMMENT
+Author: NewMember
+Content: This one took me a while, but it is fixed now!
+>> was added to task 1 successfully.
+#############################
+Bug with ID 1 status changed to Done successfully.
+#############################
+ACTIVITY for member NewMember:
+Member NewMember added to team TeamName successfully.
+Assigned task with ID 1
+Assigned task with ID 2
+Added a comment about Task 1.
+#############################
+LOG HISTORY for task 1:
+Comment added successfully.
+Status changed from Active to Done.
+#############################

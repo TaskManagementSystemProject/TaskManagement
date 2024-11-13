@@ -11,7 +11,7 @@ public class CommentImpl implements Comment {
     private static final int MESSAGE_MIN_LENGTH = 5;
     private static final int MESSAGE_MAX_LENGTH = 500;
     private static final String MESSAGE_LENGTH_ERROR = "Comment message must be between 5 and 500 symbols.";
-    private static final String TO_STRING_FORMAT = "Author: %s%nComment: %s%n";
+    private static final String TO_STRING_FORMAT = "Author: %s%nContent: %s%n";
     private String author;
     private String message;
 

@@ -76,7 +76,7 @@ public class CommentImplTest {
         Comment comment = new CommentImpl("JohnSmith", "This comment is valid");
         String output = String.format(
                 "Author: JohnSmith%n" +
-                        "Comment: This comment is valid%n");
+                        "Content: This comment is valid%n");
 
         // Act, Assert
         Assertions.assertEquals(output, comment.toString());
