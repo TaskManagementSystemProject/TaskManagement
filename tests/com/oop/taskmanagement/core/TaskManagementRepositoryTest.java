@@ -1,16 +1,14 @@
 package com.oop.taskmanagement.core;
 
-import com.oop.taskmanagement.commands.contracts.Command;
-import com.oop.taskmanagement.commands.creation.CreateBugInBoardCommand;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.Story;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
-import com.oop.taskmanagement.models.contracts.team.Team;
 import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SeverityType;
+import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.utils.ValidInitialization;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.oop.taskmanagement.utils.Constants.*;
-
 
 public class TaskManagementRepositoryTest {
     private TaskManagementRepository repository;
@@ -41,9 +38,6 @@ public class TaskManagementRepositoryTest {
                 () -> Assertions.assertNotNull(repository.getFeedbacks())
         );
     }
-
-    // TODO Gosho add tests here
-
 
     @Test
     public void getFeedbacks_Should_ReturnShallowCopyOfCollection() {
@@ -240,15 +234,21 @@ public class TaskManagementRepositoryTest {
     }
 
 
-
-
-
-
-
     @Test
     public void createTeam_Should_ThrowException_When_TeamAlreadyExists() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> repository.createTeam("Otbor"));
+    }
+
+    @Test
+    public void createTeam_ShouldAddTeamToListOfTeams_When_ArgumentsAreValid() {
+        // Arrange, Act
+        int sizeOfListBeforeTeam = repository.getTeams().size();
+        repository.createTeam("New team");
+        int sizeOfListAfterNewTeam = repository.getTeams().size();
+
+        // Assert
+        Assertions.assertNotEquals(sizeOfListBeforeTeam, sizeOfListAfterNewTeam);
     }
 
     @Test
@@ -270,6 +270,17 @@ public class TaskManagementRepositoryTest {
     public void createMember_Should_ThrowException_When_MemberNameNotUnique() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> repository.createMember("Gosho"));
+    }
+
+    @Test
+    public void createMember_ShouldAddMemberToListOfMembers_When_ArgumentsAreValid() {
+        // Arrange, Act
+        int sizeOfListBeforeMember = repository.getMembers().size();
+        repository.createMember("New Member");
+        int sizeOfListAfterNewMember = repository.getMembers().size();
+
+        // Assert
+        Assertions.assertNotEquals(sizeOfListAfterNewMember, sizeOfListBeforeMember);
     }
 
     @Test
@@ -302,22 +313,105 @@ public class TaskManagementRepositoryTest {
     }
 
 
-/*    @Test
-    public void createBug_Should_ThrowException_When_BoardNameInvalid() {
+    @Test
+    public void createBug_ShouldHaveUniqueID_When_ArgumentsAreValid() {
         // Arrange, Act
-        Command createBugCommand = new CreateBugInBoardCommand(repository);
-        String output = createBugCommand.execute(List.of(VALID_TITLE,
+        int lastIDBeforeNewBug = repository.getAllTasks().getLast().getId();
+        Bug bug = repository.createBugInBoard(
+                "New bug title",
                 VALID_DESCRIPTION,
-                VALID_STEPS_TO_REPRODUCE,
-                VALID_PRIORITY,
-                "MAJOR",
-                "Otbor",
-                "Invalid"));
-        // Arrange, Act, Assert
-        Assertions.assertTh("2", output);
+                VALID_LIST_TO_REPRODUCE,
+                PriorityType.HIGH,
+                SeverityType.MAJOR,
+                repository.findTeamByName("Otbor"),
+                repository.findBoardByTeamName("White", "Otbor"));
+        int lastIDAfterNewBug = bug.getId();
+
+        // Assert
+        Assertions.assertNotEquals(lastIDAfterNewBug, lastIDBeforeNewBug);
     }
-*/
 
+    @Test
+    public void createBug_ShouldAddBugToListOfBugs_When_ArgumentsAreValid() {
+        // Arrange, Act
+        int sizeOfListBeforeNewBug = repository.getBugs().size();
+        repository.createBugInBoard(
+                "New bug title",
+                VALID_DESCRIPTION,
+                VALID_LIST_TO_REPRODUCE,
+                PriorityType.HIGH,
+                SeverityType.MAJOR,
+                repository.findTeamByName("Otbor"),
+                repository.findBoardByTeamName("White", "Otbor"));
+        int sizeOfListAfterNewBug = repository.getBugs().size();
 
+        // Assert
+        Assertions.assertNotEquals(sizeOfListAfterNewBug, sizeOfListBeforeNewBug);
+    }
 
+    @Test
+    public void createStory_ShouldHaveUniqueID_When_ArgumentsAreValid() {
+        // Arrange, Act
+        int lastIDBeforeNewStory = repository.getAllTasks().getLast().getId();
+        Story story = repository.createStoryInBoard(
+                "New story title",
+                VALID_DESCRIPTION,
+                PriorityType.HIGH,
+                SizeType.SMALL,
+                repository.findTeamByName("Otbor"),
+                repository.findBoardByTeamName("White", "Otbor"));
+        int lastIDAfterNewStory = story.getId();
+
+        // Assert
+        Assertions.assertNotEquals(lastIDAfterNewStory, lastIDBeforeNewStory);
+    }
+
+    @Test
+    public void createStory_ShouldAddStoryToListOfStories_When_ArgumentsAreValid() {
+        // Arrange, Act
+        int sizeOfListBeforeNewStory = repository.getStories().size();
+        repository.createStoryInBoard(
+                "New story title",
+                VALID_DESCRIPTION,
+                PriorityType.HIGH,
+                SizeType.SMALL,
+                repository.findTeamByName("Otbor"),
+                repository.findBoardByTeamName("White", "Otbor"));
+        int sizeOfListAfterNewStory = repository.getStories().size();
+
+        // Assert
+        Assertions.assertNotEquals(sizeOfListAfterNewStory, sizeOfListBeforeNewStory);
+    }
+
+    @Test
+    public void createFeedback_ShouldHaveUniqueID_When_ArgumentsAreValid() {
+        // Arrange, Act
+        int lastIDBeforeNewFeedback = repository.getAllTasks().getLast().getId();
+        Feedback feedback = repository.createFeedbackInBoard(
+                "New story title",
+                VALID_DESCRIPTION,
+                VALID_RATING,
+                repository.findTeamByName("Otbor"),
+                repository.findBoardByTeamName("White", "Otbor"));
+        int lastIDAfterNewFeedback = feedback.getId();
+
+        // Assert
+        Assertions.assertNotEquals(lastIDAfterNewFeedback, lastIDBeforeNewFeedback);
+    }
+
+    @Test
+    public void createFeedback_AddFeedbackToListOfFeedbacks_When_ArgumentsAreValid() {
+        // Arrange, Act
+        int sizeOfListBeforeNewFeedback = repository.getFeedbacks().size();
+        repository.createFeedbackInBoard(
+                "New story title",
+                VALID_DESCRIPTION,
+                VALID_RATING,
+                repository.findTeamByName("Otbor"),
+                repository.findBoardByTeamName("White", "Otbor"));
+        int sizeOfListAfterNewFeedback = repository.getFeedbacks().size();
+
+        // Assert
+        Assertions.assertNotEquals(sizeOfListBeforeNewFeedback, sizeOfListAfterNewFeedback);
+    }
 }
