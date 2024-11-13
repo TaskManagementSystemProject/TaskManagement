@@ -224,6 +224,6 @@ public class ListStoriesCommandTest {
                 StatusType.NOT_DONE,
                 PriorityType.MEDIUM,
                 SizeType.MEDIUM,
-                null);
+                "None");
     }
 }

@@ -6,7 +6,6 @@ import com.oop.taskmanagement.models.enums.PriorityType;
 import com.oop.taskmanagement.models.enums.SizeType;
 import com.oop.taskmanagement.models.enums.StatusType;
 
-
 public class StoryImpl extends TaskBaseImpl implements Story {
 
     private static final String TO_STRING_FORMAT = "%sPriority: %s%nSize: %s%nAssigned to: %s"; // new
@@ -53,7 +52,6 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         this.size = size;
     }
 
-
     @Override                                               //  GETTERS
     public PriorityType getPriority() {
         return priority;
@@ -64,10 +62,9 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         return size;
     }
 
-
     @Override // new implementation
     public String toString() {
-        return String.format("Story" + TO_STRING_FORMAT, baseInfo(), getPriority(), getSize(), getAssigneeName());
+        return String.format("Story" + TO_STRING_FORMAT, baseInfo(), getPriority(), getSize(),
+                getAssigneeName() == null ? "None" : getAssigneeName());
     }
-
 }

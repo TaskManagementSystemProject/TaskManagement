@@ -83,7 +83,7 @@ public class Constants {
             StatusType.ACTIVE,
             PriorityType.LOW,
             SeverityType.MINOR,
-            null);
+            "None");
 
     public static final String STORY_TO_STRING_DUMMY_REPO = String.format(EXPECTED_STORY_TO_STRING_FORMAT,
             3,

@@ -71,7 +71,7 @@ Title: The program freezes when the Log in button is clicked.
 Status: Active
 Priority: High
 Severity: Critical
-Assigned to: null
+Assigned to: None
 #############################
 Board NewBoard created successfully in team TeamName.
 #############################

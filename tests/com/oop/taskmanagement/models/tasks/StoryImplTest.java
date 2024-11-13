@@ -206,7 +206,7 @@ public class StoryImplTest {
                 StatusType.NOT_DONE,
                 PriorityType.LOW,
                 SizeType.SMALL,
-                null
+                "None"
         );
         // Act
         String actualOutput = story.toString();

@@ -9,6 +9,7 @@ import com.oop.taskmanagement.utils.ValidationHelpers;
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
     private static final String TO_STRING_FORMAT = "%sRating: %d%nAssigned to: %s"; // new
+
     private int rating;
 
     public FeedbackImpl(int id, String title, String description, int rating) {
@@ -47,10 +48,9 @@ public class FeedbackImpl extends TaskBaseImpl implements Feedback {
         return rating;
     }
 
-
     @Override // new implementation
     public String toString() {
-        return String.format("Feedback" + TO_STRING_FORMAT, baseInfo(), getRating(), getAssigneeName());
+        return String.format("Feedback" + TO_STRING_FORMAT, baseInfo(), getRating(),
+                getAssigneeName() == null ? "None" : getAssigneeName());
     }
-
 }

@@ -218,7 +218,7 @@ public class ListBugsCommandTest {
                 StatusType.ACTIVE,
                 PriorityType.LOW,
                 SeverityType.MINOR,
-                null);
+                "None");
     }
 
     private String getExpectedBugToStringWithAssignee() {
@@ -238,6 +238,6 @@ public class ListBugsCommandTest {
                 StatusType.ACTIVE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                null);
+                "None");
     }
 }

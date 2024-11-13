@@ -170,7 +170,7 @@ public class FeedbackImplTest {
                 Constants.VALID_TITLE,
                 StatusType.NEW,
                 Constants.VALID_RATING,
-                null
+                "None"
         );
         // Act
         String actualOutput = feedback.toString();

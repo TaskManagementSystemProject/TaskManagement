@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BugImpl extends TaskBaseImpl implements Bug {
 
-    private static final String TO_STRING_FORMAT ="%sPriority: %s%nSeverity: %s%nAssigned to: %s"; // new
+    private static final String TO_STRING_FORMAT = "%sPriority: %s%nSeverity: %s%nAssigned to: %s"; // new
     private final List<String> stepsToReproduce;
     private PriorityType priority;
     private SeverityType severity;
@@ -63,7 +63,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
     @Override
     public List<String> getStepsToReproduce() {
-        return new ArrayList<>(stepsToReproduce);    // TODO
+        return new ArrayList<>(stepsToReproduce);
     }
 
     @Override
@@ -76,8 +76,10 @@ public class BugImpl extends TaskBaseImpl implements Bug {
         return severity;
     }
 
+
     @Override // new implementation
     public String toString() {
-        return String.format("Bug" + TO_STRING_FORMAT, baseInfo(), getPriority(), getSeverity(), getAssigneeName());
+        return String.format("Bug" + TO_STRING_FORMAT, baseInfo(), getPriority(), getSeverity(),
+                getAssigneeName() == null ? "None" : getAssigneeName());
     }
 }

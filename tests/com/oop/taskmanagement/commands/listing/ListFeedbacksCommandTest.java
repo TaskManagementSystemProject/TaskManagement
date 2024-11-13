@@ -204,6 +204,6 @@ public class ListFeedbacksCommandTest {
                 "mustbefirst",
                 StatusType.NEW,
                 4,
-                null);
+                "None");
     }
 }

@@ -135,6 +135,6 @@ public class ListTasksCommandTest {
                 "0000000000",
                 StatusType.NEW,
                 10,
-                null);
+                "None");
     }
 }

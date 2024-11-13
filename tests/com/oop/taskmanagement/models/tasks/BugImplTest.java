@@ -210,7 +210,7 @@ public class BugImplTest {
                 StatusType.ACTIVE,
                 PriorityType.LOW,
                 SeverityType.MINOR,
-                null
+                "None"
                 );
         // Act
         String actualOutput = bug.toString();
