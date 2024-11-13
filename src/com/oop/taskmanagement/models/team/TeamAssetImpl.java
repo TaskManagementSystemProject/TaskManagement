@@ -8,7 +8,7 @@ import java.util.List;
 
 abstract public class TeamAssetImpl implements TeamAsset {
 
-    private static final String TO_STRING_FORMAT = "Name: %s";
+    private static final String TO_STRING_FORMAT = "Name: %s.";
     private String name;
     private final List<TaskBase> tasks;
     private final List<String> activityHistory;

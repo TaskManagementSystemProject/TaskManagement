@@ -12,7 +12,7 @@ import com.oop.taskmanagement.utils.ValidationHelpers;
 import java.util.List;
 
 public class AddCommentToTaskCommand implements Command {
-    private final static String COMMENT_ADDED_SUCCESSFULLY = "COMMENT %n%s>> was added to task %d successfully.";
+    private final static String COMMENT_ADDED_SUCCESSFULLY = "COMMENT%n%s>> was added to task %d successfully.";
     private static final String TASK_ID_PARSING_ERROR = "Task ID must be a number!";
     private static final String MEMBER_LOG_MESSAGE = "Added a comment about Task %d.";
 

@@ -37,7 +37,7 @@ public class ShowTeamBoardsCommandTest {
     @Test
     public void execute_Should_ReturnBoardsOfTeamAsString_When_ValidArguments(){
         // Arrange
-        String expectedOutput = String.format("BOARDS in team Otbor:%nName: White, type: board.%nName: Black, type: board.");
+        String expectedOutput = String.format("BOARDS in team Otbor:%nName: White.%nName: Black.");
         repository.createBoardInTeam("Black", repository.findTeamByName("Otbor"));
 
         // Act

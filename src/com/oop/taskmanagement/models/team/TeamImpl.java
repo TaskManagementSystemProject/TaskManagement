@@ -88,6 +88,6 @@ public class TeamImpl implements Team {
 
     @Override
     public String toString(){
-        return String.format("Name: %s, type: team.", getName());
+        return String.format("Name: %s.", getName());
     }
 }

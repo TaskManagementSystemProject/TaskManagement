@@ -61,7 +61,7 @@ public class TeamImplTest {
     public void toString_Should_ConvertToStringWithProperFormat(){
         // Arrange
         Team team = ValidInitialization.initializeValidTeam();
-        String expectedResult = String.format("Name: %s, type: team.", Constants.VALID_TEAM_NAME);
+        String expectedResult = String.format("Name: %s.", Constants.VALID_TEAM_NAME);
 
         // Act
         String actualOutput = team.toString();

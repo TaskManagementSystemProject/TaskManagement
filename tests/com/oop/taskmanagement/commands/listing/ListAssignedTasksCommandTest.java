@@ -1,6 +1,7 @@
 package com.oop.taskmanagement.commands.listing;
 
 import com.oop.taskmanagement.commands.contracts.Command;
+import com.oop.taskmanagement.core.TaskManagementRepositoryImpl;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.enums.StatusType;
@@ -90,6 +91,20 @@ public class ListAssignedTasksCommandTest {
         String expectedOutput = "There are NO assigned tasks matching the given parameters.";
         // Act
         String actualOutput = listAssignedTasksCommand.execute(List.of("filter", "assignee", "NOTFOUND"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnInformativeMessage_When_NoParametersNothingFound() {
+        // Arrange
+        String expectedOutput = "There are NO assigned tasks matching the given parameters.";
+
+        repository = new TaskManagementRepositoryImpl();
+        listAssignedTasksCommand = new ListAssignedTasksCommand(repository);
+        // Act
+        String actualOutput = listAssignedTasksCommand.execute(List.of());
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
