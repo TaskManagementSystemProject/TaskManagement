@@ -72,18 +72,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return newBoard;
     }
 
-    /*
-    @Override
-    public Member createMemberInTeam(String name, Team team) {
-        if(teams.stream()
-                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(team.getName()))){
-            throw new InvalidUserInputException(String.format("Team %s does not exist.", team.getName()));
-        }
-        Member newMember = new MemberImpl(name);
-        team.addMember(newMember);
-        return newMember;
-    }
-     */
     @Override
     public void createMember(String name) {
         ValidationHelpers.validateNameUniqueness(members, teams, name, String.format(NAME_ALREADY_IN_USE, name));
@@ -114,22 +102,12 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Team team, Board board) {
 
-
         Story newStory = new StoryImpl(nextId, title, description, priority, size);
         nextId++;
         board.addTask(newStory);
         stories.add(newStory);
         return newStory;
     }
-
-    /*
-    private <T extends Nameable>  void checkExistence(List<T> elements, String name, String message){
-        if (elements.stream()
-                .noneMatch(currentTeam -> currentTeam.getName().equalsIgnoreCase(name))) {
-            throw new InvalidUserInputException(message);
-        }
-    }
-     */
 
     @Override
     public List<Member> getMembers() {
@@ -150,8 +128,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public List<Story> getStories(){
         return new ArrayList<>(stories);
     }
-
-    // TODO TEST GOSHO ^
 
     @Override
     public List<Feedback> getFeedbacks(){
@@ -197,76 +173,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         throw new InvalidUserInputException(String.format(BOARD_NOT_FOUND_MESSAGE, boardName, teamName));
     }
 
-    /*
-    @Override
-    public TaskBase findTaskByIdWithStream(int id) {
-        return Stream.concat(bugs.stream(),
-                        Stream.concat(feedbacks.stream(), stories.stream()))
-                .filter(task -> task.getId() == id)
-                .findFirst()
-                .orElseThrow(() -> new InvalidUserInputException(String.format("Task with %d id does not exist.", id)));
-
-        // create a stream of tasks, by flattening each team to a concatenation of its members stream of tasks and boards stream of tasks.
-        // then filter to see only the tasks whose id match
-        // knowing they are unique for sure there will be only one match, or 0 if it doesn't exist;
-    }
-
-    @Override
-    public TeamAsset findOwnerOfTaskWithStream(TaskBase task) {
-        return teams.stream()
-                .flatMap(team -> Stream.concat(
-                        team.getMembers().stream(),
-                        team.getBoards().stream()
-                )).filter(teamAsset -> teamAsset.getTasks().contains(task))
-                .findFirst()
-                .orElseThrow(() -> new InvalidUserInputException("Not found"));
-
-        // to be tested.
-    }
-
-    private TaskBase getTaskById(List<TaskBase> tasks, int id) {
-        for (TaskBase task : tasks) {
-            if (task.getId() == id) {
-                return task;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public TaskBase findTaskByIdLooping(int id) {
-        TaskBase toReturn = null;
-        for(Team team: teams){
-            for(Member member : team.getMembers()){
-                toReturn = getTaskById(member.getTasks(),id);
-            }
-            for(Board board : team.getBoards()){
-                toReturn = getTaskById(board.getTasks(), id);
-            }
-        }
-        if(toReturn == null){
-            throw new InvalidUserInputException(String.format("Task with ID %d was not found.", id));
-        }
-        return toReturn;
-    }
-    */
-
     @Override
     public Member findMemberByTask(TaskBase task) {
         String memberName = task.getAssigneeName();
         return memberName == null ? null : findMemberByName(memberName);
-        /*
-        for (Team team : teams) {
-            for (Member member : team.getMembers()) {
-                for (TaskBase currentTask : member.getTasks()) {
-                    if (currentTask.getId() == task.getId()) {
-                        return member;
-                    }
-                }
-            }
-        }
-        return null;
-         */
     }
 
     @Override
