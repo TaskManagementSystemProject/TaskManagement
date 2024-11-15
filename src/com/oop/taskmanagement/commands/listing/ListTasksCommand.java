@@ -75,6 +75,11 @@ public class ListTasksCommand implements Command {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
                 yield sortTasksByTitle();
             }
+            case FILTERSORT ->  {
+                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING + EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
+                String titlesToList = parameters.get(1);
+                yield filterTaskByTitle(titlesToList).concat(sortTasksByTitle());
+            }
         };
     }
 }

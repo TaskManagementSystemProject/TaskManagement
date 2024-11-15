@@ -15,21 +15,21 @@ public class FilteringAndSortingHelperMethods {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE = 3;
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE = 4;
 
-    public static <T extends TaskBase> String filterTasks(List<T> tasks, List<String> parameters, FilterType filterType, boolean mustBeAssigned, TaskTypes taskType) {
+    public static <T extends TaskBase> String filterTasks(List<T> tasks, List<String> parameters, FilterType filterType, boolean mustBeAssigned, TaskTypes taskType, boolean filterSort) {
 
         return switch (filterType) {
             case STATUS -> {
-                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE);
+                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE + (filterSort ? 1 : 0));
                 StatusType statusType = ParsingHelpers.tryParseEnum(parameters.get(2), StatusType.class);
                 ValidationHelpers.validateStatusType(statusType, taskType);
                 yield filterStatusGeneric(tasks, statusType, mustBeAssigned);
             }
             case ASSIGNEE -> {
-                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE);
+                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE + (filterSort ? 1 : 0));
                 yield filterAssigneeGeneric(tasks, parameters.get(2));
             }
             case STATUSANDASSIGNEE -> {
-                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
+                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE + (filterSort ? 1 : 0));
                 StatusType statusType = ParsingHelpers.tryParseEnum(parameters.get(2), StatusType.class);
                 ValidationHelpers.validateStatusType(statusType, taskType);
                 yield filterStatusAndAssigneeGeneric(tasks, statusType, parameters.get(3));

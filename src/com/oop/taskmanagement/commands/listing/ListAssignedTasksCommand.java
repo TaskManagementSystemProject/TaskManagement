@@ -47,11 +47,19 @@ public class ListAssignedTasksCommand implements Command {
             case FILTER -> {
                 ValidationHelpers.validateArgumentsCountMultiple(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, true, TaskTypes.ALL);
+                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, true, TaskTypes.ALL, false);
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
                 yield FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle) ,true);
+            }
+            case FILTERSORT -> {
+                ValidationHelpers.validateArgumentsCountMultiple(parameters,
+                        EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE + EXPECTED_NUMBER_OF_ARGUMENTS_SORTING ,
+                        EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE + EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
+                FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
+                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, true, TaskTypes.ALL, true)
+                        .concat(FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle) ,true));
             }
         };
     }

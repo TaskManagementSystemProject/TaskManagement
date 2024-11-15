@@ -8,6 +8,7 @@ import com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelper
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import com.oop.taskmanagement.models.contracts.tasks.Bug;
+import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.utils.ParsingHelpers;
 import com.oop.taskmanagement.utils.ValidationHelpers;
 import com.oop.taskmanagement.utils.enums.TaskTypes;
@@ -56,14 +57,22 @@ public class ListBugsCommand implements Command {
     private String listingResultMessage(List<String> parameters,ListingType listingType){
         return switch (listingType) {
             case FILTER -> {
-                ValidationHelpers.validateArgumentsCountMultiple(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
+                //ValidationHelpers.validateArgumentsCountMultiple(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getBugs(), parameters, filterType, false, TaskTypes.BUG);
+                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getBugs(), parameters, filterType, false, TaskTypes.BUG, false);
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
                 SortType sortType = ParsingHelpers.tryParseEnum(parameters.get(1), SortType.class);
                 yield FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getBugs(), getComparator(sortType), false);
+            }
+            case FILTERSORT -> {
+                ValidationHelpers.validateArgumentsCountMultiple(parameters,
+                        EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE + 1 ,
+                        EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE + 1);
+                FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
+                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, false, TaskTypes.ALL, true)
+                        .concat(FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle) ,true));
             }
         };
     }

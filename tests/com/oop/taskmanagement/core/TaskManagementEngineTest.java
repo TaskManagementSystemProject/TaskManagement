@@ -1,7 +1,6 @@
 package com.oop.taskmanagement.core;
 
 import com.oop.taskmanagement.core.contracts.TaskManagementEngine;
-import com.oop.taskmanagement.exceptions.InvalidUserInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

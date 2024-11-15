@@ -52,7 +52,7 @@ public class ValidationHelpers {
 
     public static void validateNameUniqueness(List<? extends Nameable> firstList, List<? extends Nameable> secondList, String nameToCheck, String message) {
         if (Stream.concat(firstList.stream(), secondList.stream())
-                .anyMatch(element -> element.getName().equalsIgnoreCase(nameToCheck))) {
+                .anyMatch(element -> element.getName().equals(nameToCheck))) {
             throw new InvalidUserInputException(message);
         }
     }
