@@ -46,14 +46,14 @@ public class FilteringAndSortingHelperMethods {
 
     private static <T extends TaskBase> String filterAssigneeGeneric(List<T> tasks, String assigneeName) {
         return tasks.stream()
-                .filter(task -> assigneeName.equalsIgnoreCase(task.getAssigneeName()))
+                .filter(task -> assigneeName.equals(task.getAssigneeName()))
                 .map(Object::toString)
                 .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
     }
 
     private static <T extends TaskBase> String filterStatusAndAssigneeGeneric(List<T> tasks, StatusType statusType, String assigneeName) {
         return tasks.stream()
-                .filter(task ->task.getStatus() == statusType && assigneeName.equalsIgnoreCase(task.getAssigneeName())) // single filter -> faster
+                .filter(task ->task.getStatus() == statusType && assigneeName.equals(task.getAssigneeName())) // single filter -> faster
                 .map(Object::toString)
                 .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
     }
