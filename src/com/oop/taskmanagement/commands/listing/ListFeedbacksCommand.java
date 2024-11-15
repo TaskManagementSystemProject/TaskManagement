@@ -7,6 +7,7 @@ import com.oop.taskmanagement.commands.enums.SortType;
 import com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods;
 import com.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.oop.taskmanagement.exceptions.InvalidUserInputException;
+import com.oop.taskmanagement.models.contracts.tasks.Bug;
 import com.oop.taskmanagement.models.contracts.tasks.Feedback;
 import com.oop.taskmanagement.models.contracts.tasks.TaskBase;
 import com.oop.taskmanagement.models.enums.StatusType;
@@ -65,16 +66,16 @@ public class ListFeedbacksCommand implements Command {
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
                 SortType sortType = ParsingHelpers.tryParseEnum(parameters.get(1), SortType.class);
-                yield FilteringAndSortingHelperMethods.sortTasksGeneric(
-                        taskManagementRepository.getFeedbacks(), getComparator(sortType), false);
+                yield FilteringAndSortingHelperMethods.sortTasksGenericString(taskManagementRepository.getFeedbacks(), getComparator(sortType), false);
             }
             case FILTERSORT -> {
                 ValidationHelpers.validateArgumentsCountMultiple(parameters,
                         EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE + 1 ,
                         EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE + 1);
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, false, TaskTypes.ALL, true)
-                        .concat(FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle) ,true));
+                SortType sortType = ParsingHelpers.tryParseEnum(parameters.get(parameters.size() - 1), SortType.class); // gets the last parameter -> must be sort parameter
+                List<Feedback> sortedFeedbacks = FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getFeedbacks(), getComparator(sortType), false).toList();
+                yield FilteringAndSortingHelperMethods.filterTasks(sortedFeedbacks, parameters, filterType, false, TaskTypes.ALL, true);
             }
         };
     }

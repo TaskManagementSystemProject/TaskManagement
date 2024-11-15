@@ -17,6 +17,7 @@ import com.oop.taskmanagement.utils.enums.TaskTypes;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ListTasksCommand implements Command {
 
@@ -48,20 +49,23 @@ public class ListTasksCommand implements Command {
 
     }
 
-    private String filterTaskByTitle(String titlesToList) {
-        return taskManagementRepository.getAllTasks()
-                .stream()
+    private String filterTaskByTitle(String titlesToList, List<TaskBase> tasks) {
+        return tasks.stream()
                 .filter(task -> task.getTitle().equals(titlesToList))
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
     }
 
-    private String sortTasksByTitle() {
+    private Stream<TaskBase> sortTasksByTitle() {
         return taskManagementRepository.getAllTasks()
                 .stream()
-                .sorted(Comparator.comparing(TaskBase::getTitle))// sorts by title
+                .sorted(Comparator.comparing(TaskBase::getTitle));// sorts by title;
+    }
+
+    private String transformStreamToString(Stream<TaskBase> str){
+        return str
                 .map(Object::toString)
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(System.lineSeparator() + System.lineSeparator()));
     }
 
     private String listingResultMessage(List<String> parameters,ListingType listingType){
@@ -69,16 +73,16 @@ public class ListTasksCommand implements Command {
             case FILTER -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING);
                 String titlesToList = parameters.get(1);
-                yield filterTaskByTitle(titlesToList);
+                yield filterTaskByTitle(titlesToList, taskManagementRepository.getAllTasks());
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
-                yield sortTasksByTitle();
+                yield transformStreamToString(sortTasksByTitle());
             }
             case FILTERSORT ->  {
-                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING + EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
+                ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING);
                 String titlesToList = parameters.get(1);
-                yield filterTaskByTitle(titlesToList).concat(sortTasksByTitle());
+                yield filterTaskByTitle(titlesToList, sortTasksByTitle().toList());
             }
         };
     }

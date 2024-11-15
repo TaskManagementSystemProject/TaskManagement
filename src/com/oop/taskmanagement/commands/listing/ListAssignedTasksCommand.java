@@ -13,8 +13,7 @@ import com.oop.taskmanagement.utils.enums.TaskTypes;
 import java.util.Comparator;
 import java.util.List;
 
-import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE;
-import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE;
+import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.*;
 
 public class ListAssignedTasksCommand implements Command {
 
@@ -42,7 +41,7 @@ public class ListAssignedTasksCommand implements Command {
         return toReturnMessage.isEmpty() ? NO_RESULTS_FOUND_MESSAGE : String.format(ASSIGNED_TASK_PREFIX_MESSAGE, toReturnMessage);
     }
 
-    private String listingResultMessage(List<String> parameters,ListingType listingType){
+    private String listingResultMessage(List<String> parameters, ListingType listingType) {
         return switch (listingType) {
             case FILTER -> {
                 ValidationHelpers.validateArgumentsCountMultiple(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
@@ -51,15 +50,13 @@ public class ListAssignedTasksCommand implements Command {
             }
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
-                yield FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle) ,true);
+                yield FilteringAndSortingHelperMethods.sortTasksGenericString(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle), true);
             }
             case FILTERSORT -> {
-                ValidationHelpers.validateArgumentsCountMultiple(parameters,
-                        EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE + EXPECTED_NUMBER_OF_ARGUMENTS_SORTING ,
-                        EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE + EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
+                ValidationHelpers.validateArgumentsCountMultiple(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE, EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE);
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, true, TaskTypes.ALL, true)
-                        .concat(FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle) ,true));
+                List<TaskBase> sortedTasks = FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle), true).toList();
+                yield FilteringAndSortingHelperMethods.filterTasks(sortedTasks, parameters, filterType, true, TaskTypes.ALL, false);
             }
         };
     }

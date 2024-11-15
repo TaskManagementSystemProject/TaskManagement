@@ -15,9 +15,9 @@ import com.oop.taskmanagement.utils.enums.TaskTypes;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
-import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE;
-import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE;
+import static com.oop.taskmanagement.commands.listing.utility.FilteringAndSortingHelperMethods.*;
 
 public class ListBugsCommand implements Command {
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS_SORTING = 2;
@@ -64,15 +64,16 @@ public class ListBugsCommand implements Command {
             case SORT -> {
                 ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS_SORTING);
                 SortType sortType = ParsingHelpers.tryParseEnum(parameters.get(1), SortType.class);
-                yield FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getBugs(), getComparator(sortType), false);
+                yield FilteringAndSortingHelperMethods.sortTasksGenericString(taskManagementRepository.getBugs(), getComparator(sortType), false);
             }
             case FILTERSORT -> {
                 ValidationHelpers.validateArgumentsCountMultiple(parameters,
-                        EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE + 1 ,
+                        EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_SINGLE + 1,
                         EXPECTED_NUMBER_OF_ARGUMENTS_FILTERING_MULTIPLE + 1);
                 FilterType filterType = ParsingHelpers.tryParseEnum(parameters.get(1), FilterType.class);
-                yield FilteringAndSortingHelperMethods.filterTasks(taskManagementRepository.getAllTasks(), parameters, filterType, false, TaskTypes.ALL, true)
-                        .concat(FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getAllTasks(), Comparator.comparing(TaskBase::getTitle) ,true));
+                SortType sortType = ParsingHelpers.tryParseEnum(parameters.get(parameters.size() - 1), SortType.class); // gets the last parameter -> must be sort parameter
+                List<Bug> sortedBugs = FilteringAndSortingHelperMethods.sortTasksGeneric(taskManagementRepository.getBugs(), getComparator(sortType), false).toList();
+                yield FilteringAndSortingHelperMethods.filterTasks(sortedBugs, parameters, filterType, false, TaskTypes.ALL, true);
             }
         };
     }
