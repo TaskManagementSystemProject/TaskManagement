@@ -171,9 +171,127 @@ public class ListBugsCommandTest {
                 repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
-        String expectedOutput = String.format("%s%n%s%n%n%s",BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
         // Act
         String actualOutput = listBugsCommand.execute(List.of("sort", "title"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredStatusParamsSortedByTitle_When_ValidArguments() {
+        // Arrange
+        repository.createBugInBoard("must be last",
+                VALID_DESCRIPTION,
+                VALID_LIST_TO_REPRODUCE,
+                PriorityType.HIGH,
+                SeverityType.MAJOR,
+                repository.findTeamByName(VALID_TEAM_NAME_TWO),
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
+
+        String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
+        // Act
+        String actualOutput = listBugsCommand.execute(List.of("filtersort", "status", "active", "title"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredAssigneeAndStatusParamsSortedByTitle_When_ValidArguments() {
+        // Arrange
+        repository.createBugInBoard("must be last",
+                VALID_DESCRIPTION,
+                VALID_LIST_TO_REPRODUCE,
+                PriorityType.HIGH,
+                SeverityType.MAJOR,
+                repository.findTeamByName(VALID_TEAM_NAME_TWO),
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
+        repository.findTaskById(2).setAssigneeName("Pesho");
+        repository.findTaskById(4).setAssigneeName("Pesho");
+
+        String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE,
+                getExpectedBugToStringWithAssignee(), getExpectedBugToStringWithAssigneeSecond());
+
+        // Act
+        String actualOutput = listBugsCommand.execute(List.of("filtersort", "statusandassignee", "active", "Pesho", "title"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredAssigneeParamsSortedByTitle_When_ValidArguments() {
+        // Arrange
+        repository.createBugInBoard("must be last",
+                VALID_DESCRIPTION,
+                VALID_LIST_TO_REPRODUCE,
+                PriorityType.HIGH,
+                SeverityType.MAJOR,
+                repository.findTeamByName(VALID_TEAM_NAME_TWO),
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
+        repository.findTaskById(2).setAssigneeName("Pesho");
+        repository.findTaskById(4).setAssigneeName("Pesho");
+
+        String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE,
+                getExpectedBugToStringWithAssignee(), getExpectedBugToStringWithAssigneeSecond());
+
+        // Act
+        String actualOutput = listBugsCommand.execute(List.of("filtersort", "assignee", "Pesho", "title"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredAssigneeParamsSortedByPriority_When_ValidArguments() {
+        // Arrange
+        repository.createBugInBoard("must be last",
+                VALID_DESCRIPTION,
+                VALID_LIST_TO_REPRODUCE,
+                PriorityType.HIGH,
+                SeverityType.MAJOR,
+                repository.findTeamByName(VALID_TEAM_NAME_TWO),
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
+        repository.findTaskById(2).setAssigneeName("Pesho");
+        repository.findTaskById(4).setAssigneeName("Pesho");
+
+        String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE,
+                getExpectedBugToStringWithAssignee(), getExpectedBugToStringWithAssigneeSecond());
+
+        // Act
+        String actualOutput = listBugsCommand.execute(List.of("filtersort", "assignee", "Pesho", "priority"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ThrowException_When_InvalidSortingTypeProvided() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filtersort", "assignee", "Pesho", "rating")));
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredAssigneeParamsSortedBySeverity_When_ValidArguments() {
+        // Arrange
+        repository.createBugInBoard("must be last",
+                VALID_DESCRIPTION,
+                VALID_LIST_TO_REPRODUCE,
+                PriorityType.HIGH,
+                SeverityType.MAJOR,
+                repository.findTeamByName(VALID_TEAM_NAME_TWO),
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
+        repository.findTaskById(2).setAssigneeName("Pesho");
+        repository.findTaskById(4).setAssigneeName("Pesho");
+
+        String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE,
+                getExpectedBugToStringWithAssignee(), getExpectedBugToStringWithAssigneeSecond());
+
+        // Act
+        String actualOutput = listBugsCommand.execute(List.of("filtersort", "assignee", "Pesho", "severity"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -246,5 +364,15 @@ public class ListBugsCommandTest {
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
                 "None");
+    }
+
+    private String getExpectedBugToStringWithAssigneeSecond() {
+        return String.format(EXPECTED_BUG_TO_STRING_FORMAT,
+                4,
+                "must be last",
+                StatusType.ACTIVE,
+                PriorityType.HIGH,
+                SeverityType.MAJOR,
+                "Pesho");
     }
 }
