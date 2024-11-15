@@ -62,11 +62,28 @@ public class ListTasksCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterSort() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listTasksCommand.execute(List.of("filtersort")));
+    }
+
+    @Test
     public void execute_Should_ReturnInformativeMessage_When_NoTasksFoundMatchingTheArguments() {
         // Arrange
         String expectedOutput = "There are NO tasks matching the given parameters.";
         // Act
         String actualOutput = listTasksCommand.execute(List.of("filter", "NOTFOUND"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void executeFilterSort_Should_ReturnInformativeMessage_When_NoTasksFoundMatchingTheArguments() {
+        // Arrange
+        String expectedOutput = "There are NO tasks matching the given parameters.";
+        // Act
+        String actualOutput = listTasksCommand.execute(List.of("filtersort", "Invalid"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
