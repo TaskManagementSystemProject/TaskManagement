@@ -28,7 +28,7 @@ public class ListFeedbacksCommandTest {
     }
 
     @Test
-    public void execute_Should_ReturnAllFeedbacksAsString_When_NoParametersPassed(){
+    public void execute_Should_ReturnAllFeedbacksAsString_When_NoParametersPassed() {
         // Arrange
         String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString());
 
@@ -36,7 +36,7 @@ public class ListFeedbacksCommandTest {
         String actualOutput = listFeedbacksCommand.execute(List.of());
 
         // Assert
-        Assertions.assertEquals(expectedOutput,actualOutput);
+        Assertions.assertEquals(expectedOutput, actualOutput);
     }
 
     @Test
@@ -48,25 +48,25 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidFilteringType() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter","InvalidFilter")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "InvalidFilter")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatus() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter","status")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "status")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter","assignee")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "assignee")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatusAndAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter","statusandassignee")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee")));
     }
 
     @Test
@@ -78,13 +78,21 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgument() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort","INVALID")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort", "INVALID")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgumentForFeedback() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort","size")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort", "size")));
+    }
+
+    @Test
+    public void execute_Should_ThrowException_When_InvalidFilterSortArgumentForFeedback() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of(
+                        "filtersort", "statusandassignee", "Scheduled", "Gosho", "rating", "extra param")));
     }
 
     @Test
@@ -142,7 +150,59 @@ public class ListFeedbacksCommandTest {
         String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToStringThree());
         repository.findFeedbackById(1).changeStatus(StatusType.SCHEDULED);
         // Act
-        String actualOutput = listFeedbacksCommand.execute(List.of("filter", "statusandassignee","scheduled" ,"Gosho"));
+        String actualOutput = listFeedbacksCommand.execute(List.of("filter", "statusandassignee", "scheduled", "Gosho"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+
+    @Test
+    public void execute_Should_ReturnFilteredByStatusAndAssigneeSortedByRating_When_ValidArguments() {
+        // Arrange
+        String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToStringThree());
+        repository.findFeedbackById(1).changeStatus(StatusType.SCHEDULED);
+        // Act
+        String actualOutput = listFeedbacksCommand.execute(
+                List.of("filtersort", "statusandassignee", "scheduled", "Gosho", "rating"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredByAssigneeSortedByRating_When_ValidArguments() {
+        // Arrange
+        String expectedOutput = String.format("%s%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToStringThree());
+        repository.findFeedbackById(1).changeStatus(StatusType.SCHEDULED);
+        // Act
+        String actualOutput = listFeedbacksCommand.execute(
+                List.of("filtersort", "assignee", "Gosho", "rating"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredByStatusSortedByRating_When_ValidArguments() {
+        // Arrange
+        repository.createFeedbackInBoard("mustbefirst",
+                VALID_DESCRIPTION,
+                4,
+                repository.findTeamByName(VALID_TEAM_NAME),
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME));
+        String expectedOutput = String.format(FEEDBACKS_PREFIX_MESSAGE + "%n" +
+                getExpectedFeedbackToStringSecond() +
+                "%n%n" +
+                "Feedback with id: 1%n" +
+                "Title: 10symb tit%n" +
+                "Status: New%n" +
+                "Rating: 5%n" +
+                "Assigned to: Gosho");
+
+        // Act
+        String actualOutput = listFeedbacksCommand.execute(
+                List.of("filtersort", "status", "new", "rating"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -151,7 +211,7 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidStatusTypeForFeedback() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee","Active" ,"Gosho")));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee", "Active", "Gosho")));
     }
 
     @Test
@@ -161,9 +221,9 @@ public class ListFeedbacksCommandTest {
                 VALID_DESCRIPTION,
                 4,
                 repository.findTeamByName(VALID_TEAM_NAME),
-                repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%s%n%n%s",FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
+        String expectedOutput = String.format("%s%n%s%n%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "title"));
 
@@ -178,9 +238,9 @@ public class ListFeedbacksCommandTest {
                 VALID_DESCRIPTION,
                 4,
                 repository.findTeamByName(VALID_TEAM_NAME),
-                repository.findBoardByTeamName(VALID_BOARD_NAME,VALID_TEAM_NAME));
+                repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME));
 
-        String expectedOutput = String.format("%s%n%s%n%n%s",FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
+        String expectedOutput = String.format("%s%n%s%n%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());
         // Act
         String actualOutput = listFeedbacksCommand.execute(List.of("sort", "rating"));
 
@@ -189,8 +249,7 @@ public class ListFeedbacksCommandTest {
     }
 
 
-
-    private String getExpectedFeedbackToString(){
+    private String getExpectedFeedbackToString() {
         return String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
                 1,
                 VALID_TITLE,
@@ -199,7 +258,7 @@ public class ListFeedbacksCommandTest {
                 VALID_MEMBER_NAME_ONE);
     }
 
-    private String getExpectedFeedbackToStringSecond(){
+    private String getExpectedFeedbackToStringSecond() {
         return String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
                 4,
                 "mustbefirst",
@@ -208,7 +267,7 @@ public class ListFeedbacksCommandTest {
                 "None");
     }
 
-    private String getExpectedFeedbackToStringThree(){
+    private String getExpectedFeedbackToStringThree() {
         return String.format(EXPECTED_FEEDBACK_TO_STRING_FORMAT,
                 1,
                 VALID_TITLE,
