@@ -60,6 +60,12 @@ public class ListAssignedTasksCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterSort() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listAssignedTasksCommand.execute(List.of("filtersort")));
+    }
+
+    @Test
     public void execute_Should_ReturnTasksSortedByTitle_When_ParameterSortProvided() {
         // Arrange
         repository.createFeedbackInBoard("0000000000",
@@ -83,7 +89,6 @@ public class ListAssignedTasksCommandTest {
         Assertions.assertEquals(expectedOutput, actualOutput);
 
     }
-
 
     @Test
     public void execute_Should_ReturnInformativeMessage_When_NoTaskFoundMatchingTheArguments() {
@@ -116,6 +121,17 @@ public class ListAssignedTasksCommandTest {
         String expectedOutput = String.format("%s%n%s", ASSIGNED_TASK_PREFIX_MESSAGE, getDummyFeedback());
         // Act
         String actualOutput = listAssignedTasksCommand.execute(List.of("filter", "status", "nEw"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnFilteredByStatusAndSortByTitle_When_ValidArgumentsForFilteringStatus() {
+        // Arrange
+        String expectedOutput = String.format("%s%n%s", ASSIGNED_TASK_PREFIX_MESSAGE, getDummyFeedback());
+        // Act
+        String actualOutput = listAssignedTasksCommand.execute(List.of("filtersort", "status", "nEw"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
