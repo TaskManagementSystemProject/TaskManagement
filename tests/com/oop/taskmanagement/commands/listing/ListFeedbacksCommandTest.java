@@ -184,6 +184,16 @@ public class ListFeedbacksCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_StatusChangeInvalid() {
+        // Arrange
+        repository.findFeedbackById(1).changeStatus(StatusType.UNSCHEDULED);
+        // Act
+
+        // Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> repository.findTaskById(1).changeStatus(StatusType.UNSCHEDULED));
+    }
+
+    @Test
     public void execute_Should_ReturnFilteredByStatusSortedByRating_When_ValidArguments() {
         // Arrange
         repository.createFeedbackInBoard("mustbefirst",
