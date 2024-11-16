@@ -20,7 +20,6 @@ public class CommentImplTest {
         Assertions.assertTrue(comment instanceof Comment);
     }
 
-
     @Test
     public void constructor_Should_ThrowException_When_AuthorNameToShort() {
         // Arrange, Act, Assert
@@ -35,7 +34,6 @@ public class CommentImplTest {
                 new CommentImpl(INVALID_AUTHOR_LONG_NAME, VALID_COMMENT_MESSAGE));
     }
 
-
     @Test
     public void constructor_Should_ThrowException_When_MessageToShort() {
         // Arrange, Act, Assert
@@ -49,7 +47,6 @@ public class CommentImplTest {
         Assertions.assertThrows(InvalidUserInputException.class, () ->
                 new CommentImpl(VALID_COMMENT_AUTHOR, INVALID_COMMENT_LONG_MESSAGE));
     }
-
 
     @Test
     public void getAuthor_Should_returnAuthor_When_ArgumentsAreValid() {
@@ -68,7 +65,6 @@ public class CommentImplTest {
         // Act, Assert
         Assertions.assertEquals("This comment is valid", comment.getMessage());
     }
-
 
     @Test
     public void toString_Should_returnComment_When_ArgumentsAreValid() {
@@ -90,5 +86,15 @@ public class CommentImplTest {
 
         // Act, Assert
         Assertions.assertTrue(comment1.equals(comment2));
+    }
+
+    @Test
+    public void equals_Should_ThrowException_When_InvalidArguments() {
+        // Arrange
+        Comment comment1 = ValidInitialization.initializeValidComment();
+        Comment comment2 = ValidInitialization.initializeValidComment();
+
+        // Act, Assert
+        Assertions.assertDoesNotThrow(() -> comment1.equals(comment2));
     }
 }
