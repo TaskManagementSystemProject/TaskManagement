@@ -42,49 +42,57 @@ public class ListFeedbacksCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidListingType() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("InvalidListing")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of("InvalidListing")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidFilteringType() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "InvalidFilter")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of("filter", "InvalidFilter")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatus() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "status")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of("filter", "status")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "assignee")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of("filter", "assignee")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatusAndAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsSort() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of("sort")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgument() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort", "INVALID")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of("sort", "INVALID")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgumentForFeedback() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("sort", "size")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of("sort", "size")));
     }
 
     @Test
@@ -93,6 +101,14 @@ public class ListFeedbacksCommandTest {
         Assertions.assertThrows(InvalidUserInputException.class,
                 () -> listFeedbacksCommand.execute(List.of(
                         "filtersort", "statusandassignee", "Scheduled", "Gosho", "rating", "extra param")));
+    }
+
+    @Test
+    public void execute_Should_ThrowException_When_InvalidSortTypeForFeedback() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listFeedbacksCommand.execute(List.of(
+                        "filtersort", "statusandassignee", "Scheduled", "Gosho", "severity")));
     }
 
     @Test
@@ -216,12 +232,6 @@ public class ListFeedbacksCommandTest {
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
-    }
-
-    @Test
-    public void execute_Should_ThrowException_When_InvalidStatusTypeForFeedback() {
-        // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listFeedbacksCommand.execute(List.of("filter", "statusandassignee", "Active", "Gosho")));
     }
 
     @Test
