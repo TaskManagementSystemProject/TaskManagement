@@ -86,6 +86,7 @@ public class ListStoriesCommandTest {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> listStoriesCommand.execute(List.of("sort", "INVALID")));
     }
+
     @Test
     public void execute_Should_ThrowException_When_InvalidFilterSortArgument() {
         // Arrange, Act, Assert
@@ -108,6 +109,7 @@ public class ListStoriesCommandTest {
     public void execute_Should_ReturnFilteredByStatus_When_ValidArgumentsForFilteringStatus() {
         // Arrange
         String expectedOutput = String.format("%s%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString());
+
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("filter", "status", "not done"));
 
@@ -119,8 +121,46 @@ public class ListStoriesCommandTest {
     public void execute_Should_ReturnInformativeMessage_When_NoStoriesFoundMatchingTheArguments() {
         // Arrange
         String expectedOutput = "There are NO stories matching the given parameters.";
+
         // Act
         String actualOutput = listStoriesCommand.execute(List.of("filter", "assignee", "NOTFOUND"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+
+    @Test
+    public void execute_Should_ReturnInformativeMessage_When_NoStoriesFoundMatchingValidAssigneeName() {
+        // Arrange
+        String expectedOutput = "There are NO stories matching the given parameters.";
+
+        // Act
+        String actualOutput = listStoriesCommand.execute(List.of("filtersort", "assignee", "InvalidAssignee", "title"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnInformativeMessage_When_NoStoriesFoundMatchingValidStatus() {
+        // Arrange
+        String expectedOutput = "There are NO stories matching the given parameters.";
+
+        // Act
+        String actualOutput = listStoriesCommand.execute(List.of("filtersort", "status", "Done", "title"));
+
+        // Assert
+        Assertions.assertEquals(expectedOutput, actualOutput);
+    }
+
+    @Test
+    public void execute_Should_ReturnInformativeMessage_When_NoStoriesFoundMatchingValidStatusAndAssignee() {
+        // Arrange
+        String expectedOutput = "There are NO stories matching the given parameters.";
+
+        // Act
+        String actualOutput = listStoriesCommand.execute(List.of("filtersort", "statusAndAssignee", "Not Done", "InvalidName", "title"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
@@ -239,7 +279,6 @@ public class ListStoriesCommandTest {
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
     }
-
 
     private String getExpectedStoriesToString() {
         return String.format(EXPECTED_STORY_TO_STRING_FORMAT,
