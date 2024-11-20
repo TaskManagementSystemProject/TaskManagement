@@ -60,6 +60,13 @@ public class ListAssignedTasksCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_InvalidFilterType() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listAssignedTasksCommand.execute(List.of("filter", "rating")));
+    }
+
+    @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterSort() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> listAssignedTasksCommand.execute(List.of("filtersort")));
