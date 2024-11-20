@@ -14,7 +14,6 @@ import java.util.List;
 
 public class CreateBoardInTeamCommandTest {
 
-    public static final String CREATE_BOARD_SUCCESS_MESSAGE = "Board %s created successfully in team %s.";
     private static final int ARGUMENT_COUNT = 2;
     private static final String VALID_TEAM_IN_REPO = "Otbor";
     private TaskManagementRepository repository;
@@ -47,9 +46,22 @@ public class CreateBoardInTeamCommandTest {
 
     @Test
     public void execute_Should_ThrowException_When_NameOfBoardAlreadyExistsInTeam() {
-
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> createBoardInTeamCommand.execute(List.of("White", "Otbor")));
+    }
+
+    @Test
+    public void execute_Should_ThrowException_When_NameToShort() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> createBoardInTeamCommand.execute(List.of("xxxx", "Otbor")));
+    }
+
+    @Test
+    public void execute_Should_ThrowException_When_NameToLong() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> createBoardInTeamCommand.execute(List.of("xxxxxxxxxxx", "Otbor")));
     }
 
     @Test
@@ -64,7 +76,7 @@ public class CreateBoardInTeamCommandTest {
     @Test
     public void execute_Should_ReturnProperMessage_When_ValidArguments() {
         // Arrange
-        String expectedOutput = String.format(CREATE_BOARD_SUCCESS_MESSAGE, "New board", "Otbor");
+        String expectedOutput = String.format("Board %s created successfully in team %s.", "New board", "Otbor");
 
         // Act
         String actualOutput = createBoardInTeamCommand.execute(List.of("New board", "Otbor"));
