@@ -199,7 +199,6 @@ public class ListFeedbacksCommandTest {
         repository.createFeedbackInBoard("mustbefirst",
                 VALID_DESCRIPTION,
                 4,
-                repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME));
         String expectedOutput = String.format(FEEDBACKS_PREFIX_MESSAGE + "%n" +
                 getExpectedFeedbackToStringSecond() +
@@ -230,7 +229,6 @@ public class ListFeedbacksCommandTest {
         repository.createFeedbackInBoard("mustbefirst",
                 VALID_DESCRIPTION,
                 4,
-                repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToString(), getExpectedFeedbackToStringSecond());
@@ -247,7 +245,6 @@ public class ListFeedbacksCommandTest {
         repository.createFeedbackInBoard("mustbefirst",
                 VALID_DESCRIPTION,
                 4,
-                repository.findTeamByName(VALID_TEAM_NAME),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", FEEDBACKS_PREFIX_MESSAGE, getExpectedFeedbackToStringSecond(), getExpectedFeedbackToString());

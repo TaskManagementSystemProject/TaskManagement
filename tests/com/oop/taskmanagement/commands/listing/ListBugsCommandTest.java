@@ -168,7 +168,6 @@ public class ListBugsCommandTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
@@ -187,7 +186,6 @@ public class ListBugsCommandTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
@@ -206,7 +204,6 @@ public class ListBugsCommandTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
         repository.findTaskById(2).setAssigneeName("Pesho");
         repository.findTaskById(4).setAssigneeName("Pesho");
@@ -229,7 +226,6 @@ public class ListBugsCommandTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
         repository.findTaskById(2).setAssigneeName("Pesho");
         repository.findTaskById(4).setAssigneeName("Pesho");
@@ -252,7 +248,6 @@ public class ListBugsCommandTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
         repository.findTaskById(2).setAssigneeName("Pesho");
         repository.findTaskById(4).setAssigneeName("Pesho");
@@ -282,7 +277,6 @@ public class ListBugsCommandTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
         repository.findTaskById(2).setAssigneeName("Pesho");
         repository.findTaskById(4).setAssigneeName("Pesho");
@@ -305,7 +299,6 @@ public class ListBugsCommandTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());
@@ -324,7 +317,6 @@ public class ListBugsCommandTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", BUGS_PREFIX_MESSAGE, getExpectedBugToString(), getExpectedBugToStringSecond());

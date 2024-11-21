@@ -38,7 +38,7 @@ public class CreateBugInBoardCommand implements Command {
         String boardName = parameters.get(6);
         Team team = taskManagementRepository.findTeamByName(teamName);
         Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
-        Bug newBug = taskManagementRepository.createBugInBoard(title, description, stepsToReproduce, priorityType, severityType, team, board);
+        Bug newBug = taskManagementRepository.createBugInBoard(title, description, stepsToReproduce, priorityType, severityType, board);
 
         board.logActivity(String.format(LOG_ACTIVITY_IN_BOARD_MESSAGE, newBug.getId()));
         return String.format(CREATE_BUG_SUCCESS_MESSAGE, newBug.getId(), boardName, teamName);

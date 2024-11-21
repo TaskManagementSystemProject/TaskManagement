@@ -35,7 +35,7 @@ public class CreateFeedbackInBoardCommand implements Command {
         String boardName = parameters.get(4);
         Team team = taskManagementRepository.findTeamByName(teamName);
         Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
-        Feedback newFeedback = taskManagementRepository.createFeedbackInBoard(title, description, rating, team, board);
+        Feedback newFeedback = taskManagementRepository.createFeedbackInBoard(title, description, rating, board);
 
         board.logActivity(String.format(LOG_ACTIVITY_IN_BOARD_MESSAGE, newFeedback.getId()));
         return String.format(CREATE_FEEDBACK_SUCCESS_MESSAGE, newFeedback.getId(), boardName, teamName);

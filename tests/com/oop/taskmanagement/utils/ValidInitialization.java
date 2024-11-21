@@ -75,9 +75,9 @@ public class ValidInitialization {
         Board board2 = repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO);
         Member member = repository.findMemberByName(VALID_MEMBER_NAME_ONE);
         Member member2 = repository.findMemberByName(VALID_MEMBER_NAME_TWO);
-        repository.createFeedbackInBoard(VALID_TITLE, VALID_DESCRIPTION, VALID_RATING, team, board);
-        repository.createBugInBoard(VALID_TITLE, VALID_DESCRIPTION, VALID_LIST_TO_REPRODUCE, PriorityType.LOW, SeverityType.MINOR, team, board);
-        repository.createStoryInBoard(VALID_TITLE, VALID_DESCRIPTION, PriorityType.LOW, SizeType.SMALL, team2, board2);
+        repository.createFeedbackInBoard(VALID_TITLE, VALID_DESCRIPTION, VALID_RATING,  board);
+        repository.createBugInBoard(VALID_TITLE, VALID_DESCRIPTION, VALID_LIST_TO_REPRODUCE, PriorityType.LOW, SeverityType.MINOR, board);
+        repository.createStoryInBoard(VALID_TITLE, VALID_DESCRIPTION, PriorityType.LOW, SizeType.SMALL, board2);
         team.addMember(member);
         team2.addMember(member2);
         TaskBase feedback = repository.findTaskById(1);

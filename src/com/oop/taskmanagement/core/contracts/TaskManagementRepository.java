@@ -20,9 +20,9 @@ public interface TaskManagementRepository {
     void createMember(String name);
     Board createBoardInTeam(String name, Team team);
     // Member createMemberInTeam(String name, Team team);
-    Bug createBugInBoard(String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board);
-    Feedback createFeedbackInBoard( String title, String description, int rating, Team team, Board board);
-    Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Team team, Board board);
+    Bug createBugInBoard(String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Board board);
+    Feedback createFeedbackInBoard( String title, String description, int rating, Board board);
+    Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Board board);
 
     // get
     List<Team> getTeams();

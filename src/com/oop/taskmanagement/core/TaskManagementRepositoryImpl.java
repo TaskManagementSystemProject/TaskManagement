@@ -80,7 +80,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Bug createBugInBoard(String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Team team, Board board) {
+    public Bug createBugInBoard(String title, String description, List<String> stepsToReproduce, PriorityType priority, SeverityType severity, Board board) {
 
         Bug newBug = new BugImpl(nextId, title, description, stepsToReproduce, priority, severity);
         nextId++;
@@ -90,7 +90,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public Feedback createFeedbackInBoard(String title, String description, int rating, Team team, Board board) {
+    public Feedback createFeedbackInBoard(String title, String description, int rating, Board board) {
         Feedback newFeedback = new FeedbackImpl(nextId, title, description, rating);
         nextId++;
         board.addTask(newFeedback);
@@ -100,7 +100,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
 
     @Override
-    public Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Team team, Board board) {
+    public Story createStoryInBoard(String title, String description, PriorityType priority, SizeType size, Board board) {
 
         Story newStory = new StoryImpl(nextId, title, description, priority, size);
         nextId++;

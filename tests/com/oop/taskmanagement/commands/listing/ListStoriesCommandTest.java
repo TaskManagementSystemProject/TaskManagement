@@ -175,7 +175,6 @@ public class ListStoriesCommandTest {
                 VALID_DESCRIPTION,
                 PriorityType.MEDIUM,
                 SizeType.MEDIUM,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
@@ -193,7 +192,6 @@ public class ListStoriesCommandTest {
                 VALID_DESCRIPTION,
                 PriorityType.MEDIUM,
                 SizeType.MEDIUM,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
@@ -211,7 +209,6 @@ public class ListStoriesCommandTest {
                 VALID_DESCRIPTION,
                 PriorityType.MEDIUM,
                 SizeType.MEDIUM,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString(), getExpectedStoriesToStringSecond());
@@ -229,7 +226,6 @@ public class ListStoriesCommandTest {
                 VALID_DESCRIPTION,
                 PriorityType.MEDIUM,
                 SizeType.MEDIUM,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s", STORIES_PREFIX_MESSAGE, getExpectedStoriesToString(), getExpectedStoriesToStringSecond());

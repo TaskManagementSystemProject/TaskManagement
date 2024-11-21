@@ -293,7 +293,6 @@ public class TaskManagementRepositoryTest {
                         VALID_LIST_TO_REPRODUCE,
                         PriorityType.HIGH,
                         SeverityType.MAJOR,
-                        repository.findTeamByName("Invalid team name"),
                         repository.findBoardByTeamName("White", "Invalid team name")));
     }
 
@@ -307,7 +306,6 @@ public class TaskManagementRepositoryTest {
                         VALID_LIST_TO_REPRODUCE,
                         PriorityType.HIGH,
                         SeverityType.MAJOR,
-                        repository.findTeamByName("Otbor"),
                         repository.findBoardByTeamName("Invalid board name", "Otbor")));
 
     }
@@ -323,7 +321,6 @@ public class TaskManagementRepositoryTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName("Otbor"),
                 repository.findBoardByTeamName("White", "Otbor"));
         int lastIDAfterNewBug = bug.getId();
 
@@ -341,7 +338,6 @@ public class TaskManagementRepositoryTest {
                 VALID_LIST_TO_REPRODUCE,
                 PriorityType.HIGH,
                 SeverityType.MAJOR,
-                repository.findTeamByName("Otbor"),
                 repository.findBoardByTeamName("White", "Otbor"));
         int sizeOfListAfterNewBug = repository.getBugs().size();
 
@@ -358,7 +354,6 @@ public class TaskManagementRepositoryTest {
                 VALID_DESCRIPTION,
                 PriorityType.HIGH,
                 SizeType.SMALL,
-                repository.findTeamByName("Otbor"),
                 repository.findBoardByTeamName("White", "Otbor"));
         int lastIDAfterNewStory = story.getId();
 
@@ -375,7 +370,6 @@ public class TaskManagementRepositoryTest {
                 VALID_DESCRIPTION,
                 PriorityType.HIGH,
                 SizeType.SMALL,
-                repository.findTeamByName("Otbor"),
                 repository.findBoardByTeamName("White", "Otbor"));
         int sizeOfListAfterNewStory = repository.getStories().size();
 
@@ -391,7 +385,6 @@ public class TaskManagementRepositoryTest {
                 "New story title",
                 VALID_DESCRIPTION,
                 VALID_RATING,
-                repository.findTeamByName("Otbor"),
                 repository.findBoardByTeamName("White", "Otbor"));
         int lastIDAfterNewFeedback = feedback.getId();
 
@@ -407,7 +400,6 @@ public class TaskManagementRepositoryTest {
                 "New story title",
                 VALID_DESCRIPTION,
                 VALID_RATING,
-                repository.findTeamByName("Otbor"),
                 repository.findBoardByTeamName("White", "Otbor"));
         int sizeOfListAfterNewFeedback = repository.getFeedbacks().size();
 

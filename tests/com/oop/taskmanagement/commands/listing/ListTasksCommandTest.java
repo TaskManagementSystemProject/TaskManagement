@@ -109,7 +109,6 @@ public class ListTasksCommandTest {
         repository.createFeedbackInBoard("0000000000",
                 "Random description",
                 10,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s%n%n%s%n%n%s%n%n%s",
@@ -133,7 +132,6 @@ public class ListTasksCommandTest {
         repository.createFeedbackInBoard("0000000000",
                 "Random description",
                 10,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         String expectedOutput = String.format("%s%n%s", ALL_TASK_PREFIX_MESSAGE, getDummyFeedback());

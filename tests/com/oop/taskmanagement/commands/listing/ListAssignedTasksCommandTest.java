@@ -71,7 +71,6 @@ public class ListAssignedTasksCommandTest {
         repository.createFeedbackInBoard("0000000000",
                 "Random description",
                 10,
-                repository.findTeamByName(VALID_TEAM_NAME_TWO),
                 repository.findBoardByTeamName(VALID_BOARD_NAME, VALID_TEAM_NAME_TWO));
 
         repository.findTaskById(4).setAssigneeName("Pesho");
@@ -141,7 +140,7 @@ public class ListAssignedTasksCommandTest {
     public void execute_Should_ReturnFilteredByStatusButAlsoFilteringUnassigned_When_ValidArgumentsForFilteringStatus() {
         // Arrange
         String expectedOutput = String.format("%s%n%s", ASSIGNED_TASK_PREFIX_MESSAGE, getDummyFeedback());
-        repository.createFeedbackInBoard("11111111111111", "222222222222222", 15, repository.findTeamByName("Otbor"), repository.findBoardByTeamName("White", "Otbor"));
+        repository.createFeedbackInBoard("11111111111111", "222222222222222", 15, repository.findBoardByTeamName("White", "Otbor"));
         // Act
         String actualOutput = listAssignedTasksCommand.execute(List.of("filter", "status", "nEw"));
 

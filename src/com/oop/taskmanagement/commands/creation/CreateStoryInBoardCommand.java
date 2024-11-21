@@ -36,7 +36,7 @@ public class CreateStoryInBoardCommand implements Command {
 
         Team team = taskManagementRepository.findTeamByName(teamName);
         Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
-        Story newStory = taskManagementRepository.createStoryInBoard(title, description, priorityType, sizeType, team, board);
+        Story newStory = taskManagementRepository.createStoryInBoard(title, description, priorityType, sizeType, board);
 
         board.logActivity(String.format(LOG_ACTIVITY_IN_BOARD_MESSAGE, newStory.getId()));
         return String.format(CREATE_STORY_SUCCESS_MESSAGE, newStory.getId(), boardName, teamName);
