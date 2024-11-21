@@ -128,6 +128,20 @@ public class ListBugsCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_InvalidStatusForBug() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "status", "InProgress")));
+    }
+
+    @Test
+    public void execute_Should_ThrowException_When_InvalidSortingType() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filtersort", "assignee", "Pesho", "rating")));
+    }
+
+
+    @Test
     public void execute_Should_ReturnInformativeMessage_When_NoParametersNothingFound() {
         // Arrange
         String expectedOutput = "There are NO bugs matching the given parameters.";

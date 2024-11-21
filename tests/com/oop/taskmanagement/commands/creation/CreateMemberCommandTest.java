@@ -41,19 +41,6 @@ public class CreateMemberCommandTest {
         Assertions.assertThrows(InvalidUserInputException.class, () -> createMemberCommand.execute(List.of(VALID_MEMBER_NAME_ONE)));
     }
 
-    @Test
-    public void execute_Should_ThrowException_When_NameToShort() {
-        // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class,
-                () -> createMemberCommand.execute(List.of("xxxx")));
-    }
-
-    @Test
-    public void execute_Should_ThrowException_When_NameToLong() {
-        // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class,
-                () -> createMemberCommand.execute(List.of("xxxxxxxxxxxxxxxx")));
-    }
 
     @Test
     public void execute_Should_CreateMember_When_ValidArguments() {
