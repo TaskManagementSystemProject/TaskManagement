@@ -42,57 +42,79 @@ public class ListBugsCommandTest {
     @Test
     public void execute_Should_ThrowException_When_InvalidListingType() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("InvalidListing")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("InvalidListing")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidFilteringType() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "InvalidFilter")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filter", "InvalidFilter")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatus() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "status")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filter", "status")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidStatusInFilterArgumentForBug() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "status", "In progress")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filter", "status", "In progress")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "assignee")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filter", "assignee")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsFilterStatusAndAssignee() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "statusandassignee")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filter", "statusandassignee")));
+    }
+
+    @Test
+    public void execute_Should_ThrowException_When_InvalidStatusTypeForBug() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filter", "status", "InProgress")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidCountOfArgumentsSort() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("sort")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("sort")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgument() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("sort", "INVALID")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("sort", "INVALID")));
     }
 
     @Test
     public void execute_Should_ThrowException_When_InvalidSortArgumentForBug() {
         // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("sort", "rating")));
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("sort", "rating")));
     }
 
+    @Test
+    public void execute_Should_ThrowException_When_InvalidSortingTypeProvided() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> listBugsCommand.execute(List.of("filtersort", "assignee", "Pesho", "rating")));
+    }
 
     @Test
     public void execute_Should_ReturnInformativeMessage_When_NoStoriesFoundMatchingTheArguments() {
@@ -152,12 +174,6 @@ public class ListBugsCommandTest {
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);
-    }
-
-    @Test
-    public void execute_Should_ThrowException_When_InvalidStatusTypeForBug() {
-        // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class, () -> listBugsCommand.execute(List.of("filter", "status", "InProgress")));
     }
 
     @Test
@@ -263,13 +279,6 @@ public class ListBugsCommandTest {
     }
 
     @Test
-    public void execute_Should_ThrowException_When_InvalidSortingTypeProvided() {
-        // Arrange, Act, Assert
-        Assertions.assertThrows(InvalidUserInputException.class,
-                () -> listBugsCommand.execute(List.of("filtersort", "assignee", "Pesho", "rating")));
-    }
-
-    @Test
     public void execute_Should_ReturnFilteredAssigneeParamsSortedBySeverity_When_ValidArguments() {
         // Arrange
         repository.createBugInBoard("must be last",
@@ -285,7 +294,8 @@ public class ListBugsCommandTest {
                 getExpectedBugToStringWithAssignee(), getExpectedBugToStringWithAssigneeSecond());
 
         // Act
-        String actualOutput = listBugsCommand.execute(List.of("filtersort", "assignee", "Pesho", "severity"));
+        String actualOutput = listBugsCommand.execute(
+                List.of("filtersort", "assignee", "Pesho", "severity"));
 
         // Assert
         Assertions.assertEquals(expectedOutput, actualOutput);

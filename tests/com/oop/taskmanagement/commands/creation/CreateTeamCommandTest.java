@@ -35,6 +35,13 @@ public class CreateTeamCommandTest {
     }
 
     @Test
+    public void execute_Should_ThrowException_When_NameToShort() {
+        // Arrange, Act, Assert
+        Assertions.assertThrows(InvalidUserInputException.class,
+                () -> createTeamCommand.execute(List.of("xxxx")));
+    }
+
+    @Test
     public void execute_Should_ThrowException_When_NameAlreadyExists() {
         // Arrange, Act, Assert
         Assertions.assertThrows(InvalidUserInputException.class, () -> createTeamCommand.execute(List.of(VALID_TEAM_NAME)));
