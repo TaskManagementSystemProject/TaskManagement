@@ -8,7 +8,7 @@ import com.oop.taskmanagement.utils.ValidationHelpers;
 
 public class FeedbackImpl extends TaskBaseImpl implements Feedback {
 
-    private static final String TO_STRING_FORMAT = "%sRating: %d%nAssigned to: %s"; // new
+    private static final String TO_STRING_FORMAT = "%sRating: %d%nAssigned to: %s";
 
     private int rating;
 
