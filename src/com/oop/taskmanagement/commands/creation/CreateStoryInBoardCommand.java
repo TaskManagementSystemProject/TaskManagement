@@ -34,7 +34,6 @@ public class CreateStoryInBoardCommand implements Command {
         String teamName = parameters.get(4);
         String boardName = parameters.get(5);
 
-        Team team = taskManagementRepository.findTeamByName(teamName);
         Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
         Story newStory = taskManagementRepository.createStoryInBoard(title, description, priorityType, sizeType, board);
 

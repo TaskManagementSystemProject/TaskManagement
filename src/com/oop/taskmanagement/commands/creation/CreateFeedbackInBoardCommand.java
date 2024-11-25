@@ -33,7 +33,6 @@ public class CreateFeedbackInBoardCommand implements Command {
         ValidationHelpers.ValidateRating(rating);
         String teamName = parameters.get(3);
         String boardName = parameters.get(4);
-        Team team = taskManagementRepository.findTeamByName(teamName);
         Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
         Feedback newFeedback = taskManagementRepository.createFeedbackInBoard(title, description, rating, board);
 

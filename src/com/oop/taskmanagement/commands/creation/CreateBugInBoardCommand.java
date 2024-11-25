@@ -36,7 +36,6 @@ public class CreateBugInBoardCommand implements Command {
         SeverityType severityType = ParsingHelpers.tryParseEnum(parameters.get(4), SeverityType.class);
         String teamName = parameters.get(5);
         String boardName = parameters.get(6);
-        Team team = taskManagementRepository.findTeamByName(teamName);
         Board board = taskManagementRepository.findBoardByTeamName(boardName, teamName);
         Bug newBug = taskManagementRepository.createBugInBoard(title, description, stepsToReproduce, priorityType, severityType, board);
 
