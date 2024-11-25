@@ -24,9 +24,7 @@ public class BugImpl extends TaskBaseImpl implements Bug {
 
         this.stepsToReproduce = stepsToReproduce;
         this.priority = priority;
-
-        // changeSeverity(severity);  removed
-        this.severity = severity; // new
+        this.severity = severity;
         this.status = StatusType.ACTIVE;
     }
 

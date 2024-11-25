@@ -8,7 +8,7 @@ import com.oop.taskmanagement.models.enums.StatusType;
 
 public class StoryImpl extends TaskBaseImpl implements Story {
 
-    private static final String TO_STRING_FORMAT = "%sPriority: %s%nSize: %s%nAssigned to: %s"; // new
+    private static final String TO_STRING_FORMAT = "%sPriority: %s%nSize: %s%nAssigned to: %s";
     private PriorityType priority;
     private SizeType size;
 
@@ -20,7 +20,6 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         this.status = StatusType.NOT_DONE;
     }
 
-    //  SETTERS
     @Override
     public void changeStatus(StatusType status) {
         if (status.equals(StatusType.NOT_DONE) || status.equals(StatusType.IN_PROGRESS) || status.equals(StatusType.DONE)) {
@@ -52,7 +51,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         this.size = size;
     }
 
-    @Override                                               //  GETTERS
+    @Override
     public PriorityType getPriority() {
         return priority;
     }
@@ -62,7 +61,7 @@ public class StoryImpl extends TaskBaseImpl implements Story {
         return size;
     }
 
-    @Override // new implementation
+    @Override
     public String toString() {
         return String.format("Story" + TO_STRING_FORMAT, baseInfo(), getPriority(), getSize(),
                 getAssigneeName() == null ? "None" : getAssigneeName());

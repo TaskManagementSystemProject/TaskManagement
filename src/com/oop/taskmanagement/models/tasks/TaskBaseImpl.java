@@ -48,13 +48,11 @@ public abstract class TaskBaseImpl implements TaskBase {
         this.eventLog.add(event);
     }
 
-    // no eventLog needed   --  can be changed to final later
     private void setTitle(String title) {
         TaskValidation.validateTitle(title);
         this.title = title;
     }
 
-    // no eventLog needed   --  can be changed to final later
     private void setDescription(String description) {
         TaskValidation.validateDescription(description);
         this.description = description;

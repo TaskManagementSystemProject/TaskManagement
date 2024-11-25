@@ -21,7 +21,6 @@ public class CommandFactoryImpl implements CommandFactory {
     public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
 
-        // TODO
         return switch (commandType) {
             case CREATEMEMBER -> new CreateMemberCommand(taskManagementRepository);
             case SHOWMEMBERS -> new ShowMembersCommand(taskManagementRepository);
